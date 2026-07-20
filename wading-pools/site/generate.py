@@ -114,7 +114,7 @@ def build_today(data: dict, today: date, weekday: str):
                 note = "Open today despite forecast" if not scheduled_hours else "Confirmed open today"
 
         pools_today.append({
-            "name": pool["name"], "info_url": pool.get("info_url"),
+            "name": pool["name"], "info_url": pool.get("info_url"), "image_url": pool.get("image_url"),
             "address": pool["address"], "map_url": pool["map_url"], "schedule": pool["schedule"],
             "status": status, "hours": hours, "note": note, "in_season": in_season,
         })

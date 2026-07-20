@@ -9,6 +9,8 @@ markup changes, rather than crash, so the site generator can flag stale data.
 import json
 import re
 import sys
+import time
+import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
@@ -104,6 +106,23 @@ def parse_wading_pools(soup: BeautifulSoup):
     return pools
 
 
+def fetch_pool_image(info_url: str):
+    """Each park's own seattle.gov page has a hero image div near the top:
+    <div class="featureWrapper ..." data-backgroundurl="/images/...jpg">
+    Fetch that page and pull the URL out. Soft-fails to None - a missing
+    thumbnail shouldn't break the whole scrape."""
+    if not info_url:
+        return None
+    try:
+        html = fetch_html(info_url)
+    except (urllib.error.URLError, TimeoutError, OSError):
+        return None
+    m = re.search(r'class="featureWrapper[^"]*"\s+data-backgroundurl="([^"]+)"', html)
+    if not m or not m.group(1).strip():
+        return None
+    return urljoin(info_url, m.group(1))
+
+
 def parse_sprayparks(soup: BeautifulSoup):
     heading = soup.find("h2", string=re.compile(r"^Sprayparks", re.I))
     if not heading:
@@ -166,6 +185,16 @@ def scrape(html: str) -> dict:
 def main():
     html = fetch_html(SOURCE_URL)
     result = scrape(html)
+
+    missing_images = 0
+    for pool in result["wading_pools"]:
+        pool["image_url"] = fetch_pool_image(pool.get("info_url"))
+        if not pool["image_url"]:
+            missing_images += 1
+        time.sleep(0.15)  # be polite to seattle.gov - ~19 extra requests per run
+    if missing_images:
+        print(f"NOTE: {missing_images} of {len(result['wading_pools'])} pools had no header image found.",
+              file=sys.stderr)
 
     if len(result["wading_pools"]) < 10 or len(result["sprayparks"]["locations"]) < 5:
         print(

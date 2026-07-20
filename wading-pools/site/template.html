@@ -24,44 +24,6 @@
     --shadow: 0 1px 2px rgba(16, 34, 43, 0.06), 0 4px 16px rgba(16, 34, 43, 0.06);
     color-scheme: light;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --ink: #e9f2f1;
-      --ink-soft: #aec2c4;
-      --paper: #0b171b;
-      --surface: #112227;
-      --teal: #4fc2ca;
-      --teal-deep: #8fdde3;
-      --teal-wash: rgba(79, 194, 202, 0.14);
-      --sun: #e8a94d;
-      --sun-wash: rgba(232, 169, 77, 0.14);
-      --open: #59c98d;
-      --open-wash: rgba(89, 201, 141, 0.14);
-      --muted: #8ea2a6;
-      --line: #203136;
-      --danger: #e2836c;
-      --danger-wash: rgba(226, 131, 108, 0.14);
-      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 20px rgba(0, 0, 0, 0.35);
-      color-scheme: dark;
-    }
-  }
-  :root[data-theme="dark"] {
-    --ink: #e9f2f1; --ink-soft: #aec2c4; --paper: #0b171b; --surface: #112227;
-    --teal: #4fc2ca; --teal-deep: #8fdde3; --teal-wash: rgba(79, 194, 202, 0.14);
-    --sun: #e8a94d; --sun-wash: rgba(232, 169, 77, 0.14);
-    --open: #59c98d; --open-wash: rgba(89, 201, 141, 0.14);
-    --muted: #8ea2a6; --line: #203136; --danger: #e2836c; --danger-wash: rgba(226, 131, 108, 0.14);
-    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 20px rgba(0, 0, 0, 0.35);
-    color-scheme: dark;
-  }
-  :root[data-theme="light"] {
-    --ink: #10222b; --ink-soft: #3c545c; --paper: #f1f6f5; --surface: #ffffff;
-    --teal: #0d7d87; --teal-deep: #095a62; --teal-wash: #e2f1f1;
-    --sun: #c97f13; --sun-wash: #faedd6; --open: #1f8a5b; --open-wash: #e3f3e9;
-    --muted: #7c8b90; --line: #dbe6e4; --danger: #b14a34; --danger-wash: #f7e7e2;
-    --shadow: 0 1px 2px rgba(16, 34, 43, 0.06), 0 4px 16px rgba(16, 34, 43, 0.06);
-    color-scheme: light;
-  }
 
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -133,20 +95,32 @@
     padding: 1px 7px; border-radius: 999px; background: var(--sun-wash); color: var(--sun);
   }
 
-  /* Today list: expanding cards, same chrome as the full-schedule pool-detail cards below */
-  details.today-detail summary .today-row {
-    display: flex; align-items: baseline; justify-content: space-between; gap: 10px; min-width: 0;
+  /* Shared card chrome: thumbnail, name+day-strip on one line, address+hours on the next */
+  .thumb {
+    width: 42px; height: 42px; border-radius: 9px; flex: 0 0 auto;
+    object-fit: cover; background: var(--line); display: block;
   }
-  details.today-detail summary .name { font-weight: 700; font-size: 14.5px; overflow-wrap: anywhere; }
-  details.today-detail summary .hours-line {
-    font-variant-numeric: tabular-nums; font-size: 13px; font-weight: 700;
-    color: var(--open); white-space: nowrap; flex: 0 0 auto;
+  .thumb.thumb-empty { background: var(--teal-wash); }
+  details.pool-detail summary .row-name {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px; min-width: 0;
   }
-  details.today-detail summary .status-line {
-    font-size: 12px; font-weight: 600; color: var(--muted); white-space: nowrap; flex: 0 0 auto;
+  details.pool-detail summary .name {
+    font-weight: 700; font-size: 14.5px; flex: 1 1 auto; min-width: 0;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  details.pool-detail summary .row-meta {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-top: 2px;
   }
   details.pool-detail summary .addr-line {
-    display: block; font-size: 11.5px; color: var(--muted); margin-top: 2px; overflow-wrap: anywhere;
+    font-size: 11.5px; color: var(--muted); flex: 1 1 auto; min-width: 0;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  details.pool-detail summary .hours-line {
+    font-variant-numeric: tabular-nums; font-size: 11.5px; font-weight: 700;
+    color: var(--open); white-space: nowrap; flex: 0 0 auto;
+  }
+  details.pool-detail summary .status-line {
+    font-size: 11.5px; font-weight: 600; color: var(--muted); white-space: nowrap; flex: 0 0 auto;
   }
   .today-actions { display: flex; gap: 8px; }
   .today-actions .action-btn {
@@ -192,7 +166,6 @@
   }
   details.pool-detail > summary::-webkit-details-marker { display: none; }
   details.pool-detail .summary-body { flex: 1; min-width: 0; }
-  details.pool-detail .name { display: block; font-weight: 700; font-size: 14.5px; }
   .day-strip { display: flex; gap: 4px; flex: 0 0 auto; }
   .day-dot {
     width: 9px; height: 9px; border-radius: 3px; background: var(--line);
@@ -321,7 +294,7 @@
     empty.textContent = 'No neighborhood wading pools are on today\'s regular schedule. Call the hotline below to check for a weather opening, or see sprayparks below.';
     openList.appendChild(empty);
   } else {
-    openToday.forEach(p => openList.appendChild(poolCard(p, true)));
+    openToday.forEach(p => openList.appendChild(poolCard(p)));
   }
 
   if (notOpenToday.length) {
@@ -332,7 +305,7 @@
     det.appendChild(sum);
     const list = document.createElement('div');
     list.className = 'card-list';
-    notOpenToday.forEach(p => list.appendChild(poolCard(p, false)));
+    notOpenToday.forEach(p => list.appendChild(poolCard(p)));
     det.appendChild(list);
     document.getElementById('today-more-slot').appendChild(det);
   }
@@ -359,24 +332,42 @@
     '</div>';
   }
 
-  function poolCard(p, isOpen) {
+  function thumbHtml(p) {
+    return p.image_url
+      ? '<img class="thumb" src="' + p.image_url + '" alt="" loading="lazy">'
+      : '<span class="thumb thumb-empty"></span>';
+  }
+
+  // Today-section pools carry a precomputed status (accounts for season + weather
+  // overrides); full-schedule pools don't, so fall back to a plain schedule lookup.
+  function hoursTodayInfo(p) {
+    if (p.status !== undefined) {
+      if (p.status === 'open' && p.hours) return { text: p.hours, open: true };
+      return { text: p.in_season ? 'Not scheduled today' : 'Not in season', open: false };
+    }
+    const h = p.schedule ? p.schedule[DATA.today.weekday] : null;
+    return h ? { text: h, open: true } : { text: 'Closed today', open: false };
+  }
+
+  function poolCard(p) {
     const det = document.createElement('details');
-    det.className = 'pool-detail today-detail';
+    det.className = 'pool-detail';
+    const info = hoursTodayInfo(p);
 
     const summary = document.createElement('summary');
-    const statusText = isOpen ? (p.hours || '') : (!p.in_season ? 'Not in season' : 'Not scheduled today');
     summary.innerHTML =
+      thumbHtml(p) +
       '<span class="summary-body">' +
-        '<span class="today-row">' +
+        '<span class="row-name">' +
           '<span class="name">' + escapeHtml(p.name) + '</span>' +
-          (isOpen && p.hours
-            ? '<span class="hours-line">' + escapeHtml(statusText) + '</span>'
-            : '<span class="status-line">' + escapeHtml(statusText) + '</span>') +
+          '<span class="day-strip">' + dayStripHtml(p.schedule) + '</span>' +
         '</span>' +
-        '<span class="addr-line">' + escapeHtml(p.address || '') + '</span>' +
+        '<span class="row-meta">' +
+          '<span class="addr-line">' + escapeHtml(p.address || '') + '</span>' +
+          '<span class="' + (info.open ? 'hours-line' : 'status-line') + '">' + escapeHtml(info.text) + '</span>' +
+        '</span>' +
         (p.note ? '<span class="note-badge">' + escapeHtml(p.note) + '</span>' : '') +
       '</span>' +
-      '<span class="day-strip">' + dayStripHtml(p.schedule) + '</span>' +
       '<span class="chev"></span>';
     det.appendChild(summary);
 
@@ -408,29 +399,7 @@
     DATA.wading_pools.length + ' pools tracked - tap one for exact days & address';
   const scheduleList = document.getElementById('schedule-list');
 
-  DATA.wading_pools.forEach(pool => {
-    const det = document.createElement('details');
-    det.className = 'pool-detail';
-
-    const summary = document.createElement('summary');
-    summary.innerHTML =
-      '<span class="summary-body">' +
-        '<span class="name">' + escapeHtml(pool.name) + '</span>' +
-        '<span class="addr-line">' + escapeHtml(pool.address || '') + '</span>' +
-      '</span>' +
-      '<span class="day-strip">' + dayStripHtml(pool.schedule) + '</span>' +
-      '<span class="chev"></span>';
-    det.appendChild(summary);
-
-    const expand = document.createElement('div');
-    expand.className = 'pool-expand';
-    expand.innerHTML =
-      '<div class="hours-grid">' + hoursGridHtml(pool.schedule) + '</div>' +
-      actionButtonsHtml(pool);
-    det.appendChild(expand);
-
-    scheduleList.appendChild(det);
-  });
+  DATA.wading_pools.forEach(pool => scheduleList.appendChild(poolCard(pool)));
 
   // ---- Sprayparks section ----
   document.getElementById('spray-meta').textContent =
