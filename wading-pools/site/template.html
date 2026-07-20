@@ -133,28 +133,28 @@
     padding: 1px 7px; border-radius: 999px; background: var(--sun-wash); color: var(--sun);
   }
 
-  /* Today list: each pool is a row of two linked cards - info+hours, then address/map */
-  .pool-row { display: flex; align-items: stretch; gap: 8px; }
-  .pool-row .pool-card { flex: 1 1 auto; min-width: 0; }
-  .info-card {
-    padding: 11px 14px; display: flex; flex-direction: column; justify-content: center; gap: 3px;
+  /* Today list: expanding cards, same chrome as the full-schedule pool-detail cards below */
+  details.today-detail summary .today-row {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 10px; min-width: 0;
   }
-  .info-card .top-row { display: flex; align-items: center; gap: 7px; min-width: 0; }
-  .info-card .name { font-weight: 700; font-size: 14.5px; overflow-wrap: anywhere; }
-  .info-card .hours-line {
-    font-variant-numeric: tabular-nums; font-size: 12.5px; font-weight: 700; color: var(--open);
+  details.today-detail summary .name { font-weight: 700; font-size: 14.5px; overflow-wrap: anywhere; }
+  details.today-detail summary .hours-line {
+    font-variant-numeric: tabular-nums; font-size: 13px; font-weight: 700;
+    color: var(--open); white-space: nowrap; flex: 0 0 auto;
   }
-  .info-card .status-line { font-size: 12px; color: var(--muted); }
-  .info-card.is-open .status-line { color: var(--ink-soft); }
-
-  .map-card {
-    flex: 0 0 32%; min-width: 84px; padding: 11px 12px;
-    display: flex; flex-direction: column; justify-content: center; gap: 2px;
+  details.today-detail summary .status-line {
+    font-size: 12px; font-weight: 600; color: var(--muted); white-space: nowrap; flex: 0 0 auto;
   }
-  .map-card .map-eyebrow {
-    font-size: 9.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--teal);
+  details.today-detail summary .addr-line {
+    font-size: 11.5px; color: var(--muted); margin-top: 2px; overflow-wrap: anywhere;
   }
-  .map-card .addr-text { font-size: 11.5px; line-height: 1.3; color: var(--ink-soft); overflow-wrap: anywhere; }
+  .today-actions { display: flex; gap: 8px; }
+  .today-actions .action-btn {
+    flex: 1; text-align: center; padding: 10px 10px; border-radius: 9px;
+    background: var(--paper); border: 1px solid var(--line);
+    color: var(--teal); font-weight: 700; font-size: 13px; text-decoration: none;
+  }
+  .today-actions .action-btn:hover { background: var(--teal-wash); }
 
   /* Single-card variant, e.g. the sprayparks summary row */
   .pool-card.single { display: flex; align-items: center; gap: 12px; padding: 12px 14px; }
@@ -345,33 +345,35 @@
   }
 
   function poolCard(p, isOpen) {
-    const row = document.createElement('div');
-    row.className = 'pool-row';
+    const det = document.createElement('details');
+    det.className = 'pool-detail today-detail';
 
-    const info = document.createElement(p.info_url ? 'a' : 'div');
-    info.className = 'pool-card info-card' + (isOpen ? ' is-open' : '');
-    if (p.info_url) { info.href = p.info_url; info.target = '_blank'; info.rel = 'noopener'; }
+    const summary = document.createElement('summary');
     const statusText = isOpen ? (p.hours || '') : (!p.in_season ? 'Not in season' : 'Not scheduled today');
-    info.innerHTML =
-      '<span class="top-row">' +
-        '<span class="status-dot"></span>' +
-        '<span class="name">' + escapeHtml(p.name) + '</span>' +
+    summary.innerHTML =
+      '<span class="summary-body">' +
+        '<span class="today-row">' +
+          '<span class="name">' + escapeHtml(p.name) + '</span>' +
+          (isOpen && p.hours
+            ? '<span class="hours-line">' + escapeHtml(statusText) + '</span>'
+            : '<span class="status-line">' + escapeHtml(statusText) + '</span>') +
+        '</span>' +
+        '<span class="addr-line">' + escapeHtml(p.address || '') + '</span>' +
+        (p.note ? '<span class="note-badge">' + escapeHtml(p.note) + '</span>' : '') +
       '</span>' +
-      (isOpen && p.hours
-        ? '<span class="hours-line">' + escapeHtml(statusText) + '</span>'
-        : '<span class="status-line">' + escapeHtml(statusText) + '</span>') +
-      (p.note ? '<span class="note-badge">' + escapeHtml(p.note) + '</span>' : '');
-    row.appendChild(info);
+      '<span class="chev"></span>';
+    det.appendChild(summary);
 
-    const map = document.createElement(p.map_url ? 'a' : 'div');
-    map.className = 'pool-card map-card';
-    if (p.map_url) { map.href = p.map_url; map.target = '_blank'; map.rel = 'noopener'; }
-    map.innerHTML =
-      '<span class="map-eyebrow">Map</span>' +
-      '<span class="addr-text">' + escapeHtml(p.address || '') + '</span>';
-    row.appendChild(map);
+    const expand = document.createElement('div');
+    expand.className = 'pool-expand';
+    expand.innerHTML =
+      '<div class="today-actions">' +
+        (p.info_url ? '<a class="action-btn" href="' + p.info_url + '" target="_blank" rel="noopener">Seattle.gov</a>' : '') +
+        (p.map_url ? '<a class="action-btn" href="' + p.map_url + '" target="_blank" rel="noopener">Map</a>' : '') +
+      '</div>';
+    det.appendChild(expand);
 
-    return row;
+    return det;
   }
 
   // ---- Sprayparks today strip ----
