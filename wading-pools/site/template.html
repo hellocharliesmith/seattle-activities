@@ -62,23 +62,26 @@
 
   .weather-card {
     margin-top: 14px; background: var(--surface); border-radius: 12px;
-    box-shadow: var(--shadow); padding: 12px 14px;
-    display: flex; align-items: center; gap: 12px;
+    box-shadow: var(--shadow); padding: 12px 14px 10px;
   }
-  .weather-card .weather-icon { width: 38px; height: 38px; flex: 0 0 auto; }
-  .weather-card .weather-body { flex: 1; min-width: 0; }
-  .weather-card .weather-condition {
-    font-weight: 700; font-size: 14px; margin-bottom: 5px; color: var(--ink);
+  .weather-card .weather-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .weather-card .weather-icon { width: 32px; height: 32px; flex: 0 0 auto; }
+  .weather-card .weather-condition { font-weight: 700; font-size: 14px; color: var(--ink); }
+  .weather-card .weather-hl {
+    font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; margin-top: 1px;
   }
-  .weather-card .weather-stats { display: flex; gap: 16px; }
-  .weather-card .wstat { display: flex; flex-direction: column; gap: 1px; }
-  .weather-card .wstat-value {
-    font-weight: 700; font-size: 13px; color: var(--ink);
-    font-variant-numeric: tabular-nums; white-space: nowrap;
+  .weather-card .weather-chart { display: block; width: 100%; height: 92px; overflow: visible; }
+  .weather-card .weather-checkpoints {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 8px;
+    padding-top: 8px; border-top: 1px solid var(--line);
   }
-  .weather-card .wstat-label {
-    font-size: 9.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+  .weather-card .wcp { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+  .weather-card .wcp-time {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
     color: var(--muted);
+  }
+  .weather-card .wcp-sub {
+    font-size: 10.5px; color: var(--ink-soft); font-variant-numeric: tabular-nums;
   }
 
   .low-confidence {
@@ -320,22 +323,72 @@
       '<path d="M13.5 14.5l-3.5 6h2.8l-1.8 4.5 4.7-6.5h-2.8l1.6-4z" fill="var(--sun)"/>',
   };
 
+  function buildWeatherChart(w) {
+    const W = 300, H = 92;
+    const padTop = 20, padBottom = 16, padX = 4;
+    const temps = w.hourly.map(function (p) { return p.temp_f; });
+    const minT = Math.min.apply(null, temps), maxT = Math.max.apply(null, temps);
+    const range = Math.max(1, maxT - minT);
+
+    function xFor(hour) { return padX + (hour / 23) * (W - padX * 2); }
+    function yFor(temp) { return padTop + (1 - (temp - minT) / range) * (H - padTop - padBottom); }
+
+    const pts = w.hourly.map(function (p) { return { x: xFor(p.hour), y: yFor(p.temp_f) }; });
+
+    // Catmull-Rom -> cubic Bezier, for a smooth curve through the hourly points
+    let linePath = '';
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p0 = pts[Math.max(0, i - 1)], p1 = pts[i], p2 = pts[i + 1], p3 = pts[Math.min(pts.length - 1, i + 2)];
+      const c1x = p1.x + (p2.x - p0.x) / 6, c1y = p1.y + (p2.y - p0.y) / 6;
+      const c2x = p2.x - (p3.x - p1.x) / 6, c2y = p2.y - (p3.y - p1.y) / 6;
+      if (i === 0) linePath += 'M' + p1.x.toFixed(1) + ',' + p1.y.toFixed(1) + ' ';
+      linePath += 'C' + c1x.toFixed(1) + ',' + c1y.toFixed(1) + ' ' + c2x.toFixed(1) + ',' + c2y.toFixed(1) + ' ' + p2.x.toFixed(1) + ',' + p2.y.toFixed(1) + ' ';
+    }
+    const baseline = H - padBottom;
+    const last = pts[pts.length - 1], first = pts[0];
+    const areaPath = linePath + 'L' + last.x.toFixed(1) + ',' + baseline + ' L' + first.x.toFixed(1) + ',' + baseline + ' Z';
+
+    let guides = '', markers = '';
+    (w.checkpoints || []).forEach(function (cp) {
+      const x = xFor(cp.hour), y = yFor(cp.temp_f);
+      guides += '<line x1="' + x.toFixed(1) + '" y1="' + y.toFixed(1) + '" x2="' + x.toFixed(1) + '" y2="' + baseline +
+        '" stroke="var(--line)" stroke-width="1" stroke-dasharray="2,2"/>';
+      markers += '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="3.5" fill="var(--surface)" stroke="var(--teal)" stroke-width="2"/>' +
+        '<text x="' + x.toFixed(1) + '" y="' + (y - 8).toFixed(1) + '" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--ink)">' + cp.temp_f + '&#176;</text>';
+    });
+
+    return '<svg class="weather-chart" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" aria-hidden="true">' +
+      '<defs>' +
+        '<linearGradient id="tempLine" x1="0" y1="0" x2="1" y2="0">' +
+          '<stop offset="0%" stop-color="var(--teal)"/><stop offset="50%" stop-color="var(--sun)"/><stop offset="100%" stop-color="var(--teal)"/>' +
+        '</linearGradient>' +
+        '<linearGradient id="tempArea" x1="0" y1="0" x2="1" y2="0">' +
+          '<stop offset="0%" stop-color="var(--teal)" stop-opacity="0.22"/><stop offset="50%" stop-color="var(--sun)" stop-opacity="0.28"/><stop offset="100%" stop-color="var(--teal)" stop-opacity="0.22"/>' +
+        '</linearGradient>' +
+      '</defs>' +
+      guides +
+      '<path d="' + areaPath + '" fill="url(#tempArea)"/>' +
+      '<path d="' + linePath + '" fill="none" stroke="url(#tempLine)" stroke-width="2.5" stroke-linecap="round"/>' +
+      markers +
+    '</svg>';
+  }
+
   if (DATA.weather) {
     const w = DATA.weather;
     const card = document.createElement('div');
     card.className = 'weather-card';
+    const cpHtml = (w.checkpoints || []).map(function (cp) {
+      return '<div class="wcp"><span class="wcp-time">' + escapeHtml(cp.label) + '</span>' +
+        '<span class="wcp-sub">UV ' + cp.uv_index + ' &middot; ' + cp.rain_chance + '%</span></div>';
+    }).join('');
     card.innerHTML =
-      '<svg class="weather-icon" viewBox="0 0 24 24" aria-hidden="true">' +
-        (WEATHER_ICONS[w.icon] || WEATHER_ICONS.cloudy) +
-      '</svg>' +
-      '<div class="weather-body">' +
-        '<div class="weather-condition">' + escapeHtml(w.condition) + '</div>' +
-        '<div class="weather-stats">' +
-          '<span class="wstat"><span class="wstat-label">High/Low</span><span class="wstat-value">' + w.high_f + '&deg;/' + w.low_f + '&deg;</span></span>' +
-          '<span class="wstat"><span class="wstat-label">UV Index</span><span class="wstat-value">' + w.uv_index + '</span></span>' +
-          '<span class="wstat"><span class="wstat-label">Rain</span><span class="wstat-value">' + w.rain_chance + '%</span></span>' +
-        '</div>' +
-      '</div>';
+      '<div class="weather-head">' +
+        '<svg class="weather-icon" viewBox="0 0 24 24" aria-hidden="true">' + (WEATHER_ICONS[w.icon] || WEATHER_ICONS.cloudy) + '</svg>' +
+        '<div><div class="weather-condition">' + escapeHtml(w.condition) + '</div>' +
+        '<div class="weather-hl">H:' + w.high_f + '&deg; L:' + w.low_f + '&deg;</div></div>' +
+      '</div>' +
+      buildWeatherChart(w) +
+      '<div class="weather-checkpoints">' + cpHtml + '</div>';
     document.getElementById('weather-slot').appendChild(card);
   }
 

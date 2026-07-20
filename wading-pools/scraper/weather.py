@@ -1,7 +1,8 @@
 """
 Fetches today's Seattle forecast from Open-Meteo (free, no API key, includes
-UV index which most no-key weather APIs skip) and writes a small summary to
-data/weather.json for the site's weather card.
+UV index and hourly data which most no-key weather APIs skip) and writes a
+summary to data/weather.json for the site's weather card: an hourly
+temperature curve plus temp/UV/rain checkpoints at 8am/noon/4pm/8pm.
 
 Unlike pool images, this DOES need to run daily - it's a forecast, not a
 static fact.
@@ -21,9 +22,13 @@ LONGITUDE = -122.3321
 API_URL = (
     "https://api.open-meteo.com/v1/forecast"
     f"?latitude={LATITUDE}&longitude={LONGITUDE}"
-    "&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max,uv_index_max"
+    "&hourly=temperature_2m,uv_index,precipitation_probability"
+    "&daily=weathercode,temperature_2m_max,temperature_2m_min"
     "&timezone=America%2FLos_Angeles&forecast_days=1&temperature_unit=fahrenheit"
 )
+
+CHECKPOINT_HOURS = [8, 12, 16, 20]
+CHECKPOINT_LABELS = {8: "8 AM", 12: "12 PM", 16: "4 PM", 20: "8 PM"}
 
 # WMO weather codes -> (condition label, icon key). Reference:
 # https://open-meteo.com/en/docs (see "WMO Weather interpretation codes")
@@ -69,16 +74,33 @@ def main():
     try:
         raw = fetch_json(API_URL)
         daily = raw["daily"]
+        hourly = raw["hourly"]
         code = daily["weathercode"][0]
         condition, icon = WEATHER_CODES.get(code, ("Unknown", "cloudy"))
+
+        hourly_points = [
+            {"hour": h, "temp_f": round(hourly["temperature_2m"][h])}
+            for h in range(24)
+        ]
+        checkpoints = [
+            {
+                "hour": h,
+                "label": CHECKPOINT_LABELS[h],
+                "temp_f": round(hourly["temperature_2m"][h]),
+                "uv_index": round(hourly["uv_index"][h]),
+                "rain_chance": round(hourly["precipitation_probability"][h]),
+            }
+            for h in CHECKPOINT_HOURS
+        ]
+
         result = {
             "date": daily["time"][0],
             "condition": condition,
             "icon": icon,
             "high_f": round(daily["temperature_2m_max"][0]),
             "low_f": round(daily["temperature_2m_min"][0]),
-            "rain_chance": round(daily["precipitation_probability_max"][0]),
-            "uv_index": round(daily["uv_index_max"][0]),
+            "hourly": hourly_points,
+            "checkpoints": checkpoints,
         }
     except (urllib.error.URLError, TimeoutError, OSError, KeyError, IndexError) as e:
         print(f"WARNING: weather fetch failed ({e}); leaving weather.json untouched.", file=sys.stderr)
@@ -86,8 +108,7 @@ def main():
 
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUT_PATH.write_text(json.dumps(result, indent=2), encoding="utf-8")
-    print(f"Wrote {OUT_PATH}: {result['condition']}, {result['low_f']}-{result['high_f']}F, "
-          f"UV {result['uv_index']}, {result['rain_chance']}% rain")
+    print(f"Wrote {OUT_PATH}: {result['condition']}, {result['low_f']}-{result['high_f']}F")
 
 
 if __name__ == "__main__":
