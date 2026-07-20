@@ -56,6 +56,27 @@
     font-variant-numeric: tabular-nums;
   }
 
+  .weather-card {
+    margin-top: 14px; background: var(--surface); border-radius: 12px;
+    box-shadow: var(--shadow); padding: 12px 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .weather-card .weather-icon { width: 38px; height: 38px; flex: 0 0 auto; }
+  .weather-card .weather-body { flex: 1; min-width: 0; }
+  .weather-card .weather-condition {
+    font-weight: 700; font-size: 14px; margin-bottom: 5px; color: var(--ink);
+  }
+  .weather-card .weather-stats { display: flex; gap: 16px; }
+  .weather-card .wstat { display: flex; flex-direction: column; gap: 1px; }
+  .weather-card .wstat-value {
+    font-weight: 700; font-size: 13px; color: var(--ink);
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .weather-card .wstat-label {
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--muted);
+  }
+
   .low-confidence {
     margin: 16px 0; padding: 12px 14px; border-radius: 10px;
     background: var(--danger-wash); color: var(--danger);
@@ -221,6 +242,8 @@
     </div>
   </header>
 
+  <div id="weather-slot"></div>
+
   <div id="low-confidence-slot"></div>
 
   <section id="today-section">
@@ -251,6 +274,66 @@
   const WEEKDAY_LABEL = { Mon: 'M', Tue: 'T', Wed: 'W', Thu: 'T', Fri: 'F', Sat: 'S', Sun: 'S' };
 
   document.getElementById('checked-chip').textContent = 'Checked ' + DATA.generated_at;
+
+  // ---- Weather card ----
+  const WEATHER_ICONS = {
+    sun:
+      '<circle cx="12" cy="12" r="5" fill="var(--sun)"/>' +
+      '<g stroke="var(--sun)" stroke-width="2" stroke-linecap="round">' +
+      '<line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/>' +
+      '<line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/>' +
+      '<line x1="4.2" y1="4.2" x2="6.3" y2="6.3"/><line x1="17.7" y1="17.7" x2="19.8" y2="19.8"/>' +
+      '<line x1="4.2" y1="19.8" x2="6.3" y2="17.7"/><line x1="17.7" y1="6.3" x2="19.8" y2="4.2"/></g>',
+    'partly-cloudy':
+      '<circle cx="8" cy="9" r="4" fill="var(--sun)"/>' +
+      '<g stroke="var(--sun)" stroke-width="1.6" stroke-linecap="round">' +
+      '<line x1="8" y1="1.5" x2="8" y2="3.3"/><line x1="1.5" y1="9" x2="3.3" y2="9"/>' +
+      '<line x1="3" y1="3.8" x2="4.3" y2="5.1"/></g>' +
+      '<g fill="var(--muted)"><circle cx="12" cy="15" r="3.6"/><circle cx="16" cy="13.5" r="4.4"/>' +
+      '<rect x="10" y="15" width="10.5" height="5.5" rx="2.75"/></g>',
+    cloudy:
+      '<g fill="var(--muted)"><circle cx="9" cy="13" r="4"/><circle cx="14" cy="11" r="5"/>' +
+      '<circle cx="17" cy="14" r="3.5"/><rect x="7" y="13" width="12" height="6" rx="3"/></g>',
+    fog:
+      '<g fill="var(--muted)"><circle cx="9" cy="10" r="3.4"/><circle cx="13.5" cy="9" r="4.2"/>' +
+      '<rect x="7" y="10" width="10.5" height="5" rx="2.5"/></g>' +
+      '<g stroke="var(--muted)" stroke-width="1.6" stroke-linecap="round" opacity="0.8">' +
+      '<line x1="3" y1="17.5" x2="21" y2="17.5"/><line x1="3" y1="20.5" x2="17" y2="20.5"/></g>',
+    rain:
+      '<g fill="var(--muted)"><circle cx="9" cy="10" r="3.4"/><circle cx="13.5" cy="9" r="4.2"/>' +
+      '<rect x="7" y="10" width="10.5" height="5" rx="2.5"/></g>' +
+      '<g stroke="var(--teal)" stroke-width="2" stroke-linecap="round">' +
+      '<line x1="8" y1="18" x2="7" y2="21.5"/><line x1="12.5" y1="18" x2="11.5" y2="21.5"/>' +
+      '<line x1="17" y1="18" x2="16" y2="21.5"/></g>',
+    snow:
+      '<g fill="var(--muted)"><circle cx="9" cy="10" r="3.4"/><circle cx="13.5" cy="9" r="4.2"/>' +
+      '<rect x="7" y="10" width="10.5" height="5" rx="2.5"/></g>' +
+      '<g fill="var(--teal)"><circle cx="8" cy="19.5" r="1.1"/><circle cx="12.5" cy="20.8" r="1.1"/>' +
+      '<circle cx="17" cy="19.5" r="1.1"/></g>',
+    storm:
+      '<g fill="var(--muted)"><circle cx="9" cy="9" r="3.4"/><circle cx="13.5" cy="8" r="4.2"/>' +
+      '<rect x="7" y="9" width="10.5" height="5" rx="2.5"/></g>' +
+      '<path d="M13.5 14.5l-3.5 6h2.8l-1.8 4.5 4.7-6.5h-2.8l1.6-4z" fill="var(--sun)"/>',
+  };
+
+  if (DATA.weather) {
+    const w = DATA.weather;
+    const card = document.createElement('div');
+    card.className = 'weather-card';
+    card.innerHTML =
+      '<svg class="weather-icon" viewBox="0 0 24 24" aria-hidden="true">' +
+        (WEATHER_ICONS[w.icon] || WEATHER_ICONS.cloudy) +
+      '</svg>' +
+      '<div class="weather-body">' +
+        '<div class="weather-condition">' + escapeHtml(w.condition) + '</div>' +
+        '<div class="weather-stats">' +
+          '<span class="wstat"><span class="wstat-label">High/Low</span><span class="wstat-value">' + w.high_f + '&deg;/' + w.low_f + '&deg;</span></span>' +
+          '<span class="wstat"><span class="wstat-label">UV Index</span><span class="wstat-value">' + w.uv_index + '</span></span>' +
+          '<span class="wstat"><span class="wstat-label">Rain</span><span class="wstat-value">' + w.rain_chance + '%</span></span>' +
+        '</div>' +
+      '</div>';
+    document.getElementById('weather-slot').appendChild(card);
+  }
 
   if (DATA.low_confidence) {
     const box = document.createElement('div');

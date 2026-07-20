@@ -15,6 +15,7 @@ from zoneinfo import ZoneInfo
 ROOT = Path(__file__).resolve().parent.parent
 DATA_PATH = ROOT / "data" / "wading-pools.json"
 IMAGES_PATH = ROOT / "data" / "pool-images.json"
+WEATHER_PATH = ROOT / "data" / "weather.json"
 OUT_PATH = ROOT / "site" / "index.html"
 DOCS_OUT = ROOT.parent / "docs" / "wading-pools" / "index.html"
 
@@ -133,6 +134,15 @@ def build_today(data: dict, today: date, weekday: str):
     }
 
 
+def load_weather():
+    if not WEATHER_PATH.exists():
+        return None
+    try:
+        return json.loads(WEATHER_PATH.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return None
+
+
 def render(data: dict) -> str:
     now = datetime.now(SEATTLE_TZ)
     today = now.date()
@@ -145,6 +155,7 @@ def render(data: dict) -> str:
         "facebook_url": data.get("facebook_url"),
         "policy": data.get("policy"),
         "today": build_today(data, today, weekday),
+        "weather": load_weather(),
         "sprayparks": data["sprayparks"],
         "weekdays": WEEKDAYS,
         "low_confidence": len(data["wading_pools"]) < 10 or len(data["sprayparks"]["locations"]) < 5,
