@@ -145,8 +145,8 @@
   details.today-detail summary .status-line {
     font-size: 12px; font-weight: 600; color: var(--muted); white-space: nowrap; flex: 0 0 auto;
   }
-  details.today-detail summary .addr-line {
-    font-size: 11.5px; color: var(--muted); margin-top: 2px; overflow-wrap: anywhere;
+  details.pool-detail summary .addr-line {
+    display: block; font-size: 11.5px; color: var(--muted); margin-top: 2px; overflow-wrap: anywhere;
   }
   .today-actions { display: flex; gap: 8px; }
   .today-actions .action-btn {
@@ -192,12 +192,7 @@
   }
   details.pool-detail > summary::-webkit-details-marker { display: none; }
   details.pool-detail .summary-body { flex: 1; min-width: 0; }
-  details.pool-detail .name { font-weight: 700; font-size: 14.5px; }
-  details.pool-detail .season-tag {
-    font-size: 11.5px; color: var(--muted); margin-top: 1px;
-  }
-  details.pool-detail .season-tag.ended { text-decoration: line-through; }
-  details.pool-detail .season-tag.upcoming { color: var(--teal); }
+  details.pool-detail .name { display: block; font-weight: 700; font-size: 14.5px; }
   .day-strip { display: flex; gap: 4px; flex: 0 0 auto; }
   .day-dot {
     width: 9px; height: 9px; border-radius: 3px; background: var(--line);
@@ -219,8 +214,6 @@
   }
   .hours-grid .day.on { background: var(--open-wash); color: var(--open); font-weight: 700; }
   .hours-grid .day .d-label { display: block; font-weight: 700; letter-spacing: 0.02em; margin-bottom: 2px; }
-  .pool-expand .addr { font-size: 13px; color: var(--teal); text-decoration: none; }
-  .pool-expand .addr:hover { text-decoration: underline; }
 
   .spray-meta { font-size: 13.5px; color: var(--ink-soft); margin: 0 0 12px; }
   .spray-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -344,6 +337,28 @@
     document.getElementById('today-more-slot').appendChild(det);
   }
 
+  function dayStripHtml(schedule) {
+    const today = DATA.today.weekday;
+    return DATA.weekdays.map(d => {
+      const on = !!(schedule && schedule[d]);
+      return '<span class="day-dot' + (on ? ' on' : '') + (d === today ? ' is-today' : '') + '"></span>';
+    }).join('');
+  }
+
+  function hoursGridHtml(schedule) {
+    return DATA.weekdays.map(d => {
+      const hours = schedule ? schedule[d] : null;
+      return '<div class="day' + (hours ? ' on' : '') + '"><span class="d-label">' + WEEKDAY_LABEL[d] + '</span>' + (hours || '-') + '</div>';
+    }).join('');
+  }
+
+  function actionButtonsHtml(p) {
+    return '<div class="today-actions">' +
+      (p.info_url ? '<a class="action-btn" href="' + p.info_url + '" target="_blank" rel="noopener">Seattle.gov</a>' : '') +
+      (p.map_url ? '<a class="action-btn" href="' + p.map_url + '" target="_blank" rel="noopener">Map</a>' : '') +
+    '</div>';
+  }
+
   function poolCard(p, isOpen) {
     const det = document.createElement('details');
     det.className = 'pool-detail today-detail';
@@ -361,16 +376,15 @@
         '<span class="addr-line">' + escapeHtml(p.address || '') + '</span>' +
         (p.note ? '<span class="note-badge">' + escapeHtml(p.note) + '</span>' : '') +
       '</span>' +
+      '<span class="day-strip">' + dayStripHtml(p.schedule) + '</span>' +
       '<span class="chev"></span>';
     det.appendChild(summary);
 
     const expand = document.createElement('div');
     expand.className = 'pool-expand';
     expand.innerHTML =
-      '<div class="today-actions">' +
-        (p.info_url ? '<a class="action-btn" href="' + p.info_url + '" target="_blank" rel="noopener">Seattle.gov</a>' : '') +
-        (p.map_url ? '<a class="action-btn" href="' + p.map_url + '" target="_blank" rel="noopener">Map</a>' : '') +
-      '</div>';
+      '<div class="hours-grid">' + hoursGridHtml(p.schedule) + '</div>' +
+      actionButtonsHtml(p);
     det.appendChild(expand);
 
     return det;
@@ -393,41 +407,26 @@
   document.getElementById('schedule-sub').textContent =
     DATA.wading_pools.length + ' pools tracked - tap one for exact days & address';
   const scheduleList = document.getElementById('schedule-list');
-  const today = DATA.today.weekday;
 
   DATA.wading_pools.forEach(pool => {
     const det = document.createElement('details');
     det.className = 'pool-detail';
 
     const summary = document.createElement('summary');
-    const strip = DATA.weekdays.map(d => {
-      const on = !!pool.schedule[d];
-      return '<span class="day-dot' + (on ? ' on' : '') + (d === today ? ' is-today' : '') + '"></span>';
-    }).join('');
-
-    let seasonLabel = pool.season || '';
-    let seasonClass = '';
-    if (pool.season_ended) { seasonClass = 'ended'; seasonLabel = 'Season ended - ' + seasonLabel; }
-    else if (pool.season_upcoming) { seasonClass = 'upcoming'; seasonLabel = 'Starts ' + seasonLabel.split('-')[0].trim(); }
-
     summary.innerHTML =
       '<span class="summary-body">' +
         '<span class="name">' + escapeHtml(pool.name) + '</span>' +
-        '<span class="season-tag ' + seasonClass + '">' + escapeHtml(seasonLabel) + '</span>' +
+        '<span class="addr-line">' + escapeHtml(pool.address || '') + '</span>' +
       '</span>' +
-      '<span class="day-strip">' + strip + '</span>' +
+      '<span class="day-strip">' + dayStripHtml(pool.schedule) + '</span>' +
       '<span class="chev"></span>';
     det.appendChild(summary);
 
     const expand = document.createElement('div');
     expand.className = 'pool-expand';
-    const grid = DATA.weekdays.map(d => {
-      const hours = pool.schedule[d];
-      return '<div class="day' + (hours ? ' on' : '') + '"><span class="d-label">' + WEEKDAY_LABEL[d] + '</span>' + (hours || '-') + '</div>';
-    }).join('');
     expand.innerHTML =
-      '<div class="hours-grid">' + grid + '</div>' +
-      (pool.map_url ? '<a class="addr" href="' + pool.map_url + '" target="_blank" rel="noopener">' + escapeHtml(pool.address || 'Map') + ' (map)</a>' : escapeHtml(pool.address || ''));
+      '<div class="hours-grid">' + hoursGridHtml(pool.schedule) + '</div>' +
+      actionButtonsHtml(pool);
     det.appendChild(expand);
 
     scheduleList.appendChild(det);

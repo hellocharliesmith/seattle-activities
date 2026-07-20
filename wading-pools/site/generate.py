@@ -115,7 +115,7 @@ def build_today(data: dict, today: date, weekday: str):
 
         pools_today.append({
             "name": pool["name"], "info_url": pool.get("info_url"),
-            "address": pool["address"], "map_url": pool["map_url"],
+            "address": pool["address"], "map_url": pool["map_url"], "schedule": pool["schedule"],
             "status": status, "hours": hours, "note": note, "in_season": in_season,
         })
 
