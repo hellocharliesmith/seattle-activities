@@ -133,19 +133,6 @@ def build_today(data: dict, today: date, weekday: str):
     }
 
 
-def annotate_full_schedule(data: dict, today: date):
-    out = []
-    for pool in data["wading_pools"]:
-        season = parse_date_range(pool["season"], data["schedule_year"])
-        out.append({
-            **pool,
-            "season_active": season is None or (season[0] <= today <= season[1]),
-            "season_upcoming": season is not None and today < season[0],
-            "season_ended": season is not None and today > season[1],
-        })
-    return out
-
-
 def render(data: dict) -> str:
     now = datetime.now(SEATTLE_TZ)
     today = now.date()
@@ -158,7 +145,6 @@ def render(data: dict) -> str:
         "facebook_url": data.get("facebook_url"),
         "policy": data.get("policy"),
         "today": build_today(data, today, weekday),
-        "wading_pools": annotate_full_schedule(data, today),
         "sprayparks": data["sprayparks"],
         "weekdays": WEEKDAYS,
         "low_confidence": len(data["wading_pools"]) < 10 or len(data["sprayparks"]["locations"]) < 5,

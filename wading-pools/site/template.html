@@ -95,21 +95,21 @@
     padding: 1px 7px; border-radius: 999px; background: var(--sun-wash); color: var(--sun);
   }
 
-  /* Shared card chrome: thumbnail, name+day-strip on one line, address+hours on the next */
+  /* Shared card chrome: thumbnail, name+hours on one line, address+day-strip on the next */
   .thumb {
     width: 42px; height: 42px; border-radius: 9px; flex: 0 0 auto;
     object-fit: cover; background: var(--line); display: block;
   }
   .thumb.thumb-empty { background: var(--teal-wash); }
   details.pool-detail summary .row-name {
-    display: flex; align-items: center; justify-content: space-between; gap: 10px; min-width: 0;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 10px; min-width: 0;
   }
   details.pool-detail summary .name {
     font-weight: 700; font-size: 14.5px; flex: 1 1 auto; min-width: 0;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   details.pool-detail summary .row-meta {
-    display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-top: 2px;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 2px;
   }
   details.pool-detail summary .addr-line {
     font-size: 11.5px; color: var(--muted); flex: 1 1 auto; min-width: 0;
@@ -156,7 +156,6 @@
   details.more-toggle[open] > summary::before { transform: rotate(90deg); }
   details.more-toggle .card-list { margin-top: 8px; }
 
-  .schedule-list { display: flex; flex-direction: column; gap: 8px; }
   details.pool-detail {
     background: var(--surface); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden;
   }
@@ -234,13 +233,6 @@
   </section>
 
   <section id="spray-today"></section>
-
-  <section id="schedule-section">
-    <p class="eyebrow">Full summer schedule</p>
-    <h2 class="display" style="font-size:20px;margin:0 0 4px;">Wading pools, day by day</h2>
-    <p class="today-sub" id="schedule-sub"></p>
-    <div class="schedule-list" id="schedule-list"></div>
-  </section>
 
   <section id="sprayparks-section">
     <p class="eyebrow">Sprayparks</p>
@@ -360,11 +352,11 @@
       '<span class="summary-body">' +
         '<span class="row-name">' +
           '<span class="name">' + escapeHtml(p.name) + '</span>' +
-          '<span class="day-strip">' + dayStripHtml(p.schedule) + '</span>' +
+          '<span class="' + (info.open ? 'hours-line' : 'status-line') + '">' + escapeHtml(info.text) + '</span>' +
         '</span>' +
         '<span class="row-meta">' +
           '<span class="addr-line">' + escapeHtml(p.address || '') + '</span>' +
-          '<span class="' + (info.open ? 'hours-line' : 'status-line') + '">' + escapeHtml(info.text) + '</span>' +
+          '<span class="day-strip">' + dayStripHtml(p.schedule) + '</span>' +
         '</span>' +
         (p.note ? '<span class="note-badge">' + escapeHtml(p.note) + '</span>' : '') +
       '</span>' +
@@ -393,13 +385,6 @@
     '</span>' +
     (DATA.today.sprayparks_open_today ? '<span class="hours">11am-8pm</span>' : '');
   sprayToday.appendChild(sCard);
-
-  // ---- Full schedule ----
-  document.getElementById('schedule-sub').textContent =
-    DATA.wading_pools.length + ' pools tracked - tap one for exact days & address';
-  const scheduleList = document.getElementById('schedule-list');
-
-  DATA.wading_pools.forEach(pool => scheduleList.appendChild(poolCard(pool)));
 
   // ---- Sprayparks section ----
   document.getElementById('spray-meta').textContent =
