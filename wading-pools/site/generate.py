@@ -14,6 +14,7 @@ from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_PATH = ROOT / "data" / "wading-pools.json"
+IMAGES_PATH = ROOT / "data" / "pool-images.json"
 OUT_PATH = ROOT / "site" / "index.html"
 DOCS_OUT = ROOT.parent / "docs" / "wading-pools" / "index.html"
 
@@ -167,8 +168,20 @@ def render(data: dict) -> str:
     return template.replace("__POOL_DATA__", json.dumps(view))
 
 
+def merge_images(data: dict) -> dict:
+    """Pool header images are cached separately (fetch_images.py, run by hand
+    every so often) rather than re-fetched on every daily scrape."""
+    if not IMAGES_PATH.exists():
+        return data
+    images = json.loads(IMAGES_PATH.read_text(encoding="utf-8"))
+    for pool in data["wading_pools"]:
+        pool["image_url"] = images.get(pool["name"])
+    return data
+
+
 def main():
     data = json.loads(DATA_PATH.read_text(encoding="utf-8"))
+    data = merge_images(data)
     html = render(data)
     OUT_PATH.write_text(html, encoding="utf-8")
     DOCS_OUT.parent.mkdir(parents=True, exist_ok=True)

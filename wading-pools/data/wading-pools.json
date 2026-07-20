@@ -1,6 +1,6 @@
 {
   "source_url": "https://www.seattle.gov/parks/pools/wading-pools-and-sprayparks",
-  "scraped_at": "2026-07-20T10:20:31+00:00",
+  "scraped_at": "2026-07-20T10:30:30+00:00",
   "schedule_year": 2026,
   "today_notice": {
     "heading": "Friday, July 17 schedule:",
@@ -29,8 +29,7 @@
         "Fri": null,
         "Sat": null,
         "Sun": null
-      },
-      "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/General/Playground.jpg"
+      }
     },
     {
       "name": "Bitter Lake Community Center",
@@ -46,8 +45,7 @@
         "Fri": "12-7pm",
         "Sat": null,
         "Sun": null
-      },
-      "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/CommunityCenters/BitterLake/BitterLake.jpg"
+      }
     },
     {
       "name": "Dahl Playfield",
@@ -63,8 +61,7 @@
         "Fri": null,
         "Sat": null,
         "Sun": null
-      },
-      "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/DEF/DahlPlayfield.jpg"
+      }
     },
     {
       "name": "Delridge Community Center",
@@ -80,8 +77,7 @@
         "Fri": "12-5:30pm",
         "Sat": null,
         "Sun": null
-      },
-      "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/CommunityCenters/Delridge/Delridge.jpg"
+      }
     },
     {
       "name": "E Queen Anne Playground",
@@ -97,8 +93,7 @@
         "Fri": null,
         "Sat": null,
         "Sun": "12-7pm"
-      },
-      "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/DEF/EastQueenAnnePlayground.jpg"
+      }
     },
     {
       "name": "E.C. Hughes Playground",
@@ -114,8 +109,7 @@
         "Fri": null,
         "Sat": null,
         "Sun": "12-7pm"
-      },
-      "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/General/EC-Huges-PG_banner.jpg"
+      }
     },
     {
       "name": "Gilman Playground",
@@ -131,8 +125,7 @@
         "Fri": "12-6pm",
         "Sat": "12-6pm",
         "Sun": null
-      },
-      "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/GHI/GilmanPlaygroundBanner.jpg"
+      }
     },
     {
       "name": "Green Lake Park",
@@ -148,8 +141,7 @@
         "Fri": "12-7pm",
         "Sat": "12-7pm",
         "Sun": "12-7pm"
-      },
-      "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/GHI/GreenLakePark.jpg"
+      }
     },
     {
       "name": "Hiawatha Community Center",
@@ -165,8 +157,7 @@
         "Fri": "12-5:30pm",
         "Sat": "12-5:30pm",
         "Sun": null
-      },
-      "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/CommunityCenters/Hiawatha/Hiawatha.png"
+      }
     },
     {
       "name": "Lincoln Park",
@@ -182,8 +173,7 @@
         "Fri": "12-7pm",
         "Sat": "12-7pm",
         "Sun": "12-7pm"
-      },
-      "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/JKL/LincolnPark.jpg"
+      }
     },
     {
       "name": "Peppi\u2019s Playground",
@@ -199,8 +189,7 @@
         "Fri": null,
         "Sat": null,
         "Sun": null
-      },
-      "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/MNOP/PeppisPlaygroundBanner.jpg"
+      }
     },
     {
       "name": "Powell Barnett Park",
@@ -216,8 +205,7 @@
         "Fri": "12-7pm",
         "Sat": "12-7pm",
         "Sun": "12-7pm"
-      },
-      "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/MNOP/PowellBarnettPark.jpg"
+      }
     },
     {
       "name": "Ravenna Park",
@@ -233,8 +221,7 @@
         "Fri": "12-7pm",
         "Sat": "12-7pm",
         "Sun": null
-      },
-      "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/QRS/RavennaPark.jpg"
+      }
     },
     {
       "name": "Sandel Playground",
@@ -250,8 +237,7 @@
         "Fri": null,
         "Sat": null,
         "Sun": null
-      },
-      "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/QRS/SandelPlayground.jpg"
+      }
     },
     {
       "name": "Soundview Playfield",
@@ -267,8 +253,7 @@
         "Fri": null,
         "Sat": "12-7pm",
         "Sun": "12-7pm"
-      },
-      "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/QRS/SoundviewPlayfieldBanner.jpg"
+      }
     },
     {
       "name": "Van Asselt Community Center",
@@ -284,8 +269,7 @@
         "Fri": "12-7pm",
         "Sat": "12-7pm",
         "Sun": "12-7pm"
-      },
-      "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/CommunityCenters/VanAsselt/VanAsselt.jpg"
+      }
     },
     {
       "name": "View Ridge Playfield",
@@ -301,8 +285,7 @@
         "Fri": null,
         "Sat": null,
         "Sun": "12-7pm"
-      },
-      "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/TUV/ViewRidgePlayfieldBanner.jpg"
+      }
     },
     {
       "name": "Volunteer Park",
@@ -318,8 +301,7 @@
         "Fri": "12-7pm",
         "Sat": "12-7pm",
         "Sun": "12-7pm"
-      },
-      "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/TUV/Volunteer_Park_Wading_Pool_1920x700.jpg"
+      }
     },
     {
       "name": "Wallingford Playfield",
@@ -335,8 +317,7 @@
         "Fri": "12-7pm",
         "Sat": "12-7pm",
         "Sun": null
-      },
-      "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/WXYZ/NewWallingfordPlayfieldPlaygroundOverview-banner700h.jpg"
+      }
     }
   ],
   "sprayparks": {

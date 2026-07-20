@@ -9,7 +9,6 @@ markup changes, rather than crash, so the site generator can flag stale data.
 import json
 import re
 import sys
-import time
 import urllib.error
 import urllib.request
 from datetime import datetime, timezone
@@ -186,15 +185,9 @@ def main():
     html = fetch_html(SOURCE_URL)
     result = scrape(html)
 
-    missing_images = 0
-    for pool in result["wading_pools"]:
-        pool["image_url"] = fetch_pool_image(pool.get("info_url"))
-        if not pool["image_url"]:
-            missing_images += 1
-        time.sleep(0.15)  # be polite to seattle.gov - ~19 extra requests per run
-    if missing_images:
-        print(f"NOTE: {missing_images} of {len(result['wading_pools'])} pools had no header image found.",
-              file=sys.stderr)
+    # Pool header images are fetched separately (see fetch_images.py) and are
+    # not part of this daily run - they're static park photos that don't need
+    # re-checking every day. site/generate.py merges them back in by name.
 
     if len(result["wading_pools"]) < 10 or len(result["sprayparks"]["locations"]) < 5:
         print(
