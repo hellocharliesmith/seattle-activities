@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seattle Pools</title>
+<style>
+  :root {
+    --ink: #10222b;
+    --ink-soft: #3c545c;
+    --paper: #f1f6f5;
+    --surface: #ffffff;
+    --teal: #0d7d87;
+    --teal-deep: #095a62;
+    --teal-wash: #e2f1f1;
+    --sun: #c97f13;
+    --sun-wash: #faedd6;
+    --open: #1f8a5b;
+    --open-wash: #e3f3e9;
+    --muted: #7c8b90;
+    --line: #dbe6e4;
+    --danger: #b14a34;
+    --danger-wash: #f7e7e2;
+    --shadow: 0 1px 2px rgba(16, 34, 43, 0.06), 0 4px 16px rgba(16, 34, 43, 0.06);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #e9f2f1;
+      --ink-soft: #aec2c4;
+      --paper: #0b171b;
+      --surface: #112227;
+      --teal: #4fc2ca;
+      --teal-deep: #8fdde3;
+      --teal-wash: rgba(79, 194, 202, 0.14);
+      --sun: #e8a94d;
+      --sun-wash: rgba(232, 169, 77, 0.14);
+      --open: #59c98d;
+      --open-wash: rgba(89, 201, 141, 0.14);
+      --muted: #8ea2a6;
+      --line: #203136;
+      --danger: #e2836c;
+      --danger-wash: rgba(226, 131, 108, 0.14);
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 20px rgba(0, 0, 0, 0.35);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e9f2f1; --ink-soft: #aec2c4; --paper: #0b171b; --surface: #112227;
+    --teal: #4fc2ca; --teal-deep: #8fdde3; --teal-wash: rgba(79, 194, 202, 0.14);
+    --sun: #e8a94d; --sun-wash: rgba(232, 169, 77, 0.14);
+    --open: #59c98d; --open-wash: rgba(89, 201, 141, 0.14);
+    --muted: #8ea2a6; --line: #203136; --danger: #e2836c; --danger-wash: rgba(226, 131, 108, 0.14);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 20px rgba(0, 0, 0, 0.35);
+    color-scheme: dark;
+  }
+  :root[data-theme="light"] {
+    --ink: #10222b; --ink-soft: #3c545c; --paper: #f1f6f5; --surface: #ffffff;
+    --teal: #0d7d87; --teal-deep: #095a62; --teal-wash: #e2f1f1;
+    --sun: #c97f13; --sun-wash: #faedd6; --open: #1f8a5b; --open-wash: #e3f3e9;
+    --muted: #7c8b90; --line: #dbe6e4; --danger: #b14a34; --danger-wash: #f7e7e2;
+    --shadow: 0 1px 2px rgba(16, 34, 43, 0.06), 0 4px 16px rgba(16, 34, 43, 0.06);
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .display {
+    font-family: ui-rounded, "SF Pro Rounded", "Nunito", "Segoe UI", system-ui, sans-serif;
+    font-weight: 800;
+  }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 0 16px 64px; }
+
+  header.top {
+    position: sticky; top: 0; z-index: 5;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 16px 12px;
+  }
+  header.top .inner { max-width: 560px; margin: 0 auto; display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+  header.top h1 {
+    font-size: 20px; letter-spacing: -0.01em; margin: 0; text-wrap: balance;
+  }
+  .checked-chip {
+    font-size: 11px; color: var(--muted); white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .low-confidence {
+    margin: 16px 0; padding: 12px 14px; border-radius: 10px;
+    background: var(--danger-wash); color: var(--danger);
+    font-size: 13px; border: 1px solid color-mix(in srgb, var(--danger) 30%, transparent);
+  }
+
+  section { margin-top: 28px; }
+  .eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 6px;
+  }
+  h2.today-date { font-size: 24px; margin: 0 0 4px; text-wrap: balance; }
+  .today-sub { color: var(--ink-soft); font-size: 14px; margin: 0 0 14px; }
+
+  .card-list { display: flex; flex-direction: column; gap: 12px; }
+
+  details.pool-card {
+    background: var(--surface); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden;
+  }
+  details.pool-card > summary {
+    list-style: none; cursor: pointer; padding: 14px 16px;
+    display: flex; align-items: flex-start; gap: 12px;
+  }
+  details.pool-card > summary::-webkit-details-marker { display: none; }
+  .status-dot {
+    width: 10px; height: 10px; border-radius: 50%; flex: 0 0 auto; margin-top: 5px;
+    background: var(--muted);
+  }
+  details.pool-card.is-open .status-dot { background: var(--open); }
+  details.pool-card.is-holiday .status-dot { background: var(--sun); }
+  details.pool-card.is-upcoming .status-dot { background: var(--teal); }
+  details.pool-card.is-closed { opacity: 0.75; }
+  details.pool-card.is-closed .status-dot { background: var(--danger); }
+  .pool-card-body { flex: 1; min-width: 0; }
+  .pool-card-body .name-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+  .pool-card-body .name { font-weight: 700; font-size: 16px; }
+  .pool-card-body .blurb { font-size: 13px; color: var(--ink-soft); margin-top: 3px; }
+  .status-badge {
+    display: inline-block; margin-top: 7px; font-size: 11px; font-weight: 700;
+    padding: 3px 9px; border-radius: 999px; background: var(--paper); color: var(--muted);
+    white-space: nowrap;
+  }
+  details.pool-card.is-open .status-badge { background: var(--open-wash); color: var(--open); }
+  details.pool-card.is-holiday .status-badge { background: var(--sun-wash); color: var(--sun); }
+  details.pool-card.is-upcoming .status-badge { background: var(--teal-wash); color: var(--teal); }
+  details.pool-card.is-closed .status-badge { background: var(--danger-wash); color: var(--danger); }
+  details.pool-card > summary .chev { color: var(--muted); transition: transform 0.15s; flex: 0 0 auto; margin-top: 5px; }
+  details.pool-card > summary .chev::after { content: "\25B8"; }
+  details.pool-card[open] > summary .chev { transform: rotate(90deg); }
+
+  .pool-expand { padding: 0 16px 16px; border-top: 1px solid var(--line); margin-top: -1px; padding-top: 14px; }
+  .pool-expand .addr {
+    display: inline-flex; align-items: center; gap: 5px; font-size: 13px; color: var(--teal);
+    text-decoration: none; margin-bottom: 12px;
+  }
+  .pool-expand .addr:hover { text-decoration: underline; }
+  .pool-expand .season-line { font-size: 13px; color: var(--ink-soft); margin: 0 0 10px; }
+
+  .holiday-note {
+    border-radius: 10px; padding: 10px 12px; margin-bottom: 12px;
+    background: var(--sun-wash); border: 1px solid color-mix(in srgb, var(--sun) 35%, transparent);
+    font-size: 13px; color: var(--ink);
+  }
+  .holiday-note .h-label { display: block; font-weight: 700; color: var(--sun); margin-bottom: 3px; font-size: 12px; }
+  .holiday-note ul { margin: 6px 0 0; padding-left: 18px; }
+  .holiday-note li { margin-bottom: 2px; }
+
+  .sched-label { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin: 14px 0 6px; }
+  .table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--line); }
+  table.sched {
+    border-collapse: collapse; width: 100%; font-size: 12.5px; min-width: 420px;
+  }
+  table.sched th, table.sched td {
+    text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top;
+  }
+  table.sched thead th {
+    background: var(--teal-wash); color: var(--teal-deep); font-weight: 700;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap;
+  }
+  table.sched tbody tr:last-child td { border-bottom: none; }
+  table.sched tbody tr:nth-child(odd) { background: color-mix(in srgb, var(--paper) 55%, var(--surface)); }
+  table.sched td:first-child, table.sched th:first-child { font-weight: 600; white-space: nowrap; }
+
+  .link-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .link-chip {
+    font-size: 12.5px; font-weight: 600; color: var(--teal); text-decoration: none;
+    background: var(--teal-wash); padding: 6px 11px; border-radius: 999px;
+  }
+  .link-chip:hover { text-decoration: underline; }
+
+  .closure-note {
+    border-radius: 10px; padding: 10px 12px; margin-bottom: 4px;
+    background: var(--danger-wash); border: 1px solid color-mix(in srgb, var(--danger) 30%, transparent);
+    font-size: 13px; color: var(--ink);
+  }
+  .closure-note .h-label { display: block; font-weight: 700; color: var(--danger); margin-bottom: 3px; font-size: 12px; }
+
+  .section-sub { color: var(--ink-soft); font-size: 13px; margin: 0 0 14px; }
+
+  footer {
+    margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line);
+    font-size: 12.5px; color: var(--muted); display: flex; flex-direction: column; gap: 6px;
+  }
+  footer a { color: var(--teal); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  footer .disclaimer { margin-top: 6px; }
+
+  a, button { -webkit-tap-highlight-color: transparent; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    details.pool-card > summary .chev { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="inner">
+      <h1 class="display"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="vertical-align:-3px;margin-right:2px;"><path d="M3 17c1.5 1.3 3 1.3 4.5 0s3-1.3 4.5 0 3 1.3 4.5 0 3-1.3 4.5 0" stroke="var(--teal)" stroke-width="2" stroke-linecap="round"/><circle cx="17" cy="6" r="3" fill="var(--sun)"/></svg>Seattle Pools</h1>
+      <span class="checked-chip" id="checked-chip"></span>
+    </div>
+  </header>
+
+  <div id="low-confidence-slot"></div>
+
+  <section id="today-header">
+    <p class="eyebrow">Today</p>
+    <h2 class="today-date display" id="today-date"></h2>
+  </section>
+
+  <section id="outdoor-section">
+    <p class="eyebrow">Outdoor pools &middot; summer only</p>
+    <h2 class="display" style="font-size:20px;margin:0 0 4px;">Colman &amp; Mounger</h2>
+    <p class="section-sub">Closed for the winter outside their summer season.</p>
+    <div id="outdoor-list" class="card-list"></div>
+  </section>
+
+  <section id="indoor-section">
+    <p class="eyebrow">Indoor pools &middot; year-round</p>
+    <h2 class="display" style="font-size:20px;margin:0 0 4px;">8 neighborhood pools</h2>
+    <p class="section-sub">Open all year; the schedule below is the currently-posted session.</p>
+    <div id="indoor-list" class="card-list"></div>
+  </section>
+
+  <footer id="footer"></footer>
+</div>
+
+<script id="pool-data" type="application/json">__POOL_DATA__</script>
+<script>
+(function () {
+  const DATA = JSON.parse(document.getElementById('pool-data').textContent);
+
+  document.getElementById('checked-chip').textContent = 'Checked ' + DATA.generated_at;
+  document.getElementById('today-date').textContent = DATA.date_label;
+
+  if (DATA.low_confidence) {
+    const box = document.createElement('div');
+    box.className = 'low-confidence';
+    box.textContent = 'Heads up: the last check could not fully parse one or more pool schedules. Details below may be incomplete - verify anything important against the official page.';
+    document.getElementById('low-confidence-slot').appendChild(box);
+  }
+
+  const STATUS_CLASS = {
+    open: 'is-open', holiday: 'is-holiday', upcoming: 'is-upcoming',
+    ended: '', unknown: '', facility_closed: 'is-closed',
+  };
+  // Wording differs by kind: an outdoor pool's season genuinely ends (the
+  // facility shuts for winter); an indoor pool stays open year-round, so
+  // "ended" just means the posted schedule table looks stale, not that the
+  // building closed.
+  const STATUS_LABEL = {
+    outdoor: {
+      open: 'In season today', holiday: 'Holiday schedule may apply',
+      upcoming: 'starts', ended: 'Season ended', unknown: 'See official page for dates',
+    },
+    indoor: {
+      open: 'Current schedule', holiday: 'Holiday schedule may apply',
+      upcoming: 'New schedule starts', ended: 'Schedule may be outdated',
+      unknown: 'See official page for hours',
+    },
+  };
+
+  renderGroup(DATA.outdoor_pools, document.getElementById('outdoor-list'), 'outdoor', true);
+  renderGroup(DATA.indoor_pools, document.getElementById('indoor-list'), 'indoor', false);
+
+  function renderGroup(pools, container, kind, openFirst) {
+    pools.forEach((pool, i) => {
+      const det = document.createElement('details');
+      det.className = 'pool-card ' + (STATUS_CLASS[pool.status] || '');
+      if (openFirst && i === 0) det.open = true;
+
+      const summary = document.createElement('summary');
+      const labels = STATUS_LABEL[kind];
+      let badgeText = pool.status === 'facility_closed' ? 'Closed' : (labels[pool.status] || '');
+      if (pool.status === 'upcoming' && pool.season_start) badgeText = labels.upcoming + ' ' + pool.season_start;
+      if (pool.status === 'ended' && pool.season_end) badgeText = labels.ended + (kind === 'outdoor' ? ' ' + pool.season_end : '');
+      summary.innerHTML =
+        '<span class="status-dot"></span>' +
+        '<span class="pool-card-body">' +
+          '<span class="name-row"><span class="name">' + escapeHtml(pool.name) + '</span></span>' +
+          (pool.blurb ? '<span class="blurb">' + escapeHtml(pool.blurb) + '</span>' : '') +
+          '<span class="status-badge">' + escapeHtml(badgeText) + '</span>' +
+        '</span>' +
+        '<span class="chev"></span>';
+      det.appendChild(summary);
+
+      const expand = document.createElement('div');
+      expand.className = 'pool-expand';
+      let html = '';
+      if (pool.map_url) {
+        html += '<a class="addr" href="' + pool.map_url + '" target="_blank" rel="noopener">' + mapIcon() + escapeHtml(pool.address || 'Map') + '</a>';
+      }
+
+      if (pool.status === 'facility_closed' && pool.closure) {
+        html += '<div class="closure-note"><span class="h-label">' + escapeHtml(pool.closure.heading) + '</span>' +
+          (pool.closure.note ? escapeHtml(pool.closure.note) : '') + '</div>';
+      } else {
+        if (pool.season_label) {
+          html += '<p class="season-line">' + escapeHtml(pool.season_label) + (pool.season_note ? ' &mdash; ' + escapeHtml(pool.season_note) : '') + '</p>';
+        }
+        if (pool.status === 'holiday' && pool.todays_holiday) {
+          html += '<div class="holiday-note"><span class="h-label">Today is a holiday-schedule day</span>' + escapeHtml(pool.todays_holiday) + '</div>';
+        } else if (pool.holiday_note || (pool.holiday_list && pool.holiday_list.length)) {
+          html += '<div class="holiday-note"><span class="h-label">Holiday exceptions</span>' +
+            (pool.holiday_note ? escapeHtml(pool.holiday_note) : '') +
+            (pool.holiday_list && pool.holiday_list.length ? '<ul>' + pool.holiday_list.map(h => '<li>' + escapeHtml(h) + '</li>').join('') + '</ul>' : '') +
+            '</div>';
+        }
+        if (pool.schedule) {
+          html += '<p class="sched-label">Regular drop-in schedule</p>' + renderTable(pool.schedule);
+        } else if (pool.schedule_pdfs && pool.schedule_pdfs.length) {
+          html += '<p class="sched-label">Schedule</p><p class="section-sub" style="margin:0 0 10px;">Posted as a PDF rather than a page table for this pool - open it directly:</p>' +
+            '<div class="link-row">' + pool.schedule_pdfs.map(pdf =>
+              '<a class="link-chip" href="' + pdf.url + '" target="_blank" rel="noopener">' + escapeHtml(pdf.label || 'Schedule PDF') + '</a>'
+            ).join('') + '</div>';
+        }
+        if (pool.holiday_schedule) {
+          html += '<p class="sched-label">Holiday schedule</p>' + renderTable(pool.holiday_schedule);
+        }
+      }
+      html += '<div class="link-row"><a class="link-chip" href="' + pool.url + '" target="_blank" rel="noopener">Full pool page (map)</a></div>';
+      expand.innerHTML = html;
+      det.appendChild(expand);
+
+      container.appendChild(det);
+    });
+  }
+
+  function renderTable(t) {
+    const cols = t.columns && t.columns.length ? t.columns.length : t.rows[0].length;
+    let out = '<div class="table-wrap"><table class="sched">';
+    if (t.columns) {
+      out += '<thead><tr>' + t.columns.map(c => '<th>' + escapeHtml(c) + '</th>').join('') + '</tr></thead>';
+    }
+    out += '<tbody>' + t.rows.map(r => {
+      const cells = r.slice(0, cols);
+      while (cells.length < cols) cells.push('');
+      return '<tr>' + cells.map(c => '<td>' + escapeHtml(c) + '</td>').join('') + '</tr>';
+    }).join('') + '</tbody></table></div>';
+    return out;
+  }
+
+  function mapIcon() {
+    return '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="vertical-align:-1px;margin-right:1px;"><path d="M12 2C12 2 5 11.5 5 16a7 7 0 0 0 14 0c0-4.5-7-14-7-14z" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
+  }
+
+  const footer = document.getElementById('footer');
+  footer.innerHTML =
+    '<div><a href="' + DATA.hub_url + '" target="_blank" rel="noopener">Official seattle.gov pools page</a></div>' +
+    '<div class="disclaimer">Unofficial mirror, rechecked automatically each morning (last: ' + DATA.generated_at + '). Schedules change by season and for weather/holidays - confirm anything important on the official pool page before heading out.</div>';
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+  }
+})();
+</script>
+</body>
+</html>

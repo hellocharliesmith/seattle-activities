@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seattle Pools</title>
+<style>
+  :root {
+    --ink: #10222b;
+    --ink-soft: #3c545c;
+    --paper: #f1f6f5;
+    --surface: #ffffff;
+    --teal: #0d7d87;
+    --teal-deep: #095a62;
+    --teal-wash: #e2f1f1;
+    --sun: #c97f13;
+    --sun-wash: #faedd6;
+    --open: #1f8a5b;
+    --open-wash: #e3f3e9;
+    --muted: #7c8b90;
+    --line: #dbe6e4;
+    --danger: #b14a34;
+    --danger-wash: #f7e7e2;
+    --shadow: 0 1px 2px rgba(16, 34, 43, 0.06), 0 4px 16px rgba(16, 34, 43, 0.06);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #e9f2f1;
+      --ink-soft: #aec2c4;
+      --paper: #0b171b;
+      --surface: #112227;
+      --teal: #4fc2ca;
+      --teal-deep: #8fdde3;
+      --teal-wash: rgba(79, 194, 202, 0.14);
+      --sun: #e8a94d;
+      --sun-wash: rgba(232, 169, 77, 0.14);
+      --open: #59c98d;
+      --open-wash: rgba(89, 201, 141, 0.14);
+      --muted: #8ea2a6;
+      --line: #203136;
+      --danger: #e2836c;
+      --danger-wash: rgba(226, 131, 108, 0.14);
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 20px rgba(0, 0, 0, 0.35);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ink: #e9f2f1; --ink-soft: #aec2c4; --paper: #0b171b; --surface: #112227;
+    --teal: #4fc2ca; --teal-deep: #8fdde3; --teal-wash: rgba(79, 194, 202, 0.14);
+    --sun: #e8a94d; --sun-wash: rgba(232, 169, 77, 0.14);
+    --open: #59c98d; --open-wash: rgba(89, 201, 141, 0.14);
+    --muted: #8ea2a6; --line: #203136; --danger: #e2836c; --danger-wash: rgba(226, 131, 108, 0.14);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 20px rgba(0, 0, 0, 0.35);
+    color-scheme: dark;
+  }
+  :root[data-theme="light"] {
+    --ink: #10222b; --ink-soft: #3c545c; --paper: #f1f6f5; --surface: #ffffff;
+    --teal: #0d7d87; --teal-deep: #095a62; --teal-wash: #e2f1f1;
+    --sun: #c97f13; --sun-wash: #faedd6; --open: #1f8a5b; --open-wash: #e3f3e9;
+    --muted: #7c8b90; --line: #dbe6e4; --danger: #b14a34; --danger-wash: #f7e7e2;
+    --shadow: 0 1px 2px rgba(16, 34, 43, 0.06), 0 4px 16px rgba(16, 34, 43, 0.06);
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .display {
+    font-family: ui-rounded, "SF Pro Rounded", "Nunito", "Segoe UI", system-ui, sans-serif;
+    font-weight: 800;
+  }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 0 16px 64px; }
+
+  header.top {
+    position: sticky; top: 0; z-index: 5;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 16px 12px;
+  }
+  header.top .inner { max-width: 560px; margin: 0 auto; display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+  header.top h1 {
+    font-size: 20px; letter-spacing: -0.01em; margin: 0; text-wrap: balance;
+  }
+  .checked-chip {
+    font-size: 11px; color: var(--muted); white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .low-confidence {
+    margin: 16px 0; padding: 12px 14px; border-radius: 10px;
+    background: var(--danger-wash); color: var(--danger);
+    font-size: 13px; border: 1px solid color-mix(in srgb, var(--danger) 30%, transparent);
+  }
+
+  section { margin-top: 28px; }
+  .eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 6px;
+  }
+  h2.today-date { font-size: 24px; margin: 0 0 4px; text-wrap: balance; }
+  .today-sub { color: var(--ink-soft); font-size: 14px; margin: 0 0 14px; }
+
+  .card-list { display: flex; flex-direction: column; gap: 12px; }
+
+  details.pool-card {
+    background: var(--surface); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden;
+  }
+  details.pool-card > summary {
+    list-style: none; cursor: pointer; padding: 14px 16px;
+    display: flex; align-items: flex-start; gap: 12px;
+  }
+  details.pool-card > summary::-webkit-details-marker { display: none; }
+  .status-dot {
+    width: 10px; height: 10px; border-radius: 50%; flex: 0 0 auto; margin-top: 5px;
+    background: var(--muted);
+  }
+  details.pool-card.is-open .status-dot { background: var(--open); }
+  details.pool-card.is-holiday .status-dot { background: var(--sun); }
+  details.pool-card.is-upcoming .status-dot { background: var(--teal); }
+  details.pool-card.is-closed { opacity: 0.75; }
+  details.pool-card.is-closed .status-dot { background: var(--danger); }
+  .pool-card-body { flex: 1; min-width: 0; }
+  .pool-card-body .name-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+  .pool-card-body .name { font-weight: 700; font-size: 16px; }
+  .pool-card-body .blurb { font-size: 13px; color: var(--ink-soft); margin-top: 3px; }
+  .status-badge {
+    display: inline-block; margin-top: 7px; font-size: 11px; font-weight: 700;
+    padding: 3px 9px; border-radius: 999px; background: var(--paper); color: var(--muted);
+    white-space: nowrap;
+  }
+  details.pool-card.is-open .status-badge { background: var(--open-wash); color: var(--open); }
+  details.pool-card.is-holiday .status-badge { background: var(--sun-wash); color: var(--sun); }
+  details.pool-card.is-upcoming .status-badge { background: var(--teal-wash); color: var(--teal); }
+  details.pool-card.is-closed .status-badge { background: var(--danger-wash); color: var(--danger); }
+  details.pool-card > summary .chev { color: var(--muted); transition: transform 0.15s; flex: 0 0 auto; margin-top: 5px; }
+  details.pool-card > summary .chev::after { content: "\25B8"; }
+  details.pool-card[open] > summary .chev { transform: rotate(90deg); }
+
+  .pool-expand { padding: 0 16px 16px; border-top: 1px solid var(--line); margin-top: -1px; padding-top: 14px; }
+  .pool-expand .addr {
+    display: inline-flex; align-items: center; gap: 5px; font-size: 13px; color: var(--teal);
+    text-decoration: none; margin-bottom: 12px;
+  }
+  .pool-expand .addr:hover { text-decoration: underline; }
+  .pool-expand .season-line { font-size: 13px; color: var(--ink-soft); margin: 0 0 10px; }
+
+  .holiday-note {
+    border-radius: 10px; padding: 10px 12px; margin-bottom: 12px;
+    background: var(--sun-wash); border: 1px solid color-mix(in srgb, var(--sun) 35%, transparent);
+    font-size: 13px; color: var(--ink);
+  }
+  .holiday-note .h-label { display: block; font-weight: 700; color: var(--sun); margin-bottom: 3px; font-size: 12px; }
+  .holiday-note ul { margin: 6px 0 0; padding-left: 18px; }
+  .holiday-note li { margin-bottom: 2px; }
+
+  .sched-label { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin: 14px 0 6px; }
+  .table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--line); }
+  table.sched {
+    border-collapse: collapse; width: 100%; font-size: 12.5px; min-width: 420px;
+  }
+  table.sched th, table.sched td {
+    text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top;
+  }
+  table.sched thead th {
+    background: var(--teal-wash); color: var(--teal-deep); font-weight: 700;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap;
+  }
+  table.sched tbody tr:last-child td { border-bottom: none; }
+  table.sched tbody tr:nth-child(odd) { background: color-mix(in srgb, var(--paper) 55%, var(--surface)); }
+  table.sched td:first-child, table.sched th:first-child { font-weight: 600; white-space: nowrap; }
+
+  .link-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .link-chip {
+    font-size: 12.5px; font-weight: 600; color: var(--teal); text-decoration: none;
+    background: var(--teal-wash); padding: 6px 11px; border-radius: 999px;
+  }
+  .link-chip:hover { text-decoration: underline; }
+
+  .closure-note {
+    border-radius: 10px; padding: 10px 12px; margin-bottom: 4px;
+    background: var(--danger-wash); border: 1px solid color-mix(in srgb, var(--danger) 30%, transparent);
+    font-size: 13px; color: var(--ink);
+  }
+  .closure-note .h-label { display: block; font-weight: 700; color: var(--danger); margin-bottom: 3px; font-size: 12px; }
+
+  .section-sub { color: var(--ink-soft); font-size: 13px; margin: 0 0 14px; }
+
+  footer {
+    margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line);
+    font-size: 12.5px; color: var(--muted); display: flex; flex-direction: column; gap: 6px;
+  }
+  footer a { color: var(--teal); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  footer .disclaimer { margin-top: 6px; }
+
+  a, button { -webkit-tap-highlight-color: transparent; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    details.pool-card > summary .chev { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="inner">
+      <h1 class="display"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="vertical-align:-3px;margin-right:2px;"><path d="M3 17c1.5 1.3 3 1.3 4.5 0s3-1.3 4.5 0 3 1.3 4.5 0 3-1.3 4.5 0" stroke="var(--teal)" stroke-width="2" stroke-linecap="round"/><circle cx="17" cy="6" r="3" fill="var(--sun)"/></svg>Seattle Pools</h1>
+      <span class="checked-chip" id="checked-chip"></span>
+    </div>
+  </header>
+
+  <div id="low-confidence-slot"></div>
+
+  <section id="today-header">
+    <p class="eyebrow">Today</p>
+    <h2 class="today-date display" id="today-date"></h2>
+  </section>
+
+  <section id="outdoor-section">
+    <p class="eyebrow">Outdoor pools &middot; summer only</p>
+    <h2 class="display" style="font-size:20px;margin:0 0 4px;">Colman &amp; Mounger</h2>
+    <p class="section-sub">Closed for the winter outside their summer season.</p>
+    <div id="outdoor-list" class="card-list"></div>
+  </section>
+
+  <section id="indoor-section">
+    <p class="eyebrow">Indoor pools &middot; year-round</p>
+    <h2 class="display" style="font-size:20px;margin:0 0 4px;">8 neighborhood pools</h2>
+    <p class="section-sub">Open all year; the schedule below is the currently-posted session.</p>
+    <div id="indoor-list" class="card-list"></div>
+  </section>
+
+  <footer id="footer"></footer>
+</div>
+
+<script id="pool-data" type="application/json">{"generated_at": "Monday, July 20 at 2:28 AM Pacific", "date_label": "Monday, July 20", "hub_url": "https://www.seattle.gov/parks/pools", "outdoor_pools": [{"slug": "colman-pool", "name": "Colman Pool", "kind": "outdoor", "url": "https://www.seattle.gov/parks/pools/colman-pool", "address": "8603 Fauntleroy Wy S", "map_url": "https://www.google.com/maps/search/?api=1&query=8603%20Fauntleroy%20Wy%20S", "blurb": "A 50-meter, 8-lane Olympic sized heated saltwater pool in West Seattle\u2019s Lincoln Park. Summer only.", "season_label": "Main Season: June 13 - Aug. 30, 2026", "season_note": "Colman Pool is operating 7 days a week from June 13 to August 30, including the July 4th holiday.", "schedule": {"columns": null, "rows": [["12:00pm - 1:30pm", "Lap Swim (daily) and weekend Recreation Swim (Fri-Sun only)"], ["1:45pm - 3:15pm", "Lap Swim and Recreation Swim"], ["3:45pm - 5:15pm", "Lap Swim and Recreation Swim"], ["5:30pm - 7:00pm", "Lap Swim and Recreation Swim"]]}, "schedule_pdfs": [], "holiday_note": null, "holiday_list": ["Labor Day, Monday Sept. 7th, has regular hours as part of the Weekend-Only Postseason."], "holiday_schedule": null, "closure": null, "season_start": "Jun 13", "season_end": "Aug 30", "in_season": true, "season_upcoming": false, "season_ended": false, "status": "open", "todays_holiday": null}, {"slug": "mounger-pool", "name": "Mounger Pool", "kind": "outdoor", "url": "https://www.seattle.gov/parks/pools/mounger-pool", "address": "2535 32nd Ave West", "map_url": "https://www.google.com/maps/search/?api=1&query=2535%2032nd%20Ave%20West", "blurb": "In the Magnolia neighborhood. Two outdoor pools: one w/50-foot corkscrew slide; the other shallow & great for kids. Concessionaire too! Summer only.", "season_label": "Main Season: June 22 - September 6.", "season_note": "Scroll down for the schedule organized by program.", "schedule": {"columns": ["Program", "Day", "Time", "Details"], "rows": [["Water Fitness (Lap Pool Only)", "Daily", "10:30 \u2013 11:30 am", "Class instruction: 10:40am-11:25am"], ["Early Morning Lap Swim", "Mon-Fri", "6 \u2013 7 am", "Discount Pass/Exact Change Only"], ["Lap Swim (Lap Pool Only)", "Sat-Sun", "9 \u2013 10 am", "5 Lap Lanes"], ["Lap Swim (Lap Pool Only)", "Daily", "11:35am \u2013 12:45pm", "5 Lap Lanes"], ["Lap Swim (Lap Pool Only)", "Mon-Thurs", "7:30pm \u2013 9pm* *7:30-8:30 starting 8/3 **Last day 8/13", "5 Lap Lanes"], ["Pool Playland (Small Pool Only)", "Daily", "10:30 \u2013 11:30am", "Parents and children aged 5 and younger."], ["Pool Playland (Small Pool Only)", "Mon-Thurs", "11:45 am \u2013 12:45 pm", "Parents and children aged 5 and younger."], ["Sensory Swim (Small Pool Only)", "Friday", "11:45 am - 12:45 pm", "Dedicated time for families with children who have sensory processing disorders or other special needs. A quiet and calming environment for adaptive swimmers to enjoy the water"], ["Recreation Swim (Both Pools)", "Daily", "1pm \u2013 2:25pm", "Children 5 & younger must be accompanied in the water by a parent during this swim."], ["Recreation Swim (Both Pools)", "Daily", "3pm \u2013 4:25pm", "Children 5 & younger must be accompanied in the water by a parent during this swim."], ["Recreation Swim (Both Pools)", "Daily", "6:05pm \u2013 7:25pm", "Children 5 & younger must be accompanied in the water by a parent during this swim."]]}, "schedule_pdfs": [], "holiday_note": "Mounger Pool will operate this schedule on 4 holidays in 2026:", "holiday_list": ["Memorial Day... Monday, May 25", "Juneteenth... Friday, June 19", "Independence Day... Saturday, July 4 Mounger Pool will run a regular Friday drop-in schedule on \"Observed\" Independence Day, Friday, July 3. Swim lessons will be canceled.", "Labor Day... Monday, September 7"], "holiday_schedule": {"columns": ["Time", "Lap Pool", "Small Pool"], "rows": [["9-10am", "Lap Swim, 5 lanes", "Pool Playland"], ["10:30-11:30am", "Water Fitness", "Pool Playland"], ["11:35am-12:45pm", "Lap Swim, 5 lanes", "Pool Playland"], ["1:00-2:25pm", "Recreation Swim", "Recreation Swim"], ["3:00-4:25pm", "Recreation Swim", "Recreation Swim"], ["4:30-6:00pm", "Lap Swim, 5 lanes", "Pool Playland"]]}, "closure": null, "season_start": "Jun 22", "season_end": "Sep 6", "in_season": true, "season_upcoming": false, "season_ended": false, "status": "open", "todays_holiday": null}], "indoor_pools": [{"slug": "ballard-pool", "name": "Ballard Pool", "kind": "indoor", "url": "https://www.seattle.gov/parks/pools/ballard-pool", "address": "1471 NW 67th Street", "map_url": "https://www.google.com/maps/search/?api=1&query=1471%20NW%2067th%20Street", "blurb": "Adjacent to Ballard High School. Features a 25-yard indoor pool with water slide, low dive, rope swing and warm water spa.", "season_label": "Early Summer 2026: June 22 - August 2", "season_note": "Pool Closed: July 4 and September 7", "schedule": {"columns": ["Program", "Day", "Time", "Details"], "rows": [["Lap Swim*", "Mon/Wed/Fri Early Morning Lap Swim (EMLS)", "6am-7:30am", "Six lap lanes. Payment with a Quick Card, check, or exact change only."], ["Lap Swim*", "Mon/Wed", "7:45pm-8:45pm", "Six lap lanes."], ["Lap Swim*", "Fri", "5:30pm-6:45pm***", "Six lap lanes.***Program cancelled 7/17"], ["Lap Swim*", "Sat", "8am-9am", "Six lap lanes."], ["Lap Swim*", "Sun", "8am-9am", "Six lap lanes."], ["Lap Swim*", "Sun", "11am-12:15pm", "Four lap lanes with an open section for water walking."], ["Adult/Senior Swim*", "Mon-Fri", "12pm-1:15pm", "Three lap lanes with an open section for water walking. Reserved for guests 18 years old and older."], ["Recreation Swim*", "Mon-Fri", "1:30pm-2:50pm", "Diving board, slide, and rope swing used during program."], ["Recreation Swim*", "Wed", "6:30pm-7:30pm", "Diving board, slide, and rope swing used during program."], ["Recreation Swim*", "Fri", "7:30pm-8:30pm***", "Diving board, slide, and rope swing used during program. ***Program cancelled 7/17"], ["Recreation Swim*", "Sat", "10am-11am", "Diving board, slide, and rope swing used during program."], ["Recreation Swim*", "Sun", "1pm-2pm", "Diving board, slide, and rope swing used during program."], ["Family Swim*", "Sun", "4:15pm-5:30pm", "Children under 18 must be accompanied by an adult in the water. Diving board, slide and rope swing used during this program."], ["Deep Water Exercise**", "Tues/Thur", "11:10am-11:55am", "Instructor led water exercise class in the deep end of the pool, also called aqua jogging."], ["Deep Water Exercise**", "Tues/Thur", "7:40pm-8:25pm", "Instructor led water exercise class in the deep end of the pool, also called aqua jogging."], ["Shallow Water Exercise**", "Mon/Wed/Fri", "11:10am-11:55am", "Instructor led water exercise in the shallow end of the pool."], ["Shallow Water Exercise**", "Sun", "10:10am-10:55am", "Instructor led water exercise in the shallow end of the pool."]]}, "schedule_pdfs": [], "holiday_note": null, "holiday_list": [], "holiday_schedule": null, "closure": null, "season_start": "Jun 22", "season_end": "Aug 2", "in_season": true, "season_upcoming": false, "season_ended": false, "status": "open", "todays_holiday": null}, {"slug": "evans-pool", "name": "Evans Pool", "kind": "indoor", "url": "https://www.seattle.gov/parks/pools/evans-pool", "address": "7201 E GreenLk Dr N", "map_url": "https://www.google.com/maps/search/?api=1&query=7201%20E%20GreenLk%20Dr%20N", "blurb": "A 25-yard indoor lap pool on the east shore of Green Lake, with sauna. Same building as the community center.", "season_label": "Summer 2026: June 22 - Aug. 22", "season_note": "Scroll down for the text-only schedule. Pool Closed: July 4. Early Closure at 2:30pm: Friday, July 17", "schedule": {"columns": ["Program", "Day", "Time", "Details"], "rows": [["Water Fitness Deep/Combo", "Tu/Th/Sat", "10:00am- 10:55am", "Instructor led fitness class: 10:10am-10:55am"], ["Water Fitness Shallow/Combo", "Wednesday", "10:00am-10:55am", "Instructor led fitness class: 10:10am-10:55am"], ["Lap Swim", "Mon-Fri", "12:00pm-1:30pm", "3 lap lanes, with adult swim"], ["Lap Swim", "Mon-Fri", "2:30pm-4:15pm", "3 lap lanes, with pool playland"], ["Lap Swim", "Monday", "10:00am-12:00pm", "3 lap lanes, no open pool"], ["Lap Swim", "Monday", "12:00pm-1:30pm", "3 lap lanes, with adult swim"], ["Lap Swim", "Monday", "2:30pm-4:15pm", "3 lap lanes, with pool playland"], ["Lap Swim", "Monday", "6:30pm-8:00pm", "6 lap lanes"], ["Lap Swim", "Tuesday", "12:00pm-1:30pm", "3 lap lanes, with adult swim"], ["Lap Swim", "Tuesday", "2:30pm-4:15pm", "3 lap lanes, with pool playland"], ["Lap Swim", "Tuesday", "6:30pm-8:00pm", "4 lanes at 6:30pm, 6 lanes at 7:15pm"], ["Lap Swim", "Wednesday", "11:00am-12:00pm", "3 lap lanes, no open pool"], ["Lap Swim", "Wednesday", "12:00pm-1:30pm", "3 lap lanes, with adult swim"], ["Lap Swim", "Wednesday", "2:30pm-4:15pm", "3 lap lanes, with pool playland"], ["Lap Swim", "Wednesday", "7:30pm-8:30pm", "3 lap lanes"], ["Lap Swim", "Thursday", "12:00pm-1:30pm", "3 lap lanes, with adult swim"], ["Lap Swim", "Thursday", "2:30pm-4:15pm", "3 lap lanes, with pool playland"], ["Lap Swim", "Thursday", "6:30pm-8:00pm", "4 lanes at 6:30pm, 6 lanes at 7:15pm"], ["Lap Swim", "Friday", "10:00am-12:00pm", "3 lap lanes, no open pool"], ["Lap Swim", "Friday", "12:00pm-1:30pm", "3 lap lanes, with adult swim"], ["Lap Swim", "Friday", "2:30pm-4:15pm", "3 lap lanes, with pool playland"], ["Lap Swim", "Friday", "4:30pm-6:00pm", "3 lap lanes, no open pool"], ["Lap Swim", "Friday", "6:00pm-7:00pm", "4 lap lanes*"], ["Lap Swim", "Saturday", "8:30am-10:00am", "6 lap lanes"], ["Lap Swim", "Saturday", "1:00pm-2:30pm", "4 lap lanes*"], ["Lap Swim", "Saturday", "4:30pm-5:30pm", "6 lap lanes"], ["Adult Swim", "Mon-Fri", "12:00pm-1:30pm", "3 lanes + open pool"], ["Adult Swim", "Wednesday", "7:30pm-8:30pm", "3 lanes + open pool"], ["Pool Playland A gentle swim for parents and young children", "Mon-Fri", "2:30pm-4:00pm", "Half pool"], ["Recreation Swim Children 6 of age and under 48\" must be accompanied by a guardian in the pool", "Mon-Fri", "1:30pm-2:30pm", "Whole pool"], ["Recreation Swim Children 6 of age and under 48\" must be accompanied by a guardian in the pool", "Wednesday", "6:30pm-7:30pm", "Half pool"], ["Recreation Swim Children 6 of age and under 48\" must be accompanied by a guardian in the pool", "Saturday", "3:30pm-4:30pm", "Whole pool"], ["Teen Swim (Free)", "Friday", "7:00pm-8:00pm", "Teens age 13-17 only. Free."]]}, "schedule_pdfs": [], "holiday_note": null, "holiday_list": [], "holiday_schedule": null, "closure": null, "season_start": "Jun 22", "season_end": "Aug 22", "in_season": true, "season_upcoming": false, "season_ended": false, "status": "open", "todays_holiday": null}, {"slug": "helene-madison-pool", "name": "Helene Madison Pool", "kind": "indoor", "url": "https://www.seattle.gov/parks/pools/helene-madison-pool", "address": "13401 Meridian Ave N", "map_url": "https://www.google.com/maps/search/?api=1&query=13401%20Meridian%20Ave%20N", "blurb": "A 25-yard indoor pool in the Haller Lake/Bitter Lake neighborhood of NE Seattle, with a shallow section and two diving boards.", "season_label": "Summer 2026: June 20 - August 16", "season_note": "Scroll down for the text-only schedule.", "schedule": {"columns": ["Program", "Day", "Time", "Details"], "rows": [["Shallow Water Fitness", "Mon/Wed", "11:10- 11:55am", "Pool opens at 11:00am"], ["Deep Water Fitness", "Tue, Thurs. Fri", "11:10-11:55am", "Pool opens at 11:00am"], ["Deep Water Fitness", "Tue/Thurs", "7:10-7:55pm", "Pool closes at 8:00pm"], ["Lap Swim 4 Lanes", "Sunday", "12:00-1:00pm", "A double lane is provided for leisure swimming, exercise, and head high swimming. Lap swimmers will be asked to move to the lap lanes."], ["Lap Swim 4 Lanes", "Sunday", "3:00-4:00pm", "A double lane is provided for leisure swimming, exercise, and head high swimming. Lap swimmers will be asked to move to the lap lanes."], ["Lap Swim 4 Lanes", "Saturday", "9:00-10:30am", "A double lane is provided for leisure swimming, exercise, and head high swimming. Lap swimmers will be asked to move to the lap lanes."], ["Lap Swim 4 Lanes", "Saturday", "12:00-1:30pm", "A double lane is provided for leisure swimming, exercise, and head high swimming. Lap swimmers will be asked to move to the lap lanes."], ["Lap Swim 4 Lanes", "Mon, Tue, Wed, Thurs, Fri", "12:00-2:00pm", "A double lane is provided for leisure swimming, exercise, and head high swimming. Lap swimmers will be asked to move to the lap lanes."], ["Lap Swim 3 Lanes", "Sunday", "11:00-12:00pm", "Diving class happening in other lanes"], ["Lap Swim 3 Lanes", "Saturday", "1:30-2:30pm", "No Open Lane"], ["Lap Swim 3 Lanes", "Mon, Tue, Wed, Thurs", "6:30-8:00pm", "Rec or Deep Water Fitness in other lanes"], ["Lap Swim 6 Lanes", "Friday", "6:00-7:00pm", "No Open Lane"], ["Adult/Senior Swim", "Mon/Wed", "11:00-12:00pm", "Deep Pool Only 18+ adults only"], ["Adult Shallow Swim", "Tue, Thurs, Fri", "11:00am-12:00pm", "Shallow Pool Only 18+ adults only"], ["Adult Shallow Swim", "Mon, Tue, Wed, Thurs, Fri", "12:00-1:30pm", "Shallow Pool Only 18+ adults only"], ["Adult Shallow Swim", "Saturday", "12:40-1:30pm", "Shallow Pool Only 18+ adults only"], ["Adult Shallow Swim", "Friday", "6:00-7:00pm", "Shallow Pool Only 18+ adults only"], ["Recreation Swim - Full Pool", "Sunday", "2:00-3:00pm", "1m and 3m Diving boards open"], ["Recreation Swim - Full Pool", "Saturday", "2:30-4:00pm", "1m and 3m Diving boards open"], ["Recreation Swim - Full Pool", "Mon, Tue, Wed, Thurs, Fri", "2:00-4:00pm", "1m and 3m Diving boards open"], ["Recreation Swim - Full Pool", "Friday", "7:00-8:00pm", "1m and 3m Diving boards open"], ["Recreation Swim w/3-lane Lap", "Mon/Wed", "7:00-8:00pm", "1m Diving Board Open Pool closes at 8pm"], ["Pool Playland", "Sunday", "11:00-12:00pm", "Shallow Pool Only"], ["Pool Playland", "Sunday", "3:00-4:00pm", "Shallow Pool Only"], ["Pool Playland", "Mon, Tue, Wed, Thurs, Fri", "1:00-2:00pm", "Shallow Pool Only"], ["Pool Playland", "Saturday", "9:00-10:00am", "Shallow Pool Only"], ["Pool Playland", "Saturday", "1:30-2:30pm", "Shallow Pool Only"], ["Masters (no coach)", "Sunday", "9:00-10:00am", "6-Lane Fitness Swim"], ["Jr Masters", "Saturday", "1:30-2:30pm", "3-Lane Fitness Swim"]]}, "schedule_pdfs": [], "holiday_note": null, "holiday_list": [], "holiday_schedule": null, "closure": null, "season_start": "Jun 20", "season_end": "Aug 16", "in_season": true, "season_upcoming": false, "season_ended": false, "status": "open", "todays_holiday": null}, {"slug": "meadowbrook-pool", "name": "Meadowbrook Pool", "kind": "indoor", "url": "https://www.seattle.gov/parks/pools/meadowbrook-pool", "address": "10515 35th Ave NE", "map_url": "https://www.google.com/maps/search/?api=1&query=10515%2035th%20Ave%20NE", "blurb": "Just east of Lake City Way in NE Seattle, this 25-yard indoor pool features a rope swing, high dive, water fitness equipment and sauna.", "season_label": "Summer 2026: June 22 - Aug 29", "season_note": "Scroll down for the text-only schedule. Pool Closed: July 4, September 7 (all day) *Early Closures: July 1, July 2, August 5, and August 14 all closed from 1:00-3:00pm", "schedule": {"columns": ["Program", "Day", "Time", "Note"], "rows": [["Recreation Swim A recreational swim for all ages", "Mon-Fri", "1:30-2:55pm", "Whole Pool (Canceled 7/1,7/2,8/5,8/14)"], ["Recreation Swim A recreational swim for all ages", "Fri", "9:35-11:00am", "Half Pool"], ["Recreation Swim A recreational swim for all ages", "Mon/Wed", "6:05-7:30pm", "Whole Pool"], ["Recreation Swim A recreational swim for all ages", "Fri", "6:35-8:00pm", "Whole Pool (canceled on 7/10)"], ["Recreation Swim A recreational swim for all ages", "Sat", "9:30-10:25am", "Whole Pool"], ["Recreation Swim A recreational swim for all ages", "Sat", "2:00-3:25 pm", "Whole Pool"], ["Lap Swim Must be swimming for fitness vs. learning to swim", "Fri", "9:35-11:00am", "3 Lap Lanes"], ["Lap Swim Must be swimming for fitness vs. learning to swim", "Mon-Fri", "6:00-7:25am", "5 Lap Lanes- (canceled on 7/3) Exact change, check, or Quick Card required"], ["Lap Swim Must be swimming for fitness vs. learning to swim", "Mon-Fri", "12:00-1:25pm", "4 Lap Lanes (Ends at 1:00pm 7/1,7/2,8/5,8/14)"], ["Lap Swim Must be swimming for fitness vs. learning to swim", "Fri", "4:05-6:30pm", "4 Lap Lanes (cancelled on 7/10)"], ["Lap Swim Must be swimming for fitness vs. learning to swim", "Mon/Wed", "7:35-9:00 pm", "4 Lap Lanes"], ["Lap Swim Must be swimming for fitness vs. learning to swim", "Tue/Thu", "8:00-9:00pm", "4 Lap Lanes"], ["Lap Swim Must be swimming for fitness vs. learning to swim", "Sat", "7:00-8:30am", "5 Lap Lanes"], ["Lap Swim Must be swimming for fitness vs. learning to swim", "Sat", "12:35-1:55pm", "4 Lap Lanes"], ["Lap Swim Must be swimming for fitness vs. learning to swim", "Sat", "4:50-6:00pm", "4 Lap Lanes"], ["Aqua Gym (Double Lane) One double wide lane with Aquarius fitness machine for pullups and water exercise. Music to keep tempo for water exercise", "Mon-Fri", "12:00-1:25pm", "(Ends at 1:00pm 7/1,7/2,8/5,8/14)"], ["Aqua Gym (Double Lane) One double wide lane with Aquarius fitness machine for pullups and water exercise. Music to keep tempo for water exercise", "Fri", "4:05-5:40pm", "Canceled on 7/10"], ["Aqua Gym (Double Lane) One double wide lane with Aquarius fitness machine for pullups and water exercise. Music to keep tempo for water exercise", "Mon/Wed", "7:35-9:00 pm", ""], ["Aqua Gym (Double Lane) One double wide lane with Aquarius fitness machine for pullups and water exercise. Music to keep tempo for water exercise", "Tue/Thu", "8:00-9:00pm", ""], ["Aqua Gym (Double Lane) One double wide lane with Aquarius fitness machine for pullups and water exercise. Music to keep tempo for water exercise", "Sat", "12:35-1:55pm", ""], ["Aqua Gym (Double Lane) One double wide lane with Aquarius fitness machine for pullups and water exercise. Music to keep tempo for water exercise", "Sat", "4:50-6:00pm", ""], ["Water Fitness Exercise class to build strength, flexibility, and cardio", "Mon/Wed/Fri", "11:10-11:55am", "Deep Fitness class"], ["Water Fitness Exercise class to build strength, flexibility, and cardio", "Tue/Thu", "11:10-11:55am", "Shallow Fitness class"], ["Water Fitness Exercise class to build strength, flexibility, and cardio", "Tue/Thu", "7:10-7:55pm", "Deep Fitness class"], ["Water Fitness Exercise class to build strength, flexibility, and cardio", "Sat", "8:40-9:25am", "Deep Fitness class"], ["Teen Late Night", "Fri", "8:05-9:00pm", "Free, Teens age 13-18 only (canceled on 7/10) Must have E-13 form on file"]]}, "schedule_pdfs": [], "holiday_note": null, "holiday_list": [], "holiday_schedule": null, "closure": null, "season_start": "Jun 22", "season_end": "Aug 29", "in_season": true, "season_upcoming": false, "season_ended": false, "status": "open", "todays_holiday": null}, {"slug": "medgar-evers-pool", "name": "Medgar Evers Pool", "kind": "indoor", "url": "https://www.seattle.gov/parks/pools/medgar-evers-pool", "address": "500 23rd Ave", "map_url": "https://www.google.com/maps/search/?api=1&query=500%2023rd%20Ave", "blurb": "Next to Garfield Community Center, this 25-yard indoor pool features a rope swing, low diving board, separate shallow section and sauna.", "season_label": "Summer 2026: June 22 - Aug. 29", "season_note": "Note: Lessons in yellow", "schedule": {"columns": ["Program", "Day", "Time", "Details"], "rows": [["Shallow Water Fitness", "Monday, Wednesday, Friday", "11:10-11:55am", "Shallow Pool"], ["Shallow Water Fitness", "Monday, Wednesday, Friday", "11:10-11:55am", "Shallow Pool", "Coached Swim Includes Workout sets for multiple levels and swim technique coaching. Fitness price.", "Tuesday & Thursday", "7:00-8:00 pm", "Lap Pool 3 lanes"], ["Recreation Swim Lifejackets available to borrow. Children younger than 6 and less than 4\u2019 tall need an adult in the water with them. All ages welcome!", "", "", ""], ["Recreation Swim Lifejackets available to borrow. Children younger than 6 and less than 4\u2019 tall need an adult in the water with them. All ages welcome!", "Monday - Friday", "1:30-2:45pm", "Both Pools"], ["Recreation Swim Lifejackets available to borrow. Children younger than 6 and less than 4\u2019 tall need an adult in the water with them. All ages welcome!", "Monday, Wednesday", "6:30-8:00 pm", "Shallow Pool"], ["Recreation Swim Lifejackets available to borrow. Children younger than 6 and less than 4\u2019 tall need an adult in the water with them. All ages welcome!", "Friday", "5:30-7:00pm", "Shallow Pool, half deep end"], ["Recreation Swim Lifejackets available to borrow. Children younger than 6 and less than 4\u2019 tall need an adult in the water with them. All ages welcome!", "Saturday", "1:30-3:00 pm", "Both Pools"], ["Pool Playland Designed to be a quieter fun swim time for families. Under 18 required to have adults in the water.", "", "", ""], ["Pool Playland Designed to be a quieter fun swim time for families. Under 18 required to have adults in the water.", "", "", ""], ["Pool Playland Designed to be a quieter fun swim time for families. Under 18 required to have adults in the water.", "Monday", "12:25-1:25pm", "Shallow Pool"], ["Pool Playland Designed to be a quieter fun swim time for families. Under 18 required to have adults in the water.", "Tuesday & Thursday", "11:00am-11:55am", "Shallow Pool"], ["Pool Playland Designed to be a quieter fun swim time for families. Under 18 required to have adults in the water.", "", "", ""], ["Adult Swim (18+) For personal exercise and for beginning swimmers to practice swimming.", "Monday -Friday", "2:45-3:45pm", "Shallow Pool"], ["Adult Swim (18+) For personal exercise and for beginning swimmers to practice swimming.", "Tuesday & Thursday", "6:30-8:00pm", "Shallow Pool"], ["Adult Swim (18+) For personal exercise and for beginning swimmers to practice swimming.", "Friday", "12:00-1:30pm", "Shallow Pool"], ["Adult Swim (18+) For personal exercise and for beginning swimmers to practice swimming.", "Saturday", "12:30-1:30 pm", "Shallow Pool"], ["Adult Swim (18+) For personal exercise and for beginning swimmers to practice swimming.", "Monday\u2014Friday", "11:00am-1:30 pm", "Lap Pool 6 lanes"], ["Adult Swim (18+) For personal exercise and for beginning swimmers to practice swimming.", "Monday\u2014Friday", "2:45-3:45pm", "Lap Pool 6 lanes"], ["Lap Swim Lap Swim is designed for swimmers of all speeds, and those who want to work on conditioning. Some lanes may be reserved for lessons.", "Saturday", "9:00-10:30am, 12:00-1:30pm", "Lap Pool 6 lanes"], ["Lap Swim Lap Swim is designed for swimmers of all speeds, and those who want to work on conditioning. Some lanes may be reserved for lessons.", "Saturday", "3:00-4:00pm", "Lap Pool 3 lanes"], ["Teen Swim 13+", "Friday", "7:00-8:00pm", "Both Pools E-13 permission form required to participate"]]}, "schedule_pdfs": [], "holiday_note": null, "holiday_list": [], "holiday_schedule": null, "closure": null, "season_start": "Jun 22", "season_end": "Aug 29", "in_season": true, "season_upcoming": false, "season_ended": false, "status": "open", "todays_holiday": null}, {"slug": "queen-anne-pool", "name": "Queen Anne Pool", "kind": "indoor", "url": "https://www.seattle.gov/parks/pools/queen-anne-pool", "address": "1920 1st Ave West", "map_url": "https://www.google.com/maps/search/?api=1&query=1920%201st%20Ave%20West", "blurb": "CLOSED UNTIL FURTHER NOTICE. Queen Anne's 6-lane, 25-yard indoor pool has built-in steps for easy entry, 1m and 3m diving boards, rope swing and a sauna.", "season_label": null, "season_note": null, "schedule": null, "schedule_pdfs": [], "holiday_note": null, "holiday_list": [], "holiday_schedule": null, "closure": {"heading": "Queen Anne Pool will remain closed until fall 2027 due to a significant underground leak requiring major repair.", "note": "A permanent fix will be completed as part of the Citywide Pool Renovation Project (future updates and timeline on this project will be shared on this website and in our Queen Anne Pool newsletter)."}, "status": "facility_closed", "season_start": null, "season_end": null, "in_season": false, "season_upcoming": false, "season_ended": false, "todays_holiday": null}, {"slug": "rainier-beach-pool", "name": "Rainier Beach Pool", "kind": "indoor", "url": "https://www.seattle.gov/parks/pools/rainier-beach-pool", "address": "8825 Rainier Ave S", "map_url": "https://www.google.com/maps/search/?api=1&query=8825%20Rainier%20Ave%20S", "blurb": "2 indoor pools: one w/ huge slide, spray features, lazy river, vortex and gradual entry. The other is a 25-yard lap pool w/ diving board. Sauna/hot tub onsite.", "season_label": "Summer 2026: June 22 - August 30", "season_note": "Admission sold 15 minutes prior to swim times. Swim sessions may sell out. Pool Closed: July 4", "schedule": null, "schedule_pdfs": [{"label": "RBP Lap Pool Summer 2026", "url": "https://www.seattle.gov/documents/Departments/ParksAndRecreation/Swimming/RainierBeach/RBP%20Lap%20Pool%20Summer%202026_ADA.pdf"}, {"label": "RBP Leisure Pool Summer 2026", "url": "https://www.seattle.gov/documents/Departments/ParksAndRecreation/Swimming/RainierBeach/RBP%20Leisure%20Pool%20Summer%202026_ADA.pdf"}], "holiday_note": null, "holiday_list": [], "holiday_schedule": null, "closure": null, "season_start": "Jun 22", "season_end": "Aug 30", "in_season": true, "season_upcoming": false, "season_ended": false, "status": "open", "todays_holiday": null}, {"slug": "southwest-pool", "name": "Southwest Pool", "kind": "indoor", "url": "https://www.seattle.gov/parks/pools/southwest-pool", "address": "2801 SW Thistle St", "map_url": "https://www.google.com/maps/search/?api=1&query=2801%20SW%20Thistle%20St", "blurb": "A 25-yard indoor pool in the Roxhill neighborhood of West Seattle. High and low diving boards, spa & sauna, and complimentary exercise machines.", "season_label": "Summer 2026: June 22 - August 29", "season_note": "Pool Closed: July 4th Closing Early: July 3 at 4:25pm & July 17 at 2:30pm", "schedule": {"columns": ["Program", "Day", "Time"], "rows": [["Adult Swim (3 lap lanes)", "Mon & Wed", "3:00-4:25pm"], ["Adult Swim (3 lap lanes)", "Tues & Thurs", "12-1:30pm"], ["Adult Swim (3 lap lanes)", "Fri", "12:00-2:30pm"], ["Adult Swim (3 lap lanes)", "Sat", "2:30-3:30pm"], ["Lap Swim (4-6 lanes)", "Sat", "9:30-10:30am"], ["Recreation Swim", "Mon & Wed", "12:05-1:30pm"], ["Recreation Swim", "Tues. Thurs, Fri", "3:00-4:25pm"], ["Recreation Swim", "Sat", "12:15-1:15pm"], ["Teen Swim (free, age 13-18)", "Fri", "4:30-5:30pm E-13 Participant Form required"], ["Water Fitness- Shallow", "Mon & Wed", "2:00-2:45pm"], ["Water Fitness- Shallow", "Tues & Thurs", "1:30-2:15pm"], ["Water Fitness - Deep", "Tues & Thurs", "6:45-7:30pm"]]}, "schedule_pdfs": [], "holiday_note": null, "holiday_list": [], "holiday_schedule": null, "closure": null, "season_start": "Jun 22", "season_end": "Aug 29", "in_season": true, "season_upcoming": false, "season_ended": false, "status": "open", "todays_holiday": null}], "low_confidence": false}</script>
+<script>
+(function () {
+  const DATA = JSON.parse(document.getElementById('pool-data').textContent);
+
+  document.getElementById('checked-chip').textContent = 'Checked ' + DATA.generated_at;
+  document.getElementById('today-date').textContent = DATA.date_label;
+
+  if (DATA.low_confidence) {
+    const box = document.createElement('div');
+    box.className = 'low-confidence';
+    box.textContent = 'Heads up: the last check could not fully parse one or more pool schedules. Details below may be incomplete - verify anything important against the official page.';
+    document.getElementById('low-confidence-slot').appendChild(box);
+  }
+
+  const STATUS_CLASS = {
+    open: 'is-open', holiday: 'is-holiday', upcoming: 'is-upcoming',
+    ended: '', unknown: '', facility_closed: 'is-closed',
+  };
+  // Wording differs by kind: an outdoor pool's season genuinely ends (the
+  // facility shuts for winter); an indoor pool stays open year-round, so
+  // "ended" just means the posted schedule table looks stale, not that the
+  // building closed.
+  const STATUS_LABEL = {
+    outdoor: {
+      open: 'In season today', holiday: 'Holiday schedule may apply',
+      upcoming: 'starts', ended: 'Season ended', unknown: 'See official page for dates',
+    },
+    indoor: {
+      open: 'Current schedule', holiday: 'Holiday schedule may apply',
+      upcoming: 'New schedule starts', ended: 'Schedule may be outdated',
+      unknown: 'See official page for hours',
+    },
+  };
+
+  renderGroup(DATA.outdoor_pools, document.getElementById('outdoor-list'), 'outdoor', true);
+  renderGroup(DATA.indoor_pools, document.getElementById('indoor-list'), 'indoor', false);
+
+  function renderGroup(pools, container, kind, openFirst) {
+    pools.forEach((pool, i) => {
+      const det = document.createElement('details');
+      det.className = 'pool-card ' + (STATUS_CLASS[pool.status] || '');
+      if (openFirst && i === 0) det.open = true;
+
+      const summary = document.createElement('summary');
+      const labels = STATUS_LABEL[kind];
+      let badgeText = pool.status === 'facility_closed' ? 'Closed' : (labels[pool.status] || '');
+      if (pool.status === 'upcoming' && pool.season_start) badgeText = labels.upcoming + ' ' + pool.season_start;
+      if (pool.status === 'ended' && pool.season_end) badgeText = labels.ended + (kind === 'outdoor' ? ' ' + pool.season_end : '');
+      summary.innerHTML =
+        '<span class="status-dot"></span>' +
+        '<span class="pool-card-body">' +
+          '<span class="name-row"><span class="name">' + escapeHtml(pool.name) + '</span></span>' +
+          (pool.blurb ? '<span class="blurb">' + escapeHtml(pool.blurb) + '</span>' : '') +
+          '<span class="status-badge">' + escapeHtml(badgeText) + '</span>' +
+        '</span>' +
+        '<span class="chev"></span>';
+      det.appendChild(summary);
+
+      const expand = document.createElement('div');
+      expand.className = 'pool-expand';
+      let html = '';
+      if (pool.map_url) {
+        html += '<a class="addr" href="' + pool.map_url + '" target="_blank" rel="noopener">' + mapIcon() + escapeHtml(pool.address || 'Map') + '</a>';
+      }
+
+      if (pool.status === 'facility_closed' && pool.closure) {
+        html += '<div class="closure-note"><span class="h-label">' + escapeHtml(pool.closure.heading) + '</span>' +
+          (pool.closure.note ? escapeHtml(pool.closure.note) : '') + '</div>';
+      } else {
+        if (pool.season_label) {
+          html += '<p class="season-line">' + escapeHtml(pool.season_label) + (pool.season_note ? ' &mdash; ' + escapeHtml(pool.season_note) : '') + '</p>';
+        }
+        if (pool.status === 'holiday' && pool.todays_holiday) {
+          html += '<div class="holiday-note"><span class="h-label">Today is a holiday-schedule day</span>' + escapeHtml(pool.todays_holiday) + '</div>';
+        } else if (pool.holiday_note || (pool.holiday_list && pool.holiday_list.length)) {
+          html += '<div class="holiday-note"><span class="h-label">Holiday exceptions</span>' +
+            (pool.holiday_note ? escapeHtml(pool.holiday_note) : '') +
+            (pool.holiday_list && pool.holiday_list.length ? '<ul>' + pool.holiday_list.map(h => '<li>' + escapeHtml(h) + '</li>').join('') + '</ul>' : '') +
+            '</div>';
+        }
+        if (pool.schedule) {
+          html += '<p class="sched-label">Regular drop-in schedule</p>' + renderTable(pool.schedule);
+        } else if (pool.schedule_pdfs && pool.schedule_pdfs.length) {
+          html += '<p class="sched-label">Schedule</p><p class="section-sub" style="margin:0 0 10px;">Posted as a PDF rather than a page table for this pool - open it directly:</p>' +
+            '<div class="link-row">' + pool.schedule_pdfs.map(pdf =>
+              '<a class="link-chip" href="' + pdf.url + '" target="_blank" rel="noopener">' + escapeHtml(pdf.label || 'Schedule PDF') + '</a>'
+            ).join('') + '</div>';
+        }
+        if (pool.holiday_schedule) {
+          html += '<p class="sched-label">Holiday schedule</p>' + renderTable(pool.holiday_schedule);
+        }
+      }
+      html += '<div class="link-row"><a class="link-chip" href="' + pool.url + '" target="_blank" rel="noopener">Full pool page (map)</a></div>';
+      expand.innerHTML = html;
+      det.appendChild(expand);
+
+      container.appendChild(det);
+    });
+  }
+
+  function renderTable(t) {
+    const cols = t.columns && t.columns.length ? t.columns.length : t.rows[0].length;
+    let out = '<div class="table-wrap"><table class="sched">';
+    if (t.columns) {
+      out += '<thead><tr>' + t.columns.map(c => '<th>' + escapeHtml(c) + '</th>').join('') + '</tr></thead>';
+    }
+    out += '<tbody>' + t.rows.map(r => {
+      const cells = r.slice(0, cols);
+      while (cells.length < cols) cells.push('');
+      return '<tr>' + cells.map(c => '<td>' + escapeHtml(c) + '</td>').join('') + '</tr>';
+    }).join('') + '</tbody></table></div>';
+    return out;
+  }
+
+  function mapIcon() {
+    return '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="vertical-align:-1px;margin-right:1px;"><path d="M12 2C12 2 5 11.5 5 16a7 7 0 0 0 14 0c0-4.5-7-14-7-14z" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
+  }
+
+  const footer = document.getElementById('footer');
+  footer.innerHTML =
+    '<div><a href="' + DATA.hub_url + '" target="_blank" rel="noopener">Official seattle.gov pools page</a></div>' +
+    '<div class="disclaimer">Unofficial mirror, rechecked automatically each morning (last: ' + DATA.generated_at + '). Schedules change by season and for weather/holidays - confirm anything important on the official pool page before heading out.</div>';
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+  }
+})();
+</script>
+</body>
+</html>

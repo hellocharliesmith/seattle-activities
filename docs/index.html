@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seattle Summer Activities</title>
+<style>
+  :root {
+    --ink: #10222b; --ink-soft: #3c545c; --paper: #f1f6f5; --surface: #ffffff;
+    --teal: #0d7d87; --line: #dbe6e4;
+    --shadow: 0 1px 2px rgba(16, 34, 43, 0.06), 0 4px 16px rgba(16, 34, 43, 0.06);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #e9f2f1; --ink-soft: #aec2c4; --paper: #0b171b; --surface: #112227;
+      --teal: #4fc2ca; --line: #203136;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 20px rgba(0,0,0,.35);
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 480px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-size: 24px; margin: 0 0 6px; }
+  p.sub { color: var(--ink-soft); margin: 0 0 24px; font-size: 14px; }
+  .card {
+    display: block; background: var(--surface); border-radius: 12px; padding: 16px;
+    box-shadow: var(--shadow); text-decoration: none; color: inherit; margin-bottom: 12px;
+  }
+  .card .name { font-weight: 700; font-size: 16px; }
+  .card .desc { font-size: 13.5px; color: var(--ink-soft); margin-top: 2px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Seattle Summer Activities</h1>
+  <p class="sub">Mobile-friendly mirrors of seattle.gov pages, checked daily.</p>
+  <a class="card" href="wading-pools/">
+    <div class="name">Wading Pools &amp; Sprayparks</div>
+    <div class="desc">What's open today, near you</div>
+  </a>
+  <a class="card" href="pools/">
+    <div class="name">Swimming Pools</div>
+    <div class="desc">Outdoor (summer) and indoor (year-round)</div>
+  </a>
+</div>
+</body>
+</html>
