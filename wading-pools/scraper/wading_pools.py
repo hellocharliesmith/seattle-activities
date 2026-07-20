@@ -105,21 +105,35 @@ def parse_wading_pools(soup: BeautifulSoup):
     return pools
 
 
-def fetch_pool_image(info_url: str):
-    """Each park's own seattle.gov page has a hero image div near the top:
-    <div class="featureWrapper ..." data-backgroundurl="/images/...jpg">
-    Fetch that page and pull the URL out. Soft-fails to None - a missing
-    thumbnail shouldn't break the whole scrape."""
+def fetch_park_page_details(info_url: str):
+    """Every park's own seattle.gov page has a hero image div near the top
+    (<div class="featureWrapper ..." data-backgroundurl="/images/...jpg">)
+    and a map-marker link with the street address
+    (<a ...><i class="fas fa-map-marker">...</i>123 Main St, Seattle, WA 98xxx</a>).
+    Fetch that page and pull both out. Soft-fails to Nones - a missing
+    thumbnail/address shouldn't break the whole scrape."""
     if not info_url:
-        return None
+        return {"image_url": None, "address": None, "map_url": None}
     try:
         html = fetch_html(info_url)
     except (urllib.error.URLError, TimeoutError, OSError):
-        return None
+        return {"image_url": None, "address": None, "map_url": None}
+
+    image_url = None
     m = re.search(r'class="featureWrapper[^"]*"\s+data-backgroundurl="([^"]+)"', html)
-    if not m or not m.group(1).strip():
-        return None
-    return urljoin(info_url, m.group(1))
+    if m and m.group(1).strip():
+        image_url = urljoin(info_url, m.group(1))
+
+    address, map_url = None, None
+    soup = BeautifulSoup(html, "html.parser")
+    marker_icon = soup.select_one("i.fa-map-marker")
+    map_link = marker_icon.find_parent("a") if marker_icon else None
+    if map_link:
+        map_url = map_link.get("href")
+        text = clean(map_link.get_text())
+        address = text or None
+
+    return {"image_url": image_url, "address": address, "map_url": map_url}
 
 
 def parse_sprayparks(soup: BeautifulSoup):
@@ -146,10 +160,11 @@ def parse_sprayparks(soup: BeautifulSoup):
         for li in ul.find_all("li", recursive=False):
             link = li.find("a")
             name = clean(link.get_text()) if link else clean(li.get_text().split("\n")[0])
+            info_url = urljoin(SOURCE_URL, link["href"]) if link and link.get("href") else None
             nested = li.find("ul")
             note = clean(nested.get_text()) if nested else None
             # strip nested note text out of the main li text if no link
-            locations.append({"name": name, "note": note})
+            locations.append({"name": name, "info_url": info_url, "note": note})
     return {"season": season, "hours": hours, "locations": locations}
 
 

@@ -15,6 +15,7 @@ from zoneinfo import ZoneInfo
 ROOT = Path(__file__).resolve().parent.parent
 DATA_PATH = ROOT / "data" / "wading-pools.json"
 IMAGES_PATH = ROOT / "data" / "pool-images.json"
+SPRAYPARKS_DETAILS_PATH = ROOT / "data" / "sprayparks-details.json"
 WEATHER_PATH = ROOT / "data" / "weather.json"
 OUT_PATH = ROOT / "site" / "index.html"
 DOCS_OUT = ROOT.parent / "docs" / "wading-pools" / "index.html"
@@ -166,13 +167,22 @@ def render(data: dict) -> str:
 
 
 def merge_images(data: dict) -> dict:
-    """Pool header images are cached separately (fetch_images.py, run by hand
-    every so often) rather than re-fetched on every daily scrape."""
-    if not IMAGES_PATH.exists():
-        return data
-    images = json.loads(IMAGES_PATH.read_text(encoding="utf-8"))
-    for pool in data["wading_pools"]:
-        pool["image_url"] = images.get(pool["name"])
+    """Pool header images and spraypark image/address/map are cached
+    separately (fetch_images.py, run by hand every so often) rather than
+    re-fetched on every daily scrape."""
+    if IMAGES_PATH.exists():
+        images = json.loads(IMAGES_PATH.read_text(encoding="utf-8"))
+        for pool in data["wading_pools"]:
+            pool["image_url"] = images.get(pool["name"])
+
+    if SPRAYPARKS_DETAILS_PATH.exists():
+        spray_details = json.loads(SPRAYPARKS_DETAILS_PATH.read_text(encoding="utf-8"))
+        for loc in data["sprayparks"]["locations"]:
+            details = spray_details.get(loc["name"], {})
+            loc["image_url"] = details.get("image_url")
+            loc["address"] = details.get("address")
+            loc["map_url"] = details.get("map_url")
+
     return data
 
 

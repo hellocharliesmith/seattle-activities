@@ -97,15 +97,6 @@
 
   .card-list { display: flex; flex-direction: column; gap: 10px; }
 
-  .pool-card {
-    background: var(--surface); border-radius: 12px;
-    box-shadow: var(--shadow); text-decoration: none; color: inherit;
-    display: block;
-  }
-  .status-dot {
-    width: 9px; height: 9px; border-radius: 50%; flex: 0 0 auto;
-    background: var(--muted);
-  }
   .note-badge {
     display: inline-block; margin-top: 2px; align-self: flex-start; font-size: 11px; font-weight: 700;
     padding: 1px 7px; border-radius: 999px; background: var(--sun-wash); color: var(--sun);
@@ -145,17 +136,6 @@
     color: var(--teal); font-weight: 700; font-size: 13px; text-decoration: none;
   }
   .today-actions .action-btn:hover { background: var(--teal-wash); }
-
-  /* Single-card variant, e.g. the sprayparks summary row */
-  .pool-card.single { display: flex; align-items: center; gap: 12px; padding: 12px 14px; }
-  .pool-card.single .body { flex: 1; min-width: 0; }
-  .pool-card.single .name { font-weight: 700; font-size: 15px; }
-  .pool-card.single .meta { font-size: 13px; color: var(--muted); margin-top: 1px; }
-  .pool-card.single.is-open .meta { color: var(--ink-soft); }
-  .pool-card.single .hours {
-    font-variant-numeric: tabular-nums; font-size: 13px; font-weight: 700;
-    color: var(--open); white-space: nowrap; text-align: right; flex: 0 0 auto;
-  }
 
   .today-empty {
     background: var(--surface); border-radius: 12px; padding: 16px; box-shadow: var(--shadow);
@@ -204,12 +184,6 @@
   .hours-grid .day .d-label { display: block; font-weight: 700; letter-spacing: 0.02em; margin-bottom: 2px; }
 
   .spray-meta { font-size: 13.5px; color: var(--ink-soft); margin: 0 0 12px; }
-  .spray-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .spray-chip {
-    background: var(--surface); border-radius: 10px; padding: 10px 12px; box-shadow: var(--shadow);
-    font-size: 13.5px; font-weight: 600;
-  }
-  .spray-chip .note { display: block; font-weight: 400; font-size: 11px; color: var(--muted); margin-top: 3px; }
 
   footer {
     margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line);
@@ -250,13 +224,11 @@
     <div id="today-more-slot"></div>
   </section>
 
-  <section id="spray-today"></section>
-
   <section id="sprayparks-section">
     <p class="eyebrow">Sprayparks</p>
     <h2 class="display" style="font-size:20px;margin:0 0 4px;">Self-timed spray features</h2>
     <p class="spray-meta" id="spray-meta"></p>
-    <div class="spray-grid" id="spray-grid"></div>
+    <div class="card-list" id="spray-list"></div>
   </section>
 
   <footer id="footer"></footer>
@@ -501,29 +473,39 @@
     return det;
   }
 
-  // ---- Sprayparks today strip ----
-  const sprayToday = document.getElementById('spray-today');
-  const sCard = document.createElement('div');
-  sCard.className = 'pool-card single' + (DATA.today.sprayparks_open_today ? ' is-open' : '');
-  sCard.innerHTML =
-    '<span class="status-dot"></span>' +
-    '<span class="body">' +
-      '<span class="name">Sprayparks (' + DATA.sprayparks.locations.length + ' locations)</span>' +
-      '<span class="meta">' + (DATA.today.sprayparks_open_today ? 'Self-timed, running today' : 'Out of season') + '</span>' +
-    '</span>' +
-    (DATA.today.sprayparks_open_today ? '<span class="hours">11am-8pm</span>' : '');
-  sprayToday.appendChild(sCard);
-
   // ---- Sprayparks section ----
   document.getElementById('spray-meta').textContent =
     (DATA.sprayparks.season || '') + (DATA.sprayparks.hours ? ' - ' + DATA.sprayparks.hours.replace(/^These sprayparks will be open /i, '').replace(/:$/, '') : '');
-  const sprayGrid = document.getElementById('spray-grid');
-  DATA.sprayparks.locations.forEach(loc => {
-    const chip = document.createElement('div');
-    chip.className = 'spray-chip';
-    chip.innerHTML = escapeHtml(loc.name) + (loc.note ? '<span class="note">' + escapeHtml(loc.note) + '</span>' : '');
-    sprayGrid.appendChild(chip);
-  });
+
+  function sprayparkCard(loc) {
+    const det = document.createElement('details');
+    det.className = 'pool-detail';
+    const isOpen = DATA.today.sprayparks_open_today;
+
+    const summary = document.createElement('summary');
+    summary.innerHTML =
+      thumbHtml(loc) +
+      '<span class="summary-body">' +
+        '<span class="row-name">' +
+          '<span class="name">' + escapeHtml(loc.name) + '</span>' +
+          '<span class="' + (isOpen ? 'hours-line' : 'status-line') + '">' + (isOpen ? '11am-8pm' : 'Out of season') + '</span>' +
+        '</span>' +
+        '<span class="row-meta"><span class="addr-line">' + escapeHtml(loc.address || '') + '</span></span>' +
+        (loc.note ? '<span class="note-badge">' + escapeHtml(loc.note) + '</span>' : '') +
+      '</span>' +
+      '<span class="chev"></span>';
+    det.appendChild(summary);
+
+    const expand = document.createElement('div');
+    expand.className = 'pool-expand';
+    expand.innerHTML = actionButtonsHtml(loc);
+    det.appendChild(expand);
+
+    return det;
+  }
+
+  const sprayList = document.getElementById('spray-list');
+  DATA.sprayparks.locations.forEach(loc => sprayList.appendChild(sprayparkCard(loc)));
 
   // ---- Footer ----
   const footer = document.getElementById('footer');

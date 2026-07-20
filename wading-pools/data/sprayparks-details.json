@@ -1,0 +1,62 @@
+{
+  "Ballard Commons": {
+    "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/ABC/Ballard_Comons2.jpg",
+    "address": "5701 22nd Ave. NW, Seattle, WA 98107",
+    "map_url": "https://maps.app.goo.gl/zDbreP7uPKqAZWqRA"
+  },
+  "Jefferson Park": {
+    "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/JKL/JeffersonPark.jpg",
+    "address": "3801 Beacon Ave. S, Seattle, WA 98108",
+    "map_url": "https://maps.app.goo.gl/E4oHeFASDoLQyDf1A"
+  },
+  "Georgetown Playfield": {
+    "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/GHI/GeorgetownPlayfield.jpg",
+    "address": "750 S Homer St., Seattle, WA 98108",
+    "map_url": "https://goo.gl/maps/b5p6oxS5cvA2"
+  },
+  "Highland Park": {
+    "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/GHI/HighlandParkPlayground.jpg",
+    "address": "1100 SW Cloverdale St., Seattle, WA 98106",
+    "map_url": "https://goo.gl/maps/A7EMaTGcRxz"
+  },
+  "John C. Little Park": {
+    "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/JKL/JohnCLittlePark.jpg",
+    "address": "6961 37th Ave. S, Seattle, WA 98118",
+    "map_url": "https://goo.gl/maps/3iQ1Z4THkGq"
+  },
+  "Judkins Park": {
+    "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/JKL/JudkinsPark.jpg",
+    "address": "2150 S Norman St., Seattle, WA 98144",
+    "map_url": "https://goo.gl/maps/8GDH6c6jQM82"
+  },
+  "Lake Union Park": {
+    "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/JKL/LakeUnionPark.jpg",
+    "address": null,
+    "map_url": null
+  },
+  "Miller Community Center": {
+    "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/CommunityCenters/Miller/Miller.jpg",
+    "address": "330 19th Ave E, Seattle, WA 98112",
+    "map_url": "https://www.google.com/maps/place/Miller+Community+Center/@47.6217717,-122.3095389,760m/data=!3m2!1e3!4b1!4m6!3m5!1s0x54906ad5296f9a01:0x20920e6f1c188516!8m2!3d47.6217681!4d-122.306964!16s%2Fg%2F1tjynf3l?entry=ttu&g_ep=EgoyMDI2MDUwMi4wIKXMDSoASAFQAw%3D%3D"
+  },
+  "Northacres Park": {
+    "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/MNOP/NorthacresPark.jpg",
+    "address": "12718 1st Ave. NE, Seattle, WA 98125",
+    "map_url": "https://goo.gl/maps/zsDbuv74wEC2"
+  },
+  "Pratt Park": {
+    "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/MNOP/PrattPark.jpg",
+    "address": "201 20th Ave S, Seattle, WA 98144",
+    "map_url": "https://goo.gl/maps/49hus2A93RJ2"
+  },
+  "South Park Playground": {
+    "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/QRS/SouthParkCCAerialBanner.jpg",
+    "address": "738 S Sullivan St., Seattle, WA 98108",
+    "map_url": "https://www.google.com/maps/place/South+Park+Playground/@47.5284425,-122.3233619,18z/data=!4m8!1m2!2m1!1sSouth+Park+Playground!3m4!1s0x549042299388ed0f:0x8fd669844bc1abf0!8m2!3d47.527336!4d-122.3239448?shorturl=1"
+  },
+  "Yesler Terrace Park": {
+    "image_url": "https://www.seattle.gov/images//images/Departments/ParksAndRecreation/Parks/WXYZ/YeslerTerracePark.jpg",
+    "address": "917 E Yesler Way, Seattle, WA 98104",
+    "map_url": "https://goo.gl/maps/r1sx98UUdoo"
+  }
+}

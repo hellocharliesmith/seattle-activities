@@ -1,6 +1,6 @@
 {
   "source_url": "https://www.seattle.gov/parks/pools/wading-pools-and-sprayparks",
-  "scraped_at": "2026-07-20T10:30:30+00:00",
+  "scraped_at": "2026-07-20T14:53:35+00:00",
   "schedule_year": 2026,
   "today_notice": {
     "heading": "Friday, July 17 schedule:",
@@ -326,50 +326,62 @@
     "locations": [
       {
         "name": "Ballard Commons",
+        "info_url": "https://www.seattle.gov/parks/parks/ballard-commons-park",
         "note": "Spray feature shut off on August 11 and August 25, 2026 to accommodate Dancing Til Dusk."
       },
       {
         "name": "Jefferson Park",
+        "info_url": "https://www.seattle.gov/parks/parks/jefferson-park",
         "note": null
       },
       {
         "name": "Georgetown Playfield",
+        "info_url": "https://www.seattle.gov/parks/parks/georgetown-playfield",
         "note": null
       },
       {
         "name": "Highland Park",
+        "info_url": "https://www.seattle.gov/parks/parks/highland-park-playground",
         "note": null
       },
       {
         "name": "John C. Little Park",
+        "info_url": "https://www.seattle.gov/parks/parks/john-c-little-sr-park",
         "note": null
       },
       {
         "name": "Judkins Park",
+        "info_url": "https://www.seattle.gov/parks/parks/judkins-park-and-playfield",
         "note": null
       },
       {
         "name": "Lake Union Park",
+        "info_url": "https://www.seattle.gov/parks/parks/lake-union-park",
         "note": null
       },
       {
         "name": "Miller Community Center",
+        "info_url": "https://www.seattle.gov/x64743.xml",
         "note": null
       },
       {
         "name": "Northacres Park",
+        "info_url": "https://www.seattle.gov/parks/parks/northacres-park",
         "note": null
       },
       {
         "name": "Pratt Park",
+        "info_url": "https://www.seattle.gov/parks/parks/pratt-park",
         "note": null
       },
       {
         "name": "South Park Playground",
+        "info_url": "https://www.seattle.gov/parks/parks/south-park-playground",
         "note": null
       },
       {
         "name": "Yesler Terrace Park",
+        "info_url": "https://www.seattle.gov/parks/parks/yesler-terrace-park",
         "note": null
       }
     ]
