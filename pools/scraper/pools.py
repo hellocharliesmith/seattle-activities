@@ -38,6 +38,7 @@ or partial page instead of failing outright.
 import json
 import re
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -89,6 +90,22 @@ def clean(text: str) -> str:
 
 def map_url_for(address: str) -> str:
     return "https://www.google.com/maps/search/?api=1&query=" + urllib.parse.quote(address)
+
+
+def fetch_pool_image(url: str):
+    """Each pool's own seattle.gov page has a hero image div near the top:
+    <div class="featureWrapper ..." data-backgroundurl="/images/...jpg">
+    Soft-fails to None - a missing thumbnail shouldn't break anything."""
+    if not url:
+        return None
+    try:
+        html = fetch_html(url)
+    except (urllib.error.URLError, TimeoutError, OSError):
+        return None
+    m = re.search(r'class="featureWrapper[^"]*"\s+data-backgroundurl="([^"]+)"', html)
+    if not m or not m.group(1).strip():
+        return None
+    return urllib.parse.urljoin(url, m.group(1))
 
 
 def fetch_pool_index():

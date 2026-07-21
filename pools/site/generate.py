@@ -30,6 +30,7 @@ from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_PATH = ROOT / "data" / "pools.json"
+IMAGES_PATH = ROOT / "data" / "pool-images.json"
 OUT_PATH = ROOT / "site" / "index.html"
 DOCS_OUT = ROOT.parent / "docs" / "pools" / "index.html"
 
@@ -129,11 +130,22 @@ def build_pool_view(pool: dict, today: date, fallback_year: int):
     }
 
 
+def merge_images(data: dict) -> dict:
+    """Pool header images are cached separately (fetch_images.py, run by
+    hand every so often) rather than re-fetched on every daily scrape."""
+    if IMAGES_PATH.exists():
+        images = json.loads(IMAGES_PATH.read_text(encoding="utf-8"))
+        for pool in data["pools"]:
+            pool["image_url"] = images.get(pool["slug"])
+    return data
+
+
 def render(data: dict) -> str:
     now = datetime.now(SEATTLE_TZ)
     today = now.date()
     fallback_year = data.get("schedule_year") or today.year
 
+    data = merge_images(data)
     pools = [build_pool_view(p, today, fallback_year) for p in data["pools"]]
     outdoor = [p for p in pools if p["kind"] == "outdoor"]
     indoor = [p for p in pools if p["kind"] == "indoor"]
