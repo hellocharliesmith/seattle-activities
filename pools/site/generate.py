@@ -24,9 +24,11 @@ schedule table posted for the current session, so the wording there is
 """
 import json
 import re
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
+
+from sessions import all_sessions
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_PATH = ROOT / "data" / "pools.json"
@@ -35,6 +37,7 @@ OUT_PATH = ROOT / "site" / "index.html"
 DOCS_OUT = ROOT.parent / "docs" / "pools" / "index.html"
 
 SEATTLE_TZ = ZoneInfo("America/Los_Angeles")
+WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 MONTHS = {
     "jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
     "jul": 7, "aug": 8, "sep": 9, "sept": 9, "oct": 10, "nov": 11, "dec": 12,
@@ -153,6 +156,15 @@ def render(data: dict) -> str:
     parseable = [p for p in pools if p["status"] != "facility_closed"]
     parsed_ok = sum(1 for p in parseable if p.get("schedule") or p.get("schedule_pdfs"))
 
+    # A 3-day rolling window (today + next 2), used by the calendar view -
+    # this is a weekly-recurring schedule, not dated events, so "3 days"
+    # just means "the next 3 weekdays starting today" for a concrete,
+    # actionable answer rather than an abstract Mon-Sun grid.
+    three_day_window = [
+        {"weekday": WEEKDAYS[(today.weekday() + i) % 7], "date_label": (today + timedelta(days=i)).strftime("%a %-d")}
+        for i in range(3)
+    ]
+
     view = {
         "generated_at": now.strftime("%A, %B %-d at %-I:%M %p") + " Pacific",
         "date_label": today.strftime("%A, %B %-d"),
@@ -160,6 +172,8 @@ def render(data: dict) -> str:
         "outdoor_pools": outdoor,
         "indoor_pools": indoor,
         "low_confidence": parsed_ok < len(parseable),
+        "sessions": all_sessions(data["pools"]),
+        "three_day_window": three_day_window,
     }
 
     template = (Path(__file__).parent / "template.html").read_text(encoding="utf-8")

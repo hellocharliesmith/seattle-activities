@@ -26,6 +26,19 @@
     --danger-wash: #f7e7e2;
     --shadow: 0 1px 2px rgba(16, 34, 43, 0.06), 0 4px 16px rgba(16, 34, 43, 0.06);
     color-scheme: light;
+
+    /* Session/program categories - deliberately distinct from the status
+       colors above (open/sun/teal/danger already mean open/holiday/
+       upcoming/closed elsewhere on this page), so a calendar block's color
+       never collides with a status meaning. */
+    --cat-lap-swim: #2f6fb0;
+    --cat-recreation-swim: #c1476b;
+    --cat-family-swim: #7452c7;
+    --cat-adult-senior-swim: #55707c;
+    --cat-water-exercise: #a5691f;
+    --cat-swim-lessons: #4a5fc1;
+    --cat-multiple: #7c8b90;
+    --cat-other: #7c8b90;
   }
 
   * { box-sizing: border-box; }
@@ -73,6 +86,49 @@
   }
   h2.today-date { font-size: 24px; margin: 0 0 4px; text-wrap: balance; }
   .section-sub { color: var(--ink-soft); font-size: 13px; margin: 0 0 14px; }
+
+  /* Search & filter across every pool's sessions */
+  .search-card { background: var(--surface); border-radius: 14px; box-shadow: var(--shadow); padding: 14px; }
+  .search-input-row { position: relative; }
+  .search-input {
+    width: 100%; padding: 11px 14px 11px 36px; border-radius: 10px; border: 1px solid var(--line);
+    background: var(--paper); color: var(--ink); font-size: 14.5px; font-family: inherit;
+  }
+  .search-input:focus { outline: 2px solid var(--teal); outline-offset: 1px; }
+  .search-input-row svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+  .filter-groups { margin-top: 12px; display: flex; flex-direction: column; gap: 10px; }
+  .filter-group-label {
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 6px; display: block;
+  }
+  .filter-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .filter-chip {
+    font-size: 12px; font-weight: 600; padding: 6px 11px; border-radius: 999px; cursor: pointer;
+    background: var(--paper); border: 1px solid var(--line); color: var(--ink-soft);
+    display: inline-flex; align-items: center; gap: 5px; -webkit-tap-highlight-color: transparent;
+  }
+  .filter-chip .fc-dot { width: 7px; height: 7px; border-radius: 50%; flex: 0 0 auto; }
+  .filter-chip.active { background: var(--teal-wash); border-color: transparent; color: var(--teal-deep); }
+  .search-meta { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+  .search-count { font-size: 12px; color: var(--muted); }
+  .clear-filters {
+    font-size: 12px; font-weight: 700; color: var(--teal); background: none; border: none;
+    cursor: pointer; padding: 4px 0; font-family: inherit;
+  }
+  .clear-filters:hover { text-decoration: underline; }
+
+  .results-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+  .result-row {
+    display: block; width: 100%; text-align: left; background: var(--paper); border: 1px solid var(--line);
+    border-radius: 10px; padding: 9px 11px; cursor: pointer; font-family: inherit;
+  }
+  .result-row:hover { background: var(--teal-wash); }
+  .result-row .rr-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+  .result-row .rr-program { font-weight: 700; font-size: 13px; color: var(--ink); display: flex; align-items: center; gap: 6px; }
+  .result-row .rr-dot { width: 8px; height: 8px; border-radius: 50%; flex: 0 0 auto; }
+  .result-row .rr-time { font-size: 11.5px; font-weight: 700; color: var(--ink-soft); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .result-row .rr-meta { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+  .search-empty { font-size: 13px; color: var(--muted); padding: 10px 2px; }
 
   .card-list { display: flex; flex-direction: column; gap: 10px; }
 
@@ -152,6 +208,50 @@
   table.sched tbody tr:nth-child(odd) { background: color-mix(in srgb, var(--paper) 55%, var(--surface)); }
   table.sched td:first-child, table.sched th:first-child { font-weight: 600; white-space: nowrap; }
 
+  /* 3-day calendar view (currently only used for Ballard Pool, as a test) */
+  .cal-toggle-row { display: flex; gap: 8px; margin: 12px 0 10px; }
+  .cal-toggle {
+    flex: 1; text-align: center; padding: 8px 10px; border-radius: 9px; cursor: pointer;
+    background: var(--paper); border: 1px solid var(--line);
+    color: var(--muted); font-weight: 700; font-size: 12.5px;
+  }
+  .cal-toggle.active { background: var(--teal-wash); color: var(--teal-deep); border-color: transparent; }
+  .cal-legend { display: flex; flex-wrap: wrap; gap: 8px 12px; margin: 0 0 12px; }
+  .cal-legend-item { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: var(--ink-soft); }
+  .cal-legend-dot { width: 8px; height: 8px; border-radius: 50%; flex: 0 0 auto; }
+  .cal-wrap { display: flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--surface); }
+  .cal-time-axis { flex: 0 0 34px; position: relative; border-right: 1px solid var(--line); background: var(--paper); }
+  .cal-time-label {
+    position: absolute; right: 4px; transform: translateY(-50%);
+    font-size: 9px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .cal-days { flex: 1; display: flex; }
+  .cal-day-col { flex: 1; position: relative; border-right: 1px solid var(--line); }
+  .cal-day-col:last-child { border-right: none; }
+  .cal-day-head {
+    text-align: center; font-size: 10.5px; font-weight: 700; color: var(--ink-soft);
+    padding: 6px 2px; border-bottom: 1px solid var(--line); background: var(--paper);
+    position: sticky; top: 0;
+  }
+  .cal-day-head .is-today-label { color: var(--teal); }
+  .cal-grid { position: relative; }
+  .cal-gridline { position: absolute; left: 0; right: 0; border-top: 1px solid var(--line); opacity: 0.6; }
+  .cal-block {
+    position: absolute; border-radius: 5px; padding: 2px 4px; overflow: hidden;
+    font-size: 9px; line-height: 1.25; cursor: pointer; border: 1px solid transparent;
+  }
+  .cal-block:focus-visible, .cal-block.selected { border-color: currentColor; }
+  .cal-block .cb-time, .cal-block .cb-label {
+    display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .cal-block .cb-time { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .cal-empty-day { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--muted); }
+  .cal-detail {
+    margin-top: 10px; padding: 10px 12px; border-radius: 10px; background: var(--paper);
+    font-size: 12.5px; color: var(--ink-soft); border: 1px solid var(--line);
+  }
+  .cal-detail .cd-title { display: block; font-weight: 700; color: var(--ink); margin-bottom: 2px; font-size: 13px; }
+
   .pdf-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 12px; }
   .pdf-chip {
     font-size: 12.5px; font-weight: 600; color: var(--teal); text-decoration: none;
@@ -198,6 +298,37 @@
   <section id="today-header">
     <p class="eyebrow">Today</p>
     <h2 class="today-date display" id="today-date"></h2>
+  </section>
+
+  <section id="search-section">
+    <p class="eyebrow">Search</p>
+    <h2 class="display" style="font-size:20px;margin:0 0 4px;">Find a swim</h2>
+    <p class="section-sub">Search and filter across every pool's posted schedule.</p>
+    <div class="search-card">
+      <div class="search-input-row">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="var(--muted)" stroke-width="2"/><line x1="21" y1="21" x2="16.3" y2="16.3" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"/></svg>
+        <input class="search-input" id="search-input" type="text" placeholder="Search programs, details, pool names...">
+      </div>
+      <div class="filter-groups">
+        <div>
+          <span class="filter-group-label">Time of day</span>
+          <div class="filter-chips" id="filter-time"></div>
+        </div>
+        <div>
+          <span class="filter-group-label">Class type</span>
+          <div class="filter-chips" id="filter-category"></div>
+        </div>
+        <div>
+          <span class="filter-group-label">Pools</span>
+          <div class="filter-chips" id="filter-pool"></div>
+        </div>
+      </div>
+      <div class="search-meta">
+        <span class="search-count" id="search-count"></span>
+        <button class="clear-filters" id="clear-filters" type="button">Clear all</button>
+      </div>
+      <div class="results-list" id="results-list"></div>
+    </div>
   </section>
 
   <section id="outdoor-section">
@@ -260,10 +391,128 @@
   renderGroup(DATA.outdoor_pools, document.getElementById('outdoor-list'), 'outdoor', true);
   renderGroup(DATA.indoor_pools, document.getElementById('indoor-list'), 'indoor', false);
 
+  // ---- Calendar block tap-for-detail (delegated - blocks are built as HTML strings) ----
+  document.addEventListener('click', (e) => {
+    const block = e.target.closest('.cal-block');
+    if (!block) return;
+    const expand = block.closest('.pool-expand');
+    const detailBox = expand && expand.querySelector('[id^="cal-detail-"]');
+    if (!detailBox) return;
+    detailBox.hidden = false;
+    detailBox.innerHTML = '<span class="cd-title">' + escapeHtml(block.dataset.program) +
+      (block.dataset.time ? ' - ' + escapeHtml(block.dataset.time) : '') + '</span>' + escapeHtml(block.dataset.details);
+    expand.querySelectorAll('.cal-block.selected').forEach(b => b.classList.remove('selected'));
+    block.classList.add('selected');
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && e.target.classList && e.target.classList.contains('cal-block')) e.target.click();
+  });
+
+  // ---- Search & filter across every pool's sessions ----
+  const TIME_BUCKETS = [
+    { key: 'morning', label: 'Morning (before 12pm)', test: s => s.start_min != null && s.start_min < 720 },
+    { key: 'afternoon', label: 'Afternoon (12-5pm)', test: s => s.start_min != null && s.start_min >= 720 && s.start_min < 1020 },
+    { key: 'evening', label: 'Evening (after 5pm)', test: s => s.start_min != null && s.start_min >= 1020 },
+  ];
+  const CATEGORY_ORDER = ['Lap Swim', 'Recreation Swim', 'Family Swim', 'Adult/Senior Swim', 'Water Exercise', 'Swim Lessons', 'Multiple', 'Other'];
+  const allCategories = [...new Set(DATA.sessions.map(s => s.category))]
+    .sort((a, b) => CATEGORY_ORDER.indexOf(a) - CATEGORY_ORDER.indexOf(b));
+  const allPools = [...DATA.outdoor_pools, ...DATA.indoor_pools].map(p => ({ slug: p.slug, name: p.name }));
+
+  const filterState = { time: new Set(), category: new Set(), pool: new Set(), query: '' };
+
+  function buildChips(container, items, stateSet, getKey, getLabel, getDot) {
+    items.forEach(item => {
+      const key = getKey(item);
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'filter-chip';
+      chip.innerHTML = (getDot ? '<span class="fc-dot" style="background:' + getDot(item) + '"></span>' : '') + escapeHtml(getLabel(item));
+      chip.addEventListener('click', () => {
+        if (stateSet.has(key)) stateSet.delete(key); else stateSet.add(key);
+        chip.classList.toggle('active');
+        runSearch();
+      });
+      container.appendChild(chip);
+    });
+  }
+  buildChips(document.getElementById('filter-time'), TIME_BUCKETS, filterState.time, b => b.key, b => b.label);
+  buildChips(document.getElementById('filter-category'), allCategories, filterState.category, c => c, c => c, c => 'var(--cat-' + catSlug(c) + ')');
+  buildChips(document.getElementById('filter-pool'), allPools, filterState.pool, p => p.slug, p => p.name);
+
+  const searchInput = document.getElementById('search-input');
+  searchInput.addEventListener('input', () => { filterState.query = searchInput.value.trim().toLowerCase(); runSearch(); });
+  document.getElementById('clear-filters').addEventListener('click', () => {
+    filterState.time.clear(); filterState.category.clear(); filterState.pool.clear(); filterState.query = '';
+    searchInput.value = '';
+    document.querySelectorAll('.filter-chip.active').forEach(c => c.classList.remove('active'));
+    runSearch();
+  });
+
+  function jumpToPool(slug) {
+    const card = document.querySelector('details.pool-card[data-slug="' + slug + '"]');
+    if (!card) return;
+    card.open = true;
+    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function runSearch() {
+    const active = filterState.query || filterState.time.size || filterState.category.size || filterState.pool.size;
+    const resultsEl = document.getElementById('results-list');
+    const countEl = document.getElementById('search-count');
+    resultsEl.innerHTML = '';
+    if (!active) {
+      countEl.textContent = 'Search or pick a filter to see matching sessions.';
+      return;
+    }
+    const q = filterState.query;
+    const matches = DATA.sessions.filter(s => {
+      if (filterState.category.size && !filterState.category.has(s.category)) return false;
+      if (filterState.pool.size && !filterState.pool.has(s.pool_slug)) return false;
+      if (filterState.time.size) {
+        const ok = [...filterState.time].some(key => TIME_BUCKETS.find(b => b.key === key).test(s));
+        if (!ok) return false;
+      }
+      if (q) {
+        const hay = [s.pool_name, s.program, s.category, s.details, s.day_label].join(' ').toLowerCase();
+        if (hay.indexOf(q) === -1) return false;
+      }
+      return true;
+    });
+
+    countEl.textContent = matches.length + (matches.length === 1 ? ' session' : ' sessions') + ' found';
+    if (!matches.length) {
+      resultsEl.innerHTML = '<div class="search-empty">No sessions match. Try different filters.</div>';
+      return;
+    }
+    matches.slice(0, 60).forEach(s => {
+      const row = document.createElement('button');
+      row.type = 'button';
+      row.className = 'result-row';
+      const dayText = s.days ? s.days.join('/') : (s.day_label || 'Days vary - see pool page');
+      row.innerHTML =
+        '<div class="rr-top">' +
+          '<span class="rr-program"><span class="rr-dot" style="background:var(--cat-' + catSlug(s.category) + ')"></span>' + escapeHtml(s.program) + '</span>' +
+          '<span class="rr-time">' + escapeHtml(s.time_label || '') + '</span>' +
+        '</div>' +
+        '<div class="rr-meta">' + escapeHtml(s.pool_name) + ' - ' + escapeHtml(dayText) + '</div>';
+      row.addEventListener('click', () => jumpToPool(s.pool_slug));
+      resultsEl.appendChild(row);
+    });
+    if (matches.length > 60) {
+      const more = document.createElement('div');
+      more.className = 'search-empty';
+      more.textContent = 'Showing the first 60 of ' + matches.length + ' matches - narrow your search to see the rest.';
+      resultsEl.appendChild(more);
+    }
+  }
+  runSearch();
+
   function renderGroup(pools, container, kind, openFirst) {
     pools.forEach((pool, i) => {
       const det = document.createElement('details');
       det.className = 'pool-card ' + (STATUS_CLASS[pool.status] || '');
+      det.dataset.slug = pool.slug;
       if (openFirst && i === 0) det.open = true;
 
       const summary = document.createElement('summary');
@@ -303,7 +552,13 @@
             (pool.holiday_list && pool.holiday_list.length ? '<ul>' + pool.holiday_list.map(h => '<li>' + escapeHtml(h) + '</li>').join('') + '</ul>' : '') +
             '</div>';
         }
-        if (pool.schedule) {
+        if (pool.schedule && pool.slug === 'ballard-pool') {
+          // Test case: a 3-day calendar view instead of the raw table, see
+          // if it reads better than scrolling a wide table sideways.
+          html += '<p class="sched-label">Schedule - 3 day view (test)</p>' + renderCalendar(pool);
+          html += '<details style="margin-top:10px;"><summary style="cursor:pointer;font-size:12px;font-weight:700;color:var(--teal);">View as table instead</summary>' +
+            '<div style="margin-top:8px;">' + renderTable(pool.schedule) + '</div></details>';
+        } else if (pool.schedule) {
           html += '<p class="sched-label">Regular drop-in schedule</p>' + renderTable(pool.schedule);
         } else if (pool.schedule_pdfs && pool.schedule_pdfs.length) {
           html += '<p class="sched-label">Schedule</p><p class="section-sub" style="margin:0 0 4px;">Posted as a PDF rather than a page table for this pool:</p>' +
@@ -338,6 +593,96 @@
       return '<tr>' + cells.map(c => '<td>' + escapeHtml(c) + '</td>').join('') + '</tr>';
     }).join('') + '</tbody></table></div>';
     return out;
+  }
+
+  function catSlug(cat) {
+    return (cat || 'other').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  }
+
+  function fmtHour(min) {
+    let h = Math.floor(min / 60) % 24;
+    const ap = h >= 12 ? 'p' : 'a';
+    let h12 = h % 12; if (h12 === 0) h12 = 12;
+    return h12 + ap;
+  }
+
+  // Greedy interval-graph coloring: gives each session a "lane" so same-day
+  // overlapping sessions sit side by side instead of on top of each other.
+  function assignLanes(sortedSessions) {
+    const laneEnds = [];
+    const laneOf = [];
+    sortedSessions.forEach(s => {
+      let placed = false;
+      for (let i = 0; i < laneEnds.length; i++) {
+        if (laneEnds[i] <= s.start_min) { laneEnds[i] = s.end_min; laneOf.push(i); placed = true; break; }
+      }
+      if (!placed) { laneEnds.push(s.end_min); laneOf.push(laneEnds.length - 1); }
+    });
+    return { laneOf, maxLanes: Math.max(1, laneEnds.length) };
+  }
+
+  function renderCalendar(pool) {
+    const sessions = DATA.sessions.filter(s => s.pool_slug === pool.slug && s.start_min != null);
+    if (!sessions.length) return '<p class="section-sub">No sessions with a parsed time for this pool.</p>';
+
+    const days = DATA.three_day_window;
+    let minStart = Math.floor(Math.min(...sessions.map(s => s.start_min)) / 60) * 60;
+    let maxEnd = Math.ceil(Math.max(...sessions.map(s => s.end_min)) / 60) * 60;
+    const pxPerMin = 0.52;
+    const gridHeight = (maxEnd - minStart) * pxPerMin;
+
+    let gridlines = '', timeLabels = '';
+    for (let m = minStart; m <= maxEnd; m += 60) {
+      const top = (m - minStart) * pxPerMin;
+      gridlines += '<div class="cal-gridline" style="top:' + top.toFixed(1) + 'px;"></div>';
+      timeLabels += '<span class="cal-time-label" style="top:' + top.toFixed(1) + 'px;">' + fmtHour(m) + '</span>';
+    }
+
+    const dayCols = days.map((d, i) => {
+      const daySessions = sessions
+        .filter(s => !s.days || s.days.indexOf(d.weekday) !== -1)
+        .sort((a, b) => a.start_min - b.start_min);
+      const lanes = assignLanes(daySessions);
+
+      const blocks = daySessions.map((s, idx) => {
+        const lane = lanes.laneOf[idx];
+        const widthPct = 100 / lanes.maxLanes;
+        const top = (s.start_min - minStart) * pxPerMin;
+        const height = Math.max(15, (s.end_min - s.start_min) * pxPerMin);
+        const catVar = 'var(--cat-' + catSlug(s.category) + ')';
+        return '<div class="cal-block" tabindex="0" ' +
+          'data-program="' + escapeHtml(s.program) + '" data-time="' + escapeHtml(s.time_label || '') + '" ' +
+          'data-details="' + escapeHtml(s.details || 'No additional details posted.') + '" ' +
+          'style="top:' + top.toFixed(1) + 'px;height:' + height.toFixed(1) + 'px;left:' + (lane * widthPct).toFixed(1) + '%;' +
+          'width:calc(' + widthPct.toFixed(1) + '% - 2px);background:color-mix(in srgb, ' + catVar + ' 16%, var(--surface));' +
+          'border-left:3px solid ' + catVar + ';color:' + catVar + ';">' +
+          '<span class="cb-time">' + escapeHtml(s.time_label || '') + '</span>' +
+          '<span class="cb-label">' + escapeHtml(s.program) + '</span>' +
+        '</div>';
+      }).join('');
+
+      return '<div class="cal-day-col">' +
+        '<div class="cal-day-head"><span class="' + (i === 0 ? 'is-today-label' : '') + '">' + escapeHtml(d.date_label) + '</span></div>' +
+        '<div class="cal-grid" style="height:' + gridHeight.toFixed(1) + 'px;">' + gridlines + blocks +
+        (daySessions.length ? '' : '<div class="cal-empty-day">No sessions</div>') +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    const usedCategories = [...new Set(sessions.map(s => s.category))];
+    const legend = usedCategories.map(c =>
+      '<span class="cal-legend-item"><span class="cal-legend-dot" style="background:var(--cat-' + catSlug(c) + ')"></span>' + escapeHtml(c) + '</span>'
+    ).join('');
+
+    return '<div class="cal-legend">' + legend + '</div>' +
+      '<div class="cal-wrap">' +
+        '<div class="cal-time-axis" style="height:' + (gridHeight + 22).toFixed(1) + 'px;">' +
+          '<div style="height:22px;"></div>' +
+          '<div style="position:relative;height:' + gridHeight.toFixed(1) + 'px;">' + timeLabels + '</div>' +
+        '</div>' +
+        '<div class="cal-days">' + dayCols + '</div>' +
+      '</div>' +
+      '<div class="cal-detail" id="cal-detail-' + pool.slug + '" hidden></div>';
   }
 
   const footer = document.getElementById('footer');
