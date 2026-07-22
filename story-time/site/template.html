@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seattle Story Times</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #10222b;
+    --ink-soft: #3c545c;
+    --paper: #f1f6f5;
+    --surface: #ffffff;
+    --teal: #0d7d87;
+    --teal-deep: #095a62;
+    --teal-wash: #e2f1f1;
+    --sun: #c97f13;
+    --sun-wash: #faedd6;
+    --open: #1f8a5b;
+    --open-wash: #e3f3e9;
+    --muted: #7c8b90;
+    --line: #dbe6e4;
+    --danger: #b14a34;
+    --danger-wash: #f7e7e2;
+    --shadow: 0 1px 2px rgba(16, 34, 43, 0.06), 0 4px 16px rgba(16, 34, 43, 0.06);
+    color-scheme: light;
+
+    /* Age-group colors - distinct from status colors used elsewhere. */
+    --cat-baby: #7452c7;
+    --cat-toddler: #c1476b;
+    --cat-preschool: #2f6fb0;
+    --cat-family: #1f8a5b;
+    --cat-other: #7c8b90;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Inter", -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .display {
+    font-family: "Inter", -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 0 16px 64px; }
+
+  header.top {
+    position: sticky; top: 0; z-index: 5;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 16px 12px;
+  }
+  header.top .inner { max-width: 560px; margin: 0 auto; display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+  .back-home {
+    display: flex; align-items: center; gap: 3px; width: fit-content; margin: 0 auto 6px;
+    max-width: 560px; font-size: 12.5px; font-weight: 700; color: var(--teal); text-decoration: none;
+  }
+  .back-home:hover { text-decoration: underline; }
+  header.top h1 {
+    font-size: 20px; letter-spacing: -0.01em; margin: 0; text-wrap: balance;
+  }
+  .checked-chip {
+    font-size: 11px; color: var(--muted); white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .low-confidence {
+    margin: 16px 0; padding: 12px 14px; border-radius: 10px;
+    background: var(--danger-wash); color: var(--danger);
+    font-size: 13px; border: 1px solid color-mix(in srgb, var(--danger) 30%, transparent);
+  }
+
+  section { margin-top: 28px; }
+  .eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 6px;
+  }
+  h2.today-date { font-size: 24px; margin: 0 0 4px; text-wrap: balance; }
+  .section-sub { color: var(--ink-soft); font-size: 13px; margin: 0 0 14px; }
+
+  .search-card { background: var(--surface); border-radius: 14px; box-shadow: var(--shadow); padding: 14px; }
+
+  .day-nav {
+    display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 12px;
+  }
+  .day-nav button {
+    width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--line);
+    background: var(--surface); color: var(--teal); font-size: 18px; font-weight: 700;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-family: inherit; box-shadow: var(--shadow);
+  }
+  .day-nav button:hover { background: var(--teal-wash); }
+  .day-nav button:disabled { opacity: 0.35; cursor: default; background: var(--surface); }
+  .day-nav #day-label { font-weight: 700; font-size: 15px; min-width: 140px; text-align: center; }
+
+  .filter-row { display: flex; gap: 8px; margin-bottom: 4px; }
+
+  /* Multi-select dropdown-with-checkboxes filter, reused for neighborhood
+     and age group - dropdown buttons rather than chips (too many options
+     for a chip row on mobile) or a native <select multiple> (bad mobile
+     UX: no visible checked state, awkward multi-tap). */
+  .msel { position: relative; flex: 1 1 0; min-width: 0; }
+  .msel-btn {
+    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 6px;
+    padding: 8px 10px; border-radius: 10px; border: 1px solid var(--line);
+    background: var(--paper); color: var(--ink); font-size: 13px; font-family: inherit; cursor: pointer;
+  }
+  .msel-btn .chev { color: var(--muted); font-size: 10px; }
+  .msel-panel {
+    position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 20;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow);
+    padding: 6px; max-height: 260px; overflow-y: auto; display: none;
+  }
+  .msel-panel.open { display: block; }
+  .msel-option { display: flex; align-items: center; gap: 8px; padding: 7px 8px; border-radius: 7px; cursor: pointer; font-size: 13px; }
+  .msel-option:hover { background: var(--teal-wash); }
+  .msel-option input { accent-color: var(--teal); }
+  .msel-help { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .msel-help .msel-clear { color: var(--teal); font-weight: 700; cursor: pointer; margin-left: 4px; }
+  .msel-help:empty { display: none; }
+
+  .event-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+  .event-card {
+    background: var(--surface); border-radius: 12px; box-shadow: var(--shadow);
+    padding: 11px 13px; display: flex; gap: 10px; align-items: flex-start;
+  }
+  .event-time {
+    flex: 0 0 auto; width: 62px; font-size: 12px; font-weight: 700; color: var(--ink-soft);
+    font-variant-numeric: tabular-nums; line-height: 1.3; padding-top: 1px;
+  }
+  .event-body { flex: 1; min-width: 0; }
+  .event-title { font-weight: 700; font-size: 14px; margin: 0 0 2px; text-wrap: balance; }
+  .event-branch { font-size: 12.5px; color: var(--ink-soft); margin: 0; }
+  .event-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .age-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 999px;
+  }
+  .age-badge.age-baby { background: color-mix(in srgb, var(--cat-baby) 14%, var(--surface)); color: var(--cat-baby); }
+  .age-badge.age-toddler { background: color-mix(in srgb, var(--cat-toddler) 14%, var(--surface)); color: var(--cat-toddler); }
+  .age-badge.age-preschool { background: color-mix(in srgb, var(--cat-preschool) 14%, var(--surface)); color: var(--cat-preschool); }
+  .age-badge.age-family { background: color-mix(in srgb, var(--cat-family) 14%, var(--surface)); color: var(--cat-family); }
+  .age-badge.age-other { background: color-mix(in srgb, var(--cat-other) 14%, var(--surface)); color: var(--cat-other); }
+  .neighborhood-chip {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 999px;
+    background: var(--teal-wash); color: var(--teal-deep);
+  }
+  .event-link { font-size: 12px; font-weight: 700; color: var(--teal); text-decoration: none; }
+  .event-link:hover { text-decoration: underline; }
+  .empty-day { padding: 24px 12px; text-align: center; color: var(--muted); font-size: 13.5px; }
+
+  footer {
+    margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line);
+    font-size: 12.5px; color: var(--muted); display: flex; flex-direction: column; gap: 6px;
+  }
+  footer a { color: var(--teal); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  footer .disclaimer { margin-top: 6px; }
+
+  a, button { -webkit-tap-highlight-color: transparent; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="back-home" href="../">&#8249; Home</a>
+    <div class="inner">
+      <h1 class="display"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="vertical-align:-3px;margin-right:2px;"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11a2 2 0 0 1 2 2v14a1.5 1.5 0 0 0-1.5-1.5H4V5.5Z" fill="var(--teal-wash)" stroke="var(--teal)" stroke-width="1.6" stroke-linejoin="round"/><path d="M20 5.5C20 4.7 19.3 4 18.5 4H13a2 2 0 0 0-2 2v14a1.5 1.5 0 0 1 1.5-1.5H20V5.5Z" fill="var(--teal-wash)" stroke="var(--teal)" stroke-width="1.6" stroke-linejoin="round"/><circle cx="17" cy="6" r="3" fill="var(--sun)"/></svg>Story Time Finder</h1>
+      <span class="checked-chip" id="checked-chip"></span>
+    </div>
+  </header>
+
+  <div id="low-confidence-slot"></div>
+
+  <section id="today-header">
+    <p class="eyebrow">Seattle Public Library</p>
+    <h2 class="today-date display" id="today-date"></h2>
+    <p class="section-sub">Story times and early-learning play groups at SPL branches. Pick a day, filter by neighborhood or age.</p>
+  </section>
+
+  <section id="finder-section">
+    <div class="search-card">
+      <div class="day-nav">
+        <button type="button" id="day-prev" aria-label="Previous day">&#8249;</button>
+        <span id="day-label"></span>
+        <button type="button" id="day-next" aria-label="Next day">&#8250;</button>
+      </div>
+      <div class="filter-row">
+        <div id="msel-neighborhood"></div>
+        <div id="msel-age"></div>
+      </div>
+      <div class="msel-help" id="msel-help"></div>
+      <div class="event-list" id="event-list"></div>
+    </div>
+  </section>
+
+  <footer id="footer"></footer>
+</div>
+
+<script id="story-data" type="application/json">__STORY_DATA__</script>
+<script>
+(function () {
+  const DATA = JSON.parse(document.getElementById('story-data').textContent);
+
+  document.getElementById('checked-chip').textContent = 'Checked ' + DATA.generated_at;
+
+  if (DATA.low_confidence) {
+    const box = document.createElement('div');
+    box.className = 'low-confidence';
+    box.textContent = 'Heads up: the last check found unusually few story time sessions. The library calendar may have changed - verify anything important on the official page.';
+    document.getElementById('low-confidence-slot').appendChild(box);
+  }
+
+  const AGE_LABELS = Object.fromEntries(DATA.age_groups.map(a => [a.value, a.label]));
+  const NEIGHBORHOOD_LABELS = Object.fromEntries(DATA.neighborhoods.map(n => [n.value, n.label]));
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+  }
+
+  // ---- Generic multi-select dropdown (checkbox list) factory ----
+  function makeMultiSelect(containerEl, {label, options, onChange}) {
+    const state = new Set();
+    containerEl.innerHTML =
+      '<div class="msel"><button type="button" class="msel-btn"><span class="msel-label"></span><span class="chev">&#9662;</span></button>' +
+      '<div class="msel-panel"></div></div>';
+    const btn = containerEl.querySelector('.msel-btn');
+    const labelEl = containerEl.querySelector('.msel-label');
+    const panel = containerEl.querySelector('.msel-panel');
+    panel.innerHTML = options.map(o => '<label class="msel-option"><input type="checkbox" value="' + o.value + '"> ' + escapeHtml(o.label) + '</label>').join('');
+    function updateLabel() { labelEl.textContent = state.size ? label + ' (' + state.size + ')' : label; }
+    updateLabel();
+    btn.addEventListener('click', (e) => { e.stopPropagation(); panel.classList.toggle('open'); });
+    panel.addEventListener('change', (e) => {
+      if (e.target.value) {
+        if (e.target.checked) state.add(e.target.value); else state.delete(e.target.value);
+        updateLabel(); onChange(state);
+      }
+    });
+    document.addEventListener('click', (e) => { if (!containerEl.contains(e.target)) panel.classList.remove('open'); });
+    return {
+      getSelected: () => state,
+      getSelectedLabels: () => options.filter(o => state.has(o.value)).map(o => o.label),
+      clear: () => { state.clear(); panel.querySelectorAll('input').forEach(i => i.checked = false); updateLabel(); onChange(state); },
+    };
+  }
+
+  const dayState = { offset: 0 };
+  let neighborhoodMsel, ageMsel;
+
+  function dayAt(offset) {
+    const d = new Date(DATA.today_iso + 'T00:00:00');
+    d.setDate(d.getDate() + offset);
+    const iso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    const label = (offset === 0 ? 'Today, ' : offset === 1 ? 'Tomorrow, ' : '') +
+      d.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+    return { iso, label };
+  }
+
+  function fmtTimeRange(ev) {
+    return ev.start_time.replace(' ', '') + ' - ' + ev.end_time.replace(' ', '');
+  }
+
+  function updateHelp() {
+    const help = document.getElementById('msel-help');
+    const parts = [];
+    const nLabels = neighborhoodMsel.getSelectedLabels();
+    const aLabels = ageMsel.getSelectedLabels();
+    if (nLabels.length) parts.push(nLabels.join(', '));
+    if (aLabels.length) parts.push(aLabels.join(', '));
+    if (!parts.length) { help.innerHTML = ''; return; }
+    help.innerHTML = 'Showing: ' + parts.map(escapeHtml).join(' &middot; ') + '<span class="msel-clear" id="msel-clear-btn">Clear</span>';
+    document.getElementById('msel-clear-btn').addEventListener('click', () => {
+      neighborhoodMsel.clear();
+      ageMsel.clear();
+    });
+  }
+
+  function renderDay() {
+    const day = dayAt(dayState.offset);
+    document.getElementById('day-label').textContent = day.label;
+    document.getElementById('day-prev').disabled = dayState.offset <= DATA.min_day_offset;
+    document.getElementById('day-next').disabled = dayState.offset >= DATA.max_day_offset;
+
+    const neighborhoods = neighborhoodMsel.getSelected();
+    const ages = ageMsel.getSelected();
+
+    const events = DATA.events
+      .filter(e => e.date === day.iso)
+      .filter(e => !neighborhoods.size || neighborhoods.has(e.neighborhood_bucket))
+      .filter(e => !ages.size || ages.has(e.age_group))
+      .sort((a, b) => (a.start_min || 0) - (b.start_min || 0) || a.title.localeCompare(b.title));
+
+    updateHelp();
+
+    const list = document.getElementById('event-list');
+    if (!events.length) {
+      list.innerHTML = '<div class="empty-day">No story times match on this day. Try a different day or clear the filters.</div>';
+      return;
+    }
+
+    list.innerHTML = events.map(ev => (
+      '<div class="event-card">' +
+        '<div class="event-time">' + escapeHtml(ev.start_time) + '<br>' + escapeHtml(ev.end_time) + '</div>' +
+        '<div class="event-body">' +
+          '<p class="event-title">' + escapeHtml(ev.title) + '</p>' +
+          '<p class="event-branch">' + escapeHtml(ev.branch) + (ev.location_note ? ' &middot; ' + escapeHtml(ev.location_note) : '') + '</p>' +
+          '<div class="event-meta">' +
+            '<span class="age-badge age-' + escapeHtml(ev.age_group) + '">' + escapeHtml(AGE_LABELS[ev.age_group] || ev.age_group) + '</span>' +
+            '<span class="neighborhood-chip">' + escapeHtml(NEIGHBORHOOD_LABELS[ev.neighborhood_bucket] || ev.neighborhood_bucket) + '</span>' +
+          '</div>' +
+        '</div>' +
+      '</div>'
+    )).join('');
+  }
+
+  neighborhoodMsel = makeMultiSelect(document.getElementById('msel-neighborhood'), {
+    label: 'Neighborhood', options: DATA.neighborhoods, onChange: renderDay,
+  });
+  ageMsel = makeMultiSelect(document.getElementById('msel-age'), {
+    label: 'Age group', options: DATA.age_groups, onChange: renderDay,
+  });
+
+  document.getElementById('today-date').textContent = dayAt(0).label;
+
+  document.getElementById('day-prev').addEventListener('click', () => {
+    dayState.offset = Math.max(DATA.min_day_offset, dayState.offset - 1);
+    renderDay();
+  });
+  document.getElementById('day-next').addEventListener('click', () => {
+    dayState.offset = Math.min(DATA.max_day_offset, dayState.offset + 1);
+    renderDay();
+  });
+
+  renderDay();
+
+  const footer = document.getElementById('footer');
+  footer.innerHTML =
+    '<div><a href="' + DATA.calendar_page_url + '" target="_blank" rel="noopener">Official SPL story time calendar</a></div>' +
+    '<div class="disclaimer">Unofficial mirror, rechecked automatically each morning (last: ' + DATA.generated_at + '). Sessions can be added, moved, or cancelled - confirm anything important on the official calendar before heading out.</div>';
+})();
+</script>
+</body>
+</html>

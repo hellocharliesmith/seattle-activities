@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seattle Community Centers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #10222b;
+    --ink-soft: #3c545c;
+    --paper: #f1f6f5;
+    --surface: #ffffff;
+    --teal: #0d7d87;
+    --teal-deep: #095a62;
+    --teal-wash: #e2f1f1;
+    --sun: #c97f13;
+    --sun-wash: #faedd6;
+    --open: #1f8a5b;
+    --open-wash: #e3f3e9;
+    --muted: #7c8b90;
+    --line: #dbe6e4;
+    --danger: #b14a34;
+    --danger-wash: #f7e7e2;
+    --shadow: 0 1px 2px rgba(16, 34, 43, 0.06), 0 4px 16px rgba(16, 34, 43, 0.06);
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Inter", -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .display {
+    font-family: "Inter", -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 0 16px 64px; }
+
+  header.top {
+    position: sticky; top: 0; z-index: 5;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 16px 12px;
+  }
+  header.top .inner { max-width: 560px; margin: 0 auto; display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+  .back-home {
+    display: flex; align-items: center; gap: 3px; width: fit-content; margin: 0 auto 6px;
+    max-width: 560px; font-size: 12.5px; font-weight: 700; color: var(--teal); text-decoration: none;
+  }
+  .back-home:hover { text-decoration: underline; }
+  header.top h1 {
+    font-size: 20px; letter-spacing: -0.01em; margin: 0; text-wrap: balance;
+  }
+  .checked-chip {
+    font-size: 11px; color: var(--muted); white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .low-confidence {
+    margin: 16px 0; padding: 12px 14px; border-radius: 10px;
+    background: var(--danger-wash); color: var(--danger);
+    font-size: 13px; border: 1px solid color-mix(in srgb, var(--danger) 30%, transparent);
+  }
+
+  section { margin-top: 28px; }
+  .eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 6px;
+  }
+  h2.today-date { font-size: 24px; margin: 0 0 4px; text-wrap: balance; }
+  .section-sub { color: var(--ink-soft); font-size: 13px; margin: 0 0 14px; }
+
+  /* ---- Multi-select dropdown filters ---- */
+  .filter-row { display: flex; gap: 8px; }
+  .msel { position: relative; flex: 1 1 0; min-width: 0; }
+  .msel-btn {
+    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 6px;
+    padding: 8px 10px; border-radius: 10px; border: 1px solid var(--line);
+    background: var(--paper); color: var(--ink); font-size: 13px; font-family: inherit; cursor: pointer;
+  }
+  .msel-btn .chev { color: var(--muted); font-size: 10px; }
+  .msel-panel {
+    position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 20;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow);
+    padding: 6px; max-height: 260px; overflow-y: auto; display: none;
+  }
+  .msel-panel.open { display: block; }
+  .msel-option { display: flex; align-items: center; gap: 8px; padding: 7px 8px; border-radius: 7px; cursor: pointer; font-size: 13px; }
+  .msel-option:hover { background: var(--teal-wash); }
+  .msel-option input { accent-color: var(--teal); }
+  .msel-help { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .msel-help .msel-clear { color: var(--teal); font-weight: 700; cursor: pointer; margin-left: 4px; }
+  .msel-help.hidden { display: none; }
+
+  .result-count { font-size: 12.5px; color: var(--muted); margin: 10px 0 10px; }
+
+  .card-list { display: flex; flex-direction: column; gap: 10px; }
+
+  details.cc-card {
+    background: var(--surface); border-radius: 12px; box-shadow: var(--shadow); overflow: hidden;
+  }
+  details.cc-card > summary {
+    list-style: none; cursor: pointer; padding: 12px 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  details.cc-card > summary::-webkit-details-marker { display: none; }
+  .summary-body { flex: 1; min-width: 0; }
+  .row-name {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 10px; min-width: 0;
+  }
+  .row-name .name {
+    font-weight: 700; font-size: 14.5px; flex: 1 1 auto; min-width: 0;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .status-text {
+    font-size: 11.5px; font-weight: 700; white-space: nowrap; flex: 0 0 auto;
+    color: var(--muted);
+  }
+  details.cc-card.is-open .status-text { color: var(--open); }
+  details.cc-card.is-closed .status-text { color: var(--danger); }
+  .row-meta { margin-top: 2px; }
+  .row-meta .addr-line {
+    font-size: 11.5px; color: var(--muted);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block;
+  }
+  details.cc-card > summary .chev { color: var(--muted); transition: transform 0.15s; flex: 0 0 auto; }
+  details.cc-card > summary .chev::after { content: "\25B8"; }
+  details.cc-card[open] > summary .chev { transform: rotate(90deg); }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px;
+  }
+  .badge-teen { background: var(--sun-wash); color: var(--sun); }
+  .badge-gym { background: var(--teal-wash); color: var(--teal-deep); }
+
+  .cc-expand { padding: 0 14px 14px; border-top: 1px solid var(--line); margin-top: -1px; padding-top: 12px; }
+  .cc-expand .detail-line { font-size: 13px; color: var(--ink-soft); margin: 0 0 8px; display: flex; gap: 6px; }
+  .cc-expand .detail-line .dl-label { font-weight: 700; color: var(--ink); flex: 0 0 auto; }
+  .cc-expand .hours-raw { white-space: pre-line; }
+
+  .today-actions { display: flex; gap: 8px; margin-top: 12px; }
+  .today-actions .action-btn {
+    flex: 1; text-align: center; padding: 10px 10px; border-radius: 9px;
+    background: var(--paper); border: 1px solid var(--line);
+    color: var(--teal); font-weight: 700; font-size: 13px; text-decoration: none;
+  }
+  .today-actions .action-btn:hover { background: var(--teal-wash); }
+
+  .empty-state {
+    background: var(--surface); border-radius: 12px; box-shadow: var(--shadow);
+    padding: 20px; text-align: center; color: var(--ink-soft); font-size: 13.5px;
+  }
+
+  footer {
+    margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line);
+    font-size: 12.5px; color: var(--muted); display: flex; flex-direction: column; gap: 6px;
+  }
+  footer a { color: var(--teal); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  footer .disclaimer { margin-top: 6px; }
+
+  a, button { -webkit-tap-highlight-color: transparent; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="back-home" href="../">&#8249; Home</a>
+    <div class="inner">
+      <h1 class="display"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="vertical-align:-3px;margin-right:2px;"><path d="M4 21V10.5L12 4l8 6.5V21" stroke="var(--teal)" stroke-width="2" stroke-linejoin="round"/><rect x="9.5" y="14" width="5" height="7" fill="var(--sun)"/></svg>Seattle Community Centers</h1>
+      <span class="checked-chip" id="checked-chip"></span>
+    </div>
+  </header>
+
+  <div id="low-confidence-slot"></div>
+
+  <section id="today-header">
+    <p class="eyebrow">Today</p>
+    <h2 class="today-date display" id="today-date"></h2>
+  </section>
+
+  <section id="centers-section">
+    <p class="eyebrow">Find a center</p>
+    <h2 class="display" style="font-size:20px;margin:0 0 4px;">All community centers</h2>
+    <p class="section-sub">26 Seattle Parks community centers citywide.</p>
+
+    <div class="filter-row">
+      <div id="filter-neighborhood"></div>
+      <div id="filter-features"></div>
+    </div>
+    <p class="msel-help hidden" id="filter-help"></p>
+    <p class="result-count" id="result-count"></p>
+
+    <div id="centers-list" class="card-list"></div>
+  </section>
+
+  <footer id="footer"></footer>
+</div>
+
+<script id="center-data" type="application/json">{"generated_at": "Wednesday, July 22 at 7:27 AM Pacific", "date_label": "Wednesday, July 22", "hub_url": "https://www.seattle.gov/parks/community-centers", "teen_programs_url": "https://www.seattle.gov/parks/childcare/teen-programs", "centers": [{"slug": "alki-community-center", "name": "Alki Community Center", "address": "5817 SW Stevens St, Seattle, WA 98116", "phone": "(206) 684-7430", "neighborhood_bucket": "west-seattle", "neighborhood_label": "West Seattle", "hours_text": null, "hours_parsed": null, "amenities": [], "has_teen_program": false, "has_drop_in_gym": false, "url": "https://www.seattle.gov/parks/community-centers/alki-community-center", "is_open_now": null, "today_label": null}, {"slug": "ballard-community-center", "name": "Ballard Community Center", "address": "6020 28th Ave NW, Seattle, WA 98107", "phone": "(206) 684-4093", "neighborhood_bucket": "ballard-fremont-greenwood", "neighborhood_label": "Ballard / Fremont / Greenwood", "hours_text": "Mon-Fri: 8:30am-8pm; Sat: 8:30am-3:30pm; Sun: 8:30am-12:30pm", "hours_parsed": {"Mon": {"open": "08:30", "close": "20:00"}, "Tue": {"open": "08:30", "close": "20:00"}, "Wed": {"open": "08:30", "close": "20:00"}, "Thu": {"open": "08:30", "close": "20:00"}, "Fri": {"open": "08:30", "close": "20:00"}, "Sat": {"open": "08:30", "close": "15:30"}, "Sun": {"open": "08:30", "close": "12:30"}}, "amenities": ["Meeting Rooms", "After School Programs", "Basketball Court", "Art Studio", "Playground", "Gym", "Kitchen", "Special Populations Programs", "Indoor Toddler Playtime", "Preschool", "Childcare", "Drop in Programs", "Wifi", "Lifelong Recreation", "Pottery Studio"], "has_teen_program": false, "has_drop_in_gym": true, "url": "https://www.seattle.gov/parks/community-centers/ballard-community-center", "is_open_now": false, "today_label": "8:30am\u20138pm today"}, {"slug": "bitter-lake-community-center", "name": "Bitter Lake Community Center", "address": "13035 Linden Ave N, Seattle, WA 98133 (Annex at 13052 Greenwood N. behind school)", "phone": "(206) 684-7524", "neighborhood_bucket": "ballard-fremont-greenwood", "neighborhood_label": "Ballard / Fremont / Greenwood", "hours_text": "Year-Round. Mon-Thur : 8am-9pm; Fri-Sat* : 8am-7pm, Teen Late Night (age 13-19) 7pm-12am; Sun : 10am-5pm", "hours_parsed": {"Mon": {"open": "08:00", "close": "21:00"}, "Tue": {"open": "08:00", "close": "21:00"}, "Wed": {"open": "08:00", "close": "21:00"}, "Thu": {"open": "08:00", "close": "21:00"}, "Fri": {"open": "08:00", "close": "19:00"}, "Sat": {"open": "08:00", "close": "19:00"}, "Sun": {"open": "10:00", "close": "17:00"}}, "amenities": ["Gym", "Kitchen", "Basketball Court", "Meeting Rooms", "Playground", "Game Room", "Wifi", "Childcare", "Preschool", "Teen Programs", "After School Programs", "Special Populations Programs", "Indoor Toddler Playtime", "Late Night Programs", "Drop in Programs", "Lifelong Recreation"], "has_teen_program": true, "has_drop_in_gym": true, "url": "https://www.seattle.gov/parks/community-centers/bitter-lake-community-center", "is_open_now": false, "today_label": "8am\u20139pm today"}, {"slug": "delridge-community-center", "name": "Delridge Community Center", "address": "4501 Delridge Way SW, Seattle, WA 98106", "phone": "(206) 684-7423", "neighborhood_bucket": "west-seattle", "neighborhood_label": "West Seattle", "hours_text": "Summer 2026. Mon-Fri 7:30am-7:00pm; Sat 9:30am-6:00pm; Sun Closed", "hours_parsed": {"Mon": {"open": "07:30", "close": "19:00"}, "Tue": {"open": "07:30", "close": "19:00"}, "Wed": {"open": "07:30", "close": "19:00"}, "Thu": {"open": "07:30", "close": "19:00"}, "Fri": {"open": "07:30", "close": "19:00"}, "Sat": {"open": "09:30", "close": "18:00"}, "Sun": null}, "amenities": ["Gym", "Kitchen", "Basketball Court", "Playground", "Wifi", "Childcare", "Drop in Programs", "Indoor Toddler Playtime", "Preschool", "Meeting Rooms", "Lifelong Recreation", "Camps"], "has_teen_program": false, "has_drop_in_gym": true, "url": "https://www.seattle.gov/parks/community-centers/delridge-community-center", "is_open_now": false, "today_label": "7:30am\u20137pm today"}, {"slug": "garfield-community-center", "name": "Garfield Community Center", "address": "2323 East Cherry St, Seattle, WA 98122", "phone": "(206) 684-4788", "neighborhood_bucket": "capitol-hill-central-district", "neighborhood_label": "Capitol Hill / Central District", "hours_text": "Year-Round. Mon - Fri: 9 a.m. - 8 p.m.; Sat: 10 a.m. - 5 p.m.; Sun: Closed", "hours_parsed": {"Mon": {"open": "09:00", "close": "20:00"}, "Tue": {"open": "09:00", "close": "20:00"}, "Wed": {"open": "09:00", "close": "20:00"}, "Thu": {"open": "09:00", "close": "20:00"}, "Fri": {"open": "09:00", "close": "20:00"}, "Sat": {"open": "10:00", "close": "17:00"}, "Sun": null}, "amenities": ["Kitchen", "Gym", "Playground", "Indoor Toddler Playtime", "Game Room", "Meeting Rooms", "Basketball Court", "Special Populations Programs", "Wifi", "Teen Programs", "Drop in Programs", "Fitness Facilities", "Lifelong Recreation", "Camps"], "has_teen_program": true, "has_drop_in_gym": true, "url": "https://www.seattle.gov/parks/community-centers/garfield-community-center", "is_open_now": false, "today_label": "9am\u20138pm today"}, {"slug": "green-lake-community-center", "name": "Green Lake Community Center", "address": null, "phone": "(206) 684-0780", "neighborhood_bucket": "wallingford-green-lake", "neighborhood_label": "Wallingford / Green Lake", "hours_text": "Summer 2026 Hours. Mon, Tues, Wed, Thurs: 8:30am-7pm; Friday: 8:30am-9pm; Saturday: 8:30am-5p; Sunday: closed", "hours_parsed": {"Mon": {"open": "08:30", "close": "19:00"}, "Tue": {"open": "08:30", "close": "19:00"}, "Wed": {"open": "08:30", "close": "19:00"}, "Thu": {"open": "08:30", "close": "19:00"}, "Fri": {"open": "08:30", "close": "21:00"}, "Sat": {"open": "08:30", "close": "17:00"}, "Sun": null}, "amenities": ["Gym", "Meeting Rooms", "Art Studio", "Wifi", "Indoor Toddler Playtime", "Drop in Programs", "Lifelong Recreation", "Basketball Court"], "has_teen_program": false, "has_drop_in_gym": true, "url": "https://www.seattle.gov/parks/community-centers/green-lake-community-center", "is_open_now": false, "today_label": "8:30am\u20137pm today"}, {"slug": "hiawatha-community-center", "name": "Hiawatha Community Center", "address": "2700 California Ave SW, Seattle, WA 98116", "phone": "(206) 684-7441", "neighborhood_bucket": "southeast-seattle", "neighborhood_label": "Southeast Seattle", "hours_text": "Mon-Fri: 9am-6pm; Closed Sat, Sun", "hours_parsed": {"Mon": {"open": "09:00", "close": "18:00"}, "Tue": {"open": "09:00", "close": "18:00"}, "Wed": {"open": "09:00", "close": "18:00"}, "Thu": {"open": "09:00", "close": "18:00"}, "Fri": {"open": "09:00", "close": "18:00"}, "Sat": null, "Sun": null}, "amenities": ["Gym", "Kitchen", "Meeting Rooms", "Auditorium", "Wifi", "Teen Programs", "Indoor Toddler Playtime", "After School Programs", "Drop in Programs", "Lifelong Recreation", "Camps", "Fitness Facilities"], "has_teen_program": false, "has_drop_in_gym": true, "url": "https://www.seattle.gov/parks/community-centers/hiawatha-community-center", "is_open_now": false, "today_label": "9am\u20136pm today"}, {"slug": "high-point-community-center", "name": "High Point Community Center", "address": "6920 34th Ave SW, Seattle, WA 98126", "phone": "(206) 684-7422", "neighborhood_bucket": "west-seattle", "neighborhood_label": "West Seattle", "hours_text": "Year-Round. Mon-Thur 9am-8pm; Fri 9am-7pm; Sat 9am-5pm; Sun 12pm-8pm", "hours_parsed": {"Mon": {"open": "09:00", "close": "20:00"}, "Tue": {"open": "09:00", "close": "20:00"}, "Wed": {"open": "09:00", "close": "20:00"}, "Thu": {"open": "09:00", "close": "20:00"}, "Fri": {"open": "09:00", "close": "19:00"}, "Sat": {"open": "09:00", "close": "17:00"}, "Sun": {"open": "12:00", "close": "20:00"}}, "amenities": ["Gym", "Kitchen", "Meeting Rooms", "View", "Wifi", "Playground", "Childcare", "Teen Programs", "Indoor Toddler Playtime", "After School Programs", "Special Populations Programs", "Late Night Programs", "Lifelong Recreation", "Camps"], "has_teen_program": false, "has_drop_in_gym": false, "url": "https://www.seattle.gov/parks/community-centers/high-point-community-center", "is_open_now": false, "today_label": "9am\u20138pm today"}, {"slug": "international-districtchinatown-community-center", "name": "International District/Chinatown Community Center", "address": "719 8th Ave S, Seattle, WA 98104", "phone": "(206) 233-0042", "neighborhood_bucket": "downtown-slu", "neighborhood_label": "Downtown / South Lake Union", "hours_text": "Year-Round. Mon, Wed, Fri: 11 a.m. - 9 p.m.; Tue, Thur: 9:30 a.m. - 6 p.m.; Sat: 9 a.m.- 5 p.m.; Sun: Closed", "hours_parsed": {"Mon": {"open": "11:00", "close": "21:00"}, "Wed": {"open": "11:00", "close": "21:00"}, "Fri": {"open": "11:00", "close": "21:00"}, "Tue": {"open": "09:30", "close": "18:00"}, "Thu": {"open": "09:30", "close": "18:00"}, "Sat": {"open": "09:00", "close": "17:00"}, "Sun": null}, "amenities": ["Gym", "Kitchen", "Basketball Court", "Meeting Rooms", "Street Parking Only", "Air Conditioning", "Teen Programs", "Drop in Programs", "Lifelong Recreation"], "has_teen_program": false, "has_drop_in_gym": true, "url": "https://www.seattle.gov/parks/community-centers/international-districtchinatown-community-center", "is_open_now": false, "today_label": "11am\u20139pm today"}, {"slug": "jefferson-community-center", "name": "Jefferson Community Center", "address": "3801 Beacon Ave S, Seattle, WA 98108", "phone": "(206) 684-7481", "neighborhood_bucket": "southeast-seattle", "neighborhood_label": "Southeast Seattle", "hours_text": "Summer 2026 (June 22 - Sept. 6). Mon-Wed: 7am-9pm; Thurs-Fri: 7am-8pm; Closed Sat-Sun", "hours_parsed": {"Mon": {"open": "07:00", "close": "21:00"}, "Tue": {"open": "07:00", "close": "21:00"}, "Wed": {"open": "07:00", "close": "21:00"}, "Thu": {"open": "07:00", "close": "20:00"}, "Fri": {"open": "07:00", "close": "20:00"}, "Sat": null, "Sun": null}, "amenities": ["Kitchen", "Gym", "View", "Art Studio", "Wifi", "Childcare", "Teen Programs", "Indoor Toddler Playtime", "After School Programs", "Drop in Programs", "Playground", "Meeting Rooms", "Lifelong Recreation"], "has_teen_program": false, "has_drop_in_gym": true, "url": "https://www.seattle.gov/parks/community-centers/jefferson-community-center", "is_open_now": true, "today_label": "7am\u20139pm today"}, {"slug": "lake-city-community-center", "name": "Lake City Community Center", "address": "12531 28th Avenue NE, Seattle, WA 98125", "phone": "(206) 256-5645", "neighborhood_bucket": "north-seattle", "neighborhood_label": "North Seattle", "hours_text": "Closed due to fire damage.", "hours_parsed": null, "amenities": [], "has_teen_program": false, "has_drop_in_gym": false, "url": "https://www.seattle.gov/parks/community-centers/lake-city-community-center", "is_open_now": null, "today_label": null}, {"slug": "laurelhurst-community-center", "name": "Laurelhurst Community Center", "address": "4554 NE 41st St, Seattle, WA 98105", "phone": "(206) 684-7529", "neighborhood_bucket": "northeast-seattle", "neighborhood_label": "Northeast Seattle", "hours_text": "Summer 2026: June 21 - Sept. 7. Mon-Fri: 9am-2pm; Sat & Sun: Closed, but available for rentals", "hours_parsed": {"Mon": {"open": "09:00", "close": "14:00"}, "Tue": {"open": "09:00", "close": "14:00"}, "Wed": {"open": "09:00", "close": "14:00"}, "Thu": {"open": "09:00", "close": "14:00"}, "Fri": {"open": "09:00", "close": "14:00"}, "Sat": null, "Sun": null}, "amenities": [], "has_teen_program": false, "has_drop_in_gym": false, "url": "https://www.seattle.gov/parks/community-centers/laurelhurst-community-center", "is_open_now": false, "today_label": "9am\u20132pm today"}, {"slug": "loyal-heights-community-center", "name": "Loyal Heights Community Center", "address": "2101 NW 77th St, Seattle, WA 98117", "phone": "(206) 684-4052", "neighborhood_bucket": "ballard-fremont-greenwood", "neighborhood_label": "Ballard / Fremont / Greenwood", "hours_text": "Year-Round. Mon, Wed, Fri: 9 a.m. - 9 p.m.; Tue, Thur: 9 a.m. - 7:30 p.m.; Closed Sat-Sun", "hours_parsed": {"Mon": {"open": "09:00", "close": "21:00"}, "Wed": {"open": "09:00", "close": "21:00"}, "Fri": {"open": "09:00", "close": "21:00"}, "Tue": {"open": "09:00", "close": "19:30"}, "Thu": {"open": "09:00", "close": "19:30"}, "Sat": null, "Sun": null}, "amenities": ["Gym", "Kitchen", "Basketball Court", "Meeting Rooms", "View", "Wifi", "Air Conditioning", "Playground", "Preschool", "Teen Programs", "Indoor Toddler Playtime", "Drop in Programs", "Lifelong Recreation", "Fitness Facilities"], "has_teen_program": false, "has_drop_in_gym": true, "url": "https://www.seattle.gov/parks/community-centers/loyal-heights-community-center", "is_open_now": false, "today_label": "9am\u20139pm today"}, {"slug": "magnolia-community-center", "name": "Magnolia Community Center", "address": "2550 34th Ave W, Seattle, WA 98199", "phone": "(206) 386-4235", "neighborhood_bucket": "queen-anne-magnolia", "neighborhood_label": "Queen Anne / Magnolia", "hours_text": "Summer 2026: June 21 - Sept. 7. Mon-Fri: 9am-8pm; Sat: 9am-5pm; Closed Sunday", "hours_parsed": {"Mon": {"open": "09:00", "close": "20:00"}, "Tue": {"open": "09:00", "close": "20:00"}, "Wed": {"open": "09:00", "close": "20:00"}, "Thu": {"open": "09:00", "close": "20:00"}, "Fri": {"open": "09:00", "close": "20:00"}, "Sat": {"open": "09:00", "close": "17:00"}, "Sun": null}, "amenities": ["Gym", "Kitchen", "Basketball Court", "Meeting Rooms", "Playground", "Art Studio", "Wifi", "Childcare", "Indoor Toddler Playtime", "Before School Programs", "After School Programs", "Drop in Programs", "Lifelong Recreation"], "has_teen_program": false, "has_drop_in_gym": true, "url": "https://www.seattle.gov/parks/community-centers/magnolia-community-center", "is_open_now": false, "today_label": "9am\u20138pm today"}, {"slug": "magnuson-community-center", "name": "Magnuson Community Center", "address": "7110 62nd Ave NE, Seattle, WA 98115", "phone": "(206) 684-7026", "neighborhood_bucket": "northeast-seattle", "neighborhood_label": "Northeast Seattle", "hours_text": "Summer 2026: June 21 - Sept. 7. Mon-Fri: 8:30am-6:30pm; Closed Saturdays & Sundays", "hours_parsed": {"Mon": {"open": "08:30", "close": "18:30"}, "Tue": {"open": "08:30", "close": "18:30"}, "Wed": {"open": "08:30", "close": "18:30"}, "Thu": {"open": "08:30", "close": "18:30"}, "Fri": {"open": "08:30", "close": "18:30"}, "Sat": null, "Sun": null}, "amenities": ["Basketball Court", "Indoor Toddler Playtime", "Meeting Rooms", "Wifi", "Teen Programs", "Late Night Programs", "Drop in Programs", "Lifelong Recreation", "Gym", "Specialized Programs", "Kitchen", "Air Conditioning"], "has_teen_program": false, "has_drop_in_gym": true, "url": "https://www.seattle.gov/parks/community-centers/magnuson-community-center", "is_open_now": false, "today_label": "8:30am\u20136:30pm today"}, {"slug": "meadowbrook-community-center", "name": "Meadowbrook Community Center", "address": "10517 35th Ave NE, Seattle, WA 98125", "phone": "(206) 684-7522", "neighborhood_bucket": "northeast-seattle", "neighborhood_label": "Northeast Seattle", "hours_text": "Year-Round. Mon-Fri 8:30am-8:30pm; Sat 9am-5pm; Closed Sundays", "hours_parsed": {"Mon": {"open": "08:30", "close": "20:30"}, "Tue": {"open": "08:30", "close": "20:30"}, "Wed": {"open": "08:30", "close": "20:30"}, "Thu": {"open": "08:30", "close": "20:30"}, "Fri": {"open": "08:30", "close": "20:30"}, "Sat": {"open": "09:00", "close": "17:00"}, "Sun": null}, "amenities": ["Kitchen", "Gym", "Basketball Court", "Meeting Rooms", "Playground", "Wifi", "Preschool", "Teen Programs", "Indoor Toddler Playtime", "After School Programs", "Special Populations Programs", "Drop in Programs", "Lifelong Recreation"], "has_teen_program": true, "has_drop_in_gym": true, "url": "https://www.seattle.gov/parks/community-centers/meadowbrook-community-center", "is_open_now": false, "today_label": "8:30am\u20138:30pm today"}, {"slug": "miller-community-center", "name": "Miller Community Center", "address": "330 19th Ave E, Seattle, WA 98112", "phone": "(206) 684-4753", "neighborhood_bucket": "capitol-hill-central-district", "neighborhood_label": "Capitol Hill / Central District", "hours_text": "Year-Round. Mon-Thur: 10am-8:30pm; Fri: 10am-8pm; Sat/Sun: Closed", "hours_parsed": {"Mon": {"open": "10:00", "close": "20:30"}, "Tue": {"open": "10:00", "close": "20:30"}, "Wed": {"open": "10:00", "close": "20:30"}, "Thu": {"open": "10:00", "close": "20:30"}, "Fri": {"open": "10:00", "close": "20:00"}, "Sat": null, "Sun": null}, "amenities": ["Lifelong Recreation", "Teen Programs", "Enrichment Programs", "Special Populations Programs", "After School Programs", "Drop in Programs", "Indoor Toddler Playtime", "Gym", "Kitchen", "Basketball Court", "Meeting Rooms", "Playground", "Wifi", "Camps"], "has_teen_program": false, "has_drop_in_gym": true, "url": "https://www.seattle.gov/parks/community-centers/miller-community-center", "is_open_now": false, "today_label": "10am\u20138:30pm today"}, {"slug": "montlake-community-center", "name": "Montlake Community Center", "address": "1618 E Calhoun St, Seattle, WA 98112", "phone": "(206) 684-4736", "neighborhood_bucket": "capitol-hill-central-district", "neighborhood_label": "Capitol Hill / Central District", "hours_text": "Summer 2026 hours:. Mon: 8am-5pm; Tues-Fri: 845am-5pm; Sat/Sun: Closed", "hours_parsed": {"Mon": {"open": "08:00", "close": "17:00"}, "Tue": {"open": "08:45", "close": "17:00"}, "Wed": {"open": "08:45", "close": "17:00"}, "Thu": {"open": "08:45", "close": "17:00"}, "Fri": {"open": "08:45", "close": "17:00"}, "Sat": null, "Sun": null}, "amenities": ["Gym", "Kitchen", "Basketball Court", "Meeting Rooms", "View", "Wifi", "Art Studio", "Playground", "Teen Programs", "Indoor Toddler Playtime", "Special Populations Programs", "Drop in Programs", "Lifelong Recreation"], "has_teen_program": false, "has_drop_in_gym": true, "url": "https://www.seattle.gov/parks/community-centers/montlake-community-center", "is_open_now": false, "today_label": "8:45am\u20135pm today"}, {"slug": "northgate-community-center", "name": "Northgate Community Center", "address": "10510 5th Ave NE, Seattle, WA 98125", "phone": "(206) 386-4283", "neighborhood_bucket": "north-seattle", "neighborhood_label": "North Seattle", "hours_text": "Year-Round. Mon-Fri 9am-8pm; Sat/Sun: Closed", "hours_parsed": {"Mon": {"open": "09:00", "close": "20:00"}, "Tue": {"open": "09:00", "close": "20:00"}, "Wed": {"open": "09:00", "close": "20:00"}, "Thu": {"open": "09:00", "close": "20:00"}, "Fri": {"open": "09:00", "close": "20:00"}, "Sat": null, "Sun": null}, "amenities": ["Basketball Court", "Playground", "Kitchen", "Gym", "Meeting Rooms", "Game Room", "Childcare", "Preschool", "Teen Programs", "After School Programs", "Special Populations Programs", "Enrichment Programs", "Lifelong Recreation", "Indoor Toddler Playtime", "Drop in Programs", "Fitness Facilities", "Wifi", "Air Conditioning"], "has_teen_program": false, "has_drop_in_gym": true, "url": "https://www.seattle.gov/parks/community-centers/northgate-community-center", "is_open_now": false, "today_label": "9am\u20138pm today"}, {"slug": "queen-anne-community-center", "name": "Queen Anne Community Center", "address": "1901 1st Ave W, Seattle, WA 98119", "phone": "(206) 386-4240", "neighborhood_bucket": "queen-anne-magnolia", "neighborhood_label": "Queen Anne / Magnolia", "hours_text": "Mon-Thur: 8am-7pm; Fri: 8am-6pm; Sat: 8am-5pm; Closed Sundays", "hours_parsed": {"Mon": {"open": "08:00", "close": "19:00"}, "Tue": {"open": "08:00", "close": "19:00"}, "Wed": {"open": "08:00", "close": "19:00"}, "Thu": {"open": "08:00", "close": "19:00"}, "Fri": {"open": "08:00", "close": "18:00"}, "Sat": {"open": "08:00", "close": "17:00"}, "Sun": null}, "amenities": ["Childcare", "Gym", "Kitchen", "Basketball Court", "Meeting Rooms", "Street Parking Only", "Playground", "Game Room", "Wifi", "Preschool", "Teen Programs", "After School Programs", "Drop in Programs", "Lifelong Recreation", "Indoor Toddler Playtime"], "has_teen_program": false, "has_drop_in_gym": true, "url": "https://www.seattle.gov/parks/community-centers/queen-anne-community-center", "is_open_now": false, "today_label": "8am\u20137pm today"}, {"slug": "rainier-beach-community-center", "name": "Rainier Beach Community Center", "address": "8825 Rainier Ave S, Seattle, WA 98118", "phone": "(206) 386-1925", "neighborhood_bucket": "southeast-seattle", "neighborhood_label": "Southeast Seattle", "hours_text": "Summer 2026: June 21 - Sept. 6. Mon, Wed: 7:30am-8:30pm; Tue, Thur: 7:30am-7:30pm; Fri: 7:30am-7pm, Teen Late Night (age 13-19) 7pm-12am; Sat: 8:30am-7:00pm, Teen Late Night (age 13-19) 7pm-12am; Sun: 9am-6pm", "hours_parsed": {"Mon": {"open": "07:30", "close": "20:30"}, "Wed": {"open": "07:30", "close": "20:30"}, "Tue": {"open": "07:30", "close": "19:30"}, "Thu": {"open": "07:30", "close": "19:30"}, "Fri": {"open": "07:30", "close": "19:00"}, "Sat": {"open": "08:30", "close": "19:00"}, "Sun": {"open": "09:00", "close": "18:00"}}, "amenities": ["Gym", "Kitchen", "Meeting Rooms", "Air Conditioning", "Playground", "Wifi", "Game Room", "Late Night Programs", "Drop in Programs", "Special Populations Programs", "After School Programs", "Indoor Toddler Playtime", "Teen Programs", "Childcare", "Lifelong Recreation", "Fitness Facilities"], "has_teen_program": true, "has_drop_in_gym": true, "url": "https://www.seattle.gov/parks/community-centers/rainier-beach-community-center", "is_open_now": false, "today_label": "7:30am\u20138:30pm today"}, {"slug": "rainier-community-center", "name": "Rainier Community Center", "address": "4600 38th Ave S, Seattle, WA 98118", "phone": "(206) 386-1919", "neighborhood_bucket": "southeast-seattle", "neighborhood_label": "Southeast Seattle", "hours_text": "Summer 2026: June 21-Sept. 6. Mon-Thurs: 9am-8pm; Fri: 9am-6:30pm, Teen Late Night 7pm-12am; Sat: 9am-6:30pm, Teen Late Night 7pm-12am; Closed Sundays", "hours_parsed": {"Mon": {"open": "09:00", "close": "20:00"}, "Tue": {"open": "09:00", "close": "20:00"}, "Wed": {"open": "09:00", "close": "20:00"}, "Thu": {"open": "09:00", "close": "20:00"}, "Fri": {"open": "09:00", "close": "18:30"}, "Sat": {"open": "09:00", "close": "18:30"}, "Sun": null}, "amenities": ["Gym", "Kitchen", "Meeting Rooms", "Game Room", "Fitness Facilities", "Playground", "Wifi", "Late Night Programs", "Special Populations Programs", "Drop in Programs", "Childcare", "After School Programs", "Indoor Toddler Playtime", "Teen Programs", "Lifelong Recreation"], "has_teen_program": true, "has_drop_in_gym": true, "url": "https://www.seattle.gov/parks/community-centers/rainier-community-center", "is_open_now": false, "today_label": "9am\u20138pm today"}, {"slug": "ravenna-eckstein-community-center", "name": "Ravenna-Eckstein Community Center", "address": "6535 Ravenna Ave NE, Seattle, WA 98115", "phone": "(206) 684-7534", "neighborhood_bucket": "northeast-seattle", "neighborhood_label": "Northeast Seattle", "hours_text": "Summer 2026: June 21 - Sept. 7. Mon-Fri: 9am-5pm; Closed Saturdays & Sundays", "hours_parsed": {"Mon": {"open": "09:00", "close": "17:00"}, "Tue": {"open": "09:00", "close": "17:00"}, "Wed": {"open": "09:00", "close": "17:00"}, "Thu": {"open": "09:00", "close": "17:00"}, "Fri": {"open": "09:00", "close": "17:00"}, "Sat": null, "Sun": null}, "amenities": ["Kitchen", "Gym", "Basketball Court", "Meeting Rooms", "Playground", "Wifi", "Teen Programs", "Indoor Toddler Playtime", "Before School Programs", "After School Programs", "Drop in Programs", "Lifelong Recreation"], "has_teen_program": false, "has_drop_in_gym": true, "url": "https://www.seattle.gov/parks/community-centers/ravenna-eckstein-community-center", "is_open_now": false, "today_label": "9am\u20135pm today"}, {"slug": "south-park-community-center", "name": "South Park Community Center", "address": "8319 8th Ave S, Seattle, WA 98108", "phone": "(206) 684-7451", "neighborhood_bucket": "georgetown-south-park", "neighborhood_label": "Georgetown / South Park", "hours_text": "Summer 2026: June 22 - Sept. 6. Mon-Thurs: 7:30am-7:30pm; Fri: 7:30am-7pm, Teen Late Night 7pm-12am; Sat: 10:30am-7pm, Teen Late Night 7pm-12am; Closed Sundays", "hours_parsed": {"Mon": {"open": "07:30", "close": "19:30"}, "Tue": {"open": "07:30", "close": "19:30"}, "Wed": {"open": "07:30", "close": "19:30"}, "Thu": {"open": "07:30", "close": "19:30"}, "Fri": {"open": "07:30", "close": "19:00"}, "Sat": {"open": "10:30", "close": "19:00"}, "Sun": null}, "amenities": ["Wifi", "Playground", "Kitchen", "Gym", "Basketball Court", "Teen Programs", "After School Programs", "Special Populations Programs", "Drop in Programs", "Indoor Toddler Playtime", "Late Night Programs", "Lifelong Recreation", "Air Conditioning"], "has_teen_program": true, "has_drop_in_gym": true, "url": "https://www.seattle.gov/parks/community-centers/south-park-community-center", "is_open_now": false, "today_label": "7:30am\u20137:30pm today"}, {"slug": "van-asselt-community-center", "name": "Van Asselt Community Center", "address": "2820 S Myrtle St, Seattle, WA 98108", "phone": "(206) 386-1921", "neighborhood_bucket": "southeast-seattle", "neighborhood_label": "Southeast Seattle", "hours_text": "Year-Round. Mon-Thurs: 9am-7pm; Fri: 10am-7pm, Teen Late Night (age 13-19): 7pm-12am; Sat: Closed, Teen Late Night (age 13-19): 7pm-12am; Sun: Closed.", "hours_parsed": {"Mon": {"open": "09:00", "close": "19:00"}, "Tue": {"open": "09:00", "close": "19:00"}, "Wed": {"open": "09:00", "close": "19:00"}, "Thu": {"open": "09:00", "close": "19:00"}, "Fri": {"open": "10:00", "close": "19:00"}, "Sat": null, "Sun": null}, "amenities": ["Gym", "Kitchen", "Basketball Court", "Meeting Rooms", "Playground", "Game Room", "Wifi", "Childcare", "Teen Programs", "After School Programs", "Special Populations Programs", "Late Night Programs", "Lifelong Recreation"], "has_teen_program": true, "has_drop_in_gym": false, "url": "https://www.seattle.gov/parks/community-centers/van-asselt-community-center", "is_open_now": false, "today_label": "9am\u20137pm today"}, {"slug": "yesler-community-center", "name": "Yesler Community Center", "address": "917 E Yesler Way, Seattle, WA 98122", "phone": "(206) 386-1245", "neighborhood_bucket": "capitol-hill-central-district", "neighborhood_label": "Capitol Hill / Central District", "hours_text": "Summer 2026: June 21 - Sept. 7. Mon-Fri: 7:15 am - 6:45 pm; Sat: 8:30 am- 5:00 pm; Closed Sundays.", "hours_parsed": {"Mon": {"open": "07:15", "close": "18:45"}, "Tue": {"open": "07:15", "close": "18:45"}, "Wed": {"open": "07:15", "close": "18:45"}, "Thu": {"open": "07:15", "close": "18:45"}, "Fri": {"open": "07:15", "close": "18:45"}, "Sat": {"open": "08:30", "close": "17:00"}, "Sun": null}, "amenities": ["Gym", "Kitchen", "Basketball Court", "Meeting Rooms", "View", "Playground", "Wifi", "Tutoring", "Special Populations Programs", "Indoor Toddler Playtime", "Teen Programs", "Lifelong Recreation", "Camps"], "has_teen_program": false, "has_drop_in_gym": false, "url": "https://www.seattle.gov/parks/community-centers/yesler-community-center", "is_open_now": true, "today_label": "7:15am\u20136:45pm today"}], "neighborhood_options": [{"value": "ballard-fremont-greenwood", "label": "Ballard / Fremont / Greenwood"}, {"value": "wallingford-green-lake", "label": "Wallingford / Green Lake"}, {"value": "north-seattle", "label": "North Seattle"}, {"value": "northeast-seattle", "label": "Northeast Seattle"}, {"value": "queen-anne-magnolia", "label": "Queen Anne / Magnolia"}, {"value": "downtown-slu", "label": "Downtown / South Lake Union"}, {"value": "capitol-hill-central-district", "label": "Capitol Hill / Central District"}, {"value": "west-seattle", "label": "West Seattle"}, {"value": "southeast-seattle", "label": "Southeast Seattle"}, {"value": "georgetown-south-park", "label": "Georgetown / South Park"}], "low_confidence": false}</script>
+<script>
+(function () {
+  const DATA = JSON.parse(document.getElementById('center-data').textContent);
+
+  document.getElementById('checked-chip').textContent = 'Checked ' + DATA.generated_at;
+  document.getElementById('today-date').textContent = DATA.date_label;
+
+  if (DATA.low_confidence) {
+    const box = document.createElement('div');
+    box.className = 'low-confidence';
+    box.textContent = 'Heads up: the last check could not fully parse hours for one or more centers. Details below may be incomplete - verify anything important against the official page.';
+    document.getElementById('low-confidence-slot').appendChild(box);
+  }
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+  }
+
+  function mapUrlFor(address) {
+    return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(address);
+  }
+
+  // ---- Reusable multi-select dropdown (checkbox list in a popover) ----
+  function makeMultiSelect(containerEl, {label, options, onChange}) {
+    const state = new Set();
+    containerEl.innerHTML =
+      '<div class="msel"><button type="button" class="msel-btn"><span class="msel-label"></span><span class="chev">▾</span></button>' +
+      '<div class="msel-panel"></div></div>';
+    const btn = containerEl.querySelector('.msel-btn');
+    const labelEl = containerEl.querySelector('.msel-label');
+    const panel = containerEl.querySelector('.msel-panel');
+    panel.innerHTML = options.map(o => '<label class="msel-option"><input type="checkbox" value="' + o.value + '"> ' + escapeHtml(o.label) + '</label>').join('');
+    function updateLabel() { labelEl.textContent = state.size ? label + ' (' + state.size + ')' : label; }
+    updateLabel();
+    btn.addEventListener('click', (e) => { e.stopPropagation(); panel.classList.toggle('open'); });
+    panel.addEventListener('change', (e) => {
+      if (e.target.value) {
+        if (e.target.checked) state.add(e.target.value); else state.delete(e.target.value);
+        updateLabel(); onChange(state);
+      }
+    });
+    document.addEventListener('click', (e) => { if (!containerEl.contains(e.target)) panel.classList.remove('open'); });
+    return {
+      getSelected: () => state,
+      getSelectedLabels: () => options.filter(o => state.has(o.value)).map(o => o.label),
+      clear: () => { state.clear(); panel.querySelectorAll('input').forEach(i => i.checked = false); updateLabel(); onChange(state); },
+    };
+  }
+
+  const FEATURE_OPTIONS = [
+    { value: 'teen', label: 'Teen program' },
+    { value: 'gym', label: 'Drop-in gym' },
+    { value: 'open', label: 'Open now' },
+  ];
+
+  let neighborhoodSel, featuresSel;
+  function updateHelpAndFilter() {
+    const nLabels = neighborhoodSel.getSelectedLabels();
+    const fLabels = featuresSel.getSelectedLabels();
+    const groups = [nLabels, fLabels].filter(g => g.length).map(g => g.join(', '));
+    const help = document.getElementById('filter-help');
+    if (!groups.length) {
+      help.classList.add('hidden');
+      help.innerHTML = '';
+    } else {
+      help.classList.remove('hidden');
+      help.innerHTML = 'Showing: ' + escapeHtml(groups.join(' · ')) + '<span class="msel-clear" id="filter-clear">Clear</span>';
+      document.getElementById('filter-clear').addEventListener('click', () => {
+        neighborhoodSel.clear(); featuresSel.clear();
+      });
+    }
+    renderList();
+  }
+
+  neighborhoodSel = makeMultiSelect(document.getElementById('filter-neighborhood'), {
+    label: 'Neighborhood',
+    options: DATA.neighborhood_options,
+    onChange: updateHelpAndFilter,
+  });
+  featuresSel = makeMultiSelect(document.getElementById('filter-features'), {
+    label: 'Features',
+    options: FEATURE_OPTIONS,
+    onChange: updateHelpAndFilter,
+  });
+
+  function matchesFilters(center) {
+    const nSet = neighborhoodSel.getSelected();
+    const fSet = featuresSel.getSelected();
+    if (nSet.size && !nSet.has(center.neighborhood_bucket)) return false;
+    if (fSet.has('teen') && !center.has_teen_program) return false;
+    if (fSet.has('gym') && !center.has_drop_in_gym) return false;
+    if (fSet.has('open') && center.is_open_now !== true) return false;
+    return true;
+  }
+
+  function statusText(center) {
+    if (center.is_open_now === true) return 'Open now';
+    if (center.is_open_now === false) return 'Closed now';
+    return 'See hours';
+  }
+
+  function statusClass(center) {
+    if (center.is_open_now === true) return 'is-open';
+    if (center.is_open_now === false) return 'is-closed';
+    return '';
+  }
+
+  function renderCard(center) {
+    const det = document.createElement('details');
+    det.className = 'cc-card ' + statusClass(center);
+    det.dataset.slug = center.slug;
+
+    const summary = document.createElement('summary');
+    summary.innerHTML =
+      '<span class="summary-body">' +
+        '<span class="row-name">' +
+          '<span class="name">' + escapeHtml(center.name) + '</span>' +
+          '<span class="status-text">' + escapeHtml(statusText(center)) + '</span>' +
+        '</span>' +
+        '<span class="row-meta"><span class="addr-line">' + escapeHtml(center.address || '') + '</span></span>' +
+        '<span class="tag-row">' +
+          (center.has_teen_program ? '<span class="badge badge-teen">Teen program</span>' : '') +
+          (center.has_drop_in_gym ? '<span class="badge badge-gym">Drop-in gym</span>' : '') +
+        '</span>' +
+      '</span>' +
+      '<span class="chev"></span>';
+    det.appendChild(summary);
+
+    const expand = document.createElement('div');
+    expand.className = 'cc-expand';
+    let html = '';
+    if (center.today_label) {
+      html += '<p class="detail-line"><span class="dl-label">Today:</span><span>' + escapeHtml(center.today_label) + '</span></p>';
+    }
+    if (center.hours_text) {
+      html += '<p class="detail-line"><span class="dl-label">Hours:</span><span class="hours-raw">' + escapeHtml(center.hours_text) + '</span></p>';
+    } else {
+      html += '<p class="detail-line"><span class="dl-label">Hours:</span><span>Not posted - check the official page.</span></p>';
+    }
+    if (center.phone) {
+      html += '<p class="detail-line"><span class="dl-label">Phone:</span><a href="tel:' + escapeHtml(center.phone.replace(/[^\d+]/g, '')) + '">' + escapeHtml(center.phone) + '</a></p>';
+    }
+    if (center.amenities && center.amenities.length) {
+      html += '<p class="detail-line"><span class="dl-label">Amenities:</span><span>' + escapeHtml(center.amenities.join(', ')) + '</span></p>';
+    }
+    html += '<div class="today-actions">' +
+      '<a class="action-btn" href="' + center.url + '" target="_blank" rel="noopener">Seattle.gov</a>' +
+      (center.address ? '<a class="action-btn" href="' + mapUrlFor(center.address) + '" target="_blank" rel="noopener">Map</a>' : '') +
+    '</div>';
+    expand.innerHTML = html;
+    det.appendChild(expand);
+    return det;
+  }
+
+  function renderList() {
+    const list = document.getElementById('centers-list');
+    const matches = DATA.centers.filter(matchesFilters);
+    list.innerHTML = '';
+    document.getElementById('result-count').textContent =
+      matches.length === DATA.centers.length
+        ? DATA.centers.length + ' community centers'
+        : matches.length + ' of ' + DATA.centers.length + ' community centers';
+
+    if (!matches.length) {
+      const empty = document.createElement('div');
+      empty.className = 'empty-state';
+      empty.textContent = 'No community centers match those filters. Try clearing one.';
+      list.appendChild(empty);
+      return;
+    }
+    matches.forEach(center => list.appendChild(renderCard(center)));
+  }
+
+  renderList();
+
+  const footer = document.getElementById('footer');
+  footer.innerHTML =
+    '<div><a href="' + DATA.hub_url + '" target="_blank" rel="noopener">Official seattle.gov community centers page</a></div>' +
+    (DATA.teen_programs_url ? '<div><a href="' + DATA.teen_programs_url + '" target="_blank" rel="noopener">Teen programs &amp; Teen Late Night</a></div>' : '') +
+    '<div class="disclaimer">Unofficial mirror, rechecked automatically (last: ' + DATA.generated_at + '). Hours change by season and for holidays - confirm anything important on the official page before heading out.</div>';
+})();
+</script>
+</body>
+</html>
