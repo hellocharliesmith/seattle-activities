@@ -101,13 +101,13 @@
   .day-nav button:disabled { opacity: 0.35; cursor: default; background: var(--surface); }
   .day-nav #day-label { font-weight: 700; font-size: 15px; min-width: 140px; text-align: center; }
 
-  .filter-row { display: flex; gap: 8px; margin-bottom: 4px; }
+  .filter-row { display: flex; gap: 8px; margin-bottom: 4px; position: relative; }
 
   /* Multi-select dropdown-with-checkboxes filter, reused for neighborhood
      and age group - dropdown buttons rather than chips (too many options
      for a chip row on mobile) or a native <select multiple> (bad mobile
      UX: no visible checked state, awkward multi-tap). */
-  .msel { position: relative; flex: 1 1 0; min-width: 0; }
+  .msel { flex: 1 1 0; min-width: 0; }
   .msel-btn {
     width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 6px;
     padding: 8px 10px; border-radius: 10px; border: 1px solid var(--line);
