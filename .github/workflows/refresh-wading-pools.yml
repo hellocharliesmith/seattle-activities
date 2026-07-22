@@ -1,0 +1,44 @@
+name: Refresh wading pools
+
+on:
+  schedule:
+    # 7:22 AM Pacific (UTC-7 during PDT). Runs on GitHub's servers, not
+    # dependent on any local machine being on.
+    - cron: "22 14 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wading-pools-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install beautifulsoup4
+
+      - name: Scrape wading pools + sprayparks schedule
+        run: python3 wading-pools/scraper/wading_pools.py
+
+      - name: Fetch today's weather
+        run: python3 wading-pools/scraper/weather.py
+
+      - name: Regenerate site
+        run: python3 wading-pools/site/generate.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Daily refresh: wading pools"
+          git push

@@ -1,0 +1,42 @@
+name: Refresh pools
+
+on:
+  schedule:
+    # 7:40 AM Pacific (UTC-7 during PDT), offset from the wading-pools
+    # workflow so they don't clash. Runs on GitHub's servers, not
+    # dependent on any local machine being on.
+    - cron: "40 14 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pools-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install beautifulsoup4
+
+      - name: Scrape all 10 pool pages
+        run: python3 pools/scraper/pools.py
+
+      - name: Regenerate site (also builds search/filter + calendar data via sessions.py)
+        run: python3 pools/site/generate.py
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Daily refresh: pools"
+          git push
