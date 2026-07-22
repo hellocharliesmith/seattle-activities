@@ -41,6 +41,7 @@ _TIME_RANGE_BOTH_AMPM = re.compile(
 )
 
 CATEGORY_RULES = [
+    ("Pool Playland", re.compile(r"playland", re.I)),
     ("Family Swim", re.compile(r"family swim", re.I)),
     ("Recreation Swim", re.compile(r"rec(?:reation)? swim", re.I)),
     ("Lap Swim", re.compile(r"lap swim|lap lanes?\b", re.I)),
@@ -48,6 +49,42 @@ CATEGORY_RULES = [
     ("Water Exercise", re.compile(r"water (fitness|exercise|walk)|aqua ?(jog|fit)|deep water|shallow water", re.I)),
     ("Swim Lessons", re.compile(r"swim lesson|lessons?\b", re.I)),
 ]
+
+# Toddler/kid-friendly detection. Built from what's actually in the posted
+# schedules (see pools/data/pools.json): "Family Swim" and "Recreation Swim"
+# are consistently open to all ages with young kids explicitly welcomed
+# ("Children under 18 must be accompanied", "All ages welcome!", diving
+# boards/slides, etc). "Pool Playland" ("a gentle swim for parents and young
+# children") is the clearest toddler signal of all but doesn't match any
+# CATEGORY_RULES pattern, so it's caught by keyword instead. Lap Swim, Adult/
+# Senior Swim, and Water Exercise are fitness-oriented and never toddler
+# sessions in practice; Teen Swim and Masters/Jr Masters are explicitly
+# excluded even though they'd otherwise fall into a catch-all bucket.
+_KID_SIGNAL = re.compile(
+    r"playland|famil(?:y|ies)|toddler|parent[\s-]?(?:and|&|tot|,)|young child|all ages|lifejacket|\bchildren\b",
+    re.I,
+)
+_KID_EXCLUDE_SIGNAL = re.compile(
+    r"\b18\s*\+|\b18\s*years?\s*(old)?|adults?\s*only|teen swim|\bmasters\b|ages?\s*13[\s-]17",
+    re.I,
+)
+
+
+def is_kid_friendly(category: str, program: str, details: str) -> bool:
+    text = f"{program or ''} {details or ''}"
+    if _KID_EXCLUDE_SIGNAL.search(text):
+        return False
+    if category in ("Family Swim", "Recreation Swim", "Pool Playland"):
+        return True
+    if category in ("Lap Swim", "Adult/Senior Swim", "Water Exercise"):
+        # Hard exclude regardless of incidental keyword matches - e.g. Evans
+        # Pool's Lap Swim rows note "with pool playland" because Playland
+        # runs concurrently in a separate area, not because lap lanes are
+        # toddler-appropriate. Playland has its own session row already.
+        return False
+    if category == "Multiple" and re.search(r"rec(?:reation)? swim", text, re.I):
+        return True
+    return bool(_KID_SIGNAL.search(text))
 
 
 def parse_days(text: str):
@@ -177,6 +214,7 @@ def pool_sessions(pool: dict):
             "time_label": time_label or (time_text or "").strip(),
             "details": (details or "").strip(),
             "day_label": (day_text or "").strip(),
+            "kid_friendly": is_kid_friendly(category, program_clean, details),
         })
     return sessions
 

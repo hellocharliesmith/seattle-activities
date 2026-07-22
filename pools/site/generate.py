@@ -149,6 +149,11 @@ def render(data: dict) -> str:
     fallback_year = data.get("schedule_year") or today.year
 
     data = merge_images(data)
+    sessions = all_sessions(data["pools"])
+    kid_friendly_slugs = {s["pool_slug"] for s in sessions if s["kid_friendly"]}
+    for pool in data["pools"]:
+        pool["has_kid_friendly"] = pool["slug"] in kid_friendly_slugs
+
     pools = [build_pool_view(p, today, fallback_year) for p in data["pools"]]
     outdoor = [p for p in pools if p["kind"] == "outdoor"]
     indoor = [p for p in pools if p["kind"] == "indoor"]
@@ -172,7 +177,7 @@ def render(data: dict) -> str:
         "outdoor_pools": outdoor,
         "indoor_pools": indoor,
         "low_confidence": parsed_ok < len(parseable),
-        "sessions": all_sessions(data["pools"]),
+        "sessions": sessions,
         "three_day_window": three_day_window,
     }
 
