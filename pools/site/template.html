@@ -110,10 +110,16 @@
     background: var(--paper); color: var(--ink); font-size: 13px; font-family: inherit;
   }
   .kid-filters select:focus { outline: 2px solid var(--teal); outline-offset: 1px; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
   .kid-badge {
-    display: inline-flex; align-items: center; gap: 4px; margin-top: 4px;
+    display: inline-flex; align-items: center; gap: 4px;
     font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px;
     background: var(--cat-pool-playland-wash, var(--sun-wash)); color: var(--cat-pool-playland, var(--sun));
+  }
+  .outdoor-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px;
+    background: var(--teal-wash); color: var(--teal-deep);
   }
 
   .card-list { display: flex; flex-direction: column; gap: 10px; }
@@ -303,18 +309,11 @@
     <div class="search-card kid-cal-scope" id="kid-calendar-slot"></div>
   </section>
 
-  <section id="outdoor-section">
-    <p class="eyebrow">Outdoor pools &middot; summer only</p>
-    <h2 class="display" style="font-size:20px;margin:0 0 4px;">Colman &amp; Mounger</h2>
-    <p class="section-sub">Closed for the winter outside their summer season.</p>
-    <div id="outdoor-list" class="card-list"></div>
-  </section>
-
-  <section id="indoor-section">
-    <p class="eyebrow">Indoor pools &middot; year-round</p>
-    <h2 class="display" style="font-size:20px;margin:0 0 4px;">8 neighborhood pools</h2>
-    <p class="section-sub">Open all year; the schedule below is the currently-posted session.</p>
-    <div id="indoor-list" class="card-list"></div>
+  <section id="pools-section">
+    <p class="eyebrow">All pools</p>
+    <h2 class="display" style="font-size:20px;margin:0 0 4px;">Seattle city pools</h2>
+    <p class="section-sub">10 pools total; pools tagged "Outdoor" are summer-only and closed the rest of the year.</p>
+    <div id="pools-list" class="card-list"></div>
   </section>
 
   <footer id="footer"></footer>
@@ -360,8 +359,8 @@
       : '<span class="thumb thumb-empty"></span>';
   }
 
-  renderGroup(DATA.outdoor_pools, document.getElementById('outdoor-list'), 'outdoor', true);
-  renderGroup(DATA.indoor_pools, document.getElementById('indoor-list'), 'indoor', false);
+  const allPoolsSorted = [...DATA.outdoor_pools, ...DATA.indoor_pools].sort((a, b) => a.name.localeCompare(b.name));
+  renderGroup(allPoolsSorted, document.getElementById('pools-list'));
 
   // ---- Calendar block tap-for-detail (delegated - blocks are built as HTML strings) ----
   document.addEventListener('click', (e) => {
@@ -380,18 +379,17 @@
     if (e.key === 'Enter' && e.target.classList && e.target.classList.contains('cal-block')) e.target.click();
   });
 
-  function renderGroup(pools, container, kind, openFirst) {
-    pools.forEach((pool, i) => {
+  function renderGroup(pools, container) {
+    pools.forEach((pool) => {
       const det = document.createElement('details');
       det.className = 'pool-card ' + (STATUS_CLASS[pool.status] || '');
       det.dataset.slug = pool.slug;
-      if (openFirst && i === 0) det.open = true;
 
       const summary = document.createElement('summary');
-      const labels = STATUS_LABEL[kind];
+      const labels = STATUS_LABEL[pool.kind];
       let statusText = pool.status === 'facility_closed' ? 'Closed' : (labels[pool.status] || '');
       if (pool.status === 'upcoming' && pool.season_start) statusText = labels.upcoming + ' ' + pool.season_start;
-      if (pool.status === 'ended' && pool.season_end) statusText = labels.ended + (kind === 'outdoor' ? ' ' + pool.season_end : '');
+      if (pool.status === 'ended' && pool.season_end) statusText = labels.ended + (pool.kind === 'outdoor' ? ' ' + pool.season_end : '');
       summary.innerHTML =
         thumbHtml(pool) +
         '<span class="summary-body">' +
@@ -400,7 +398,10 @@
             '<span class="status-text">' + escapeHtml(statusText) + '</span>' +
           '</span>' +
           '<span class="row-meta"><span class="addr-line">' + escapeHtml(pool.address || '') + '</span></span>' +
-          (pool.has_kid_friendly ? '<span class="kid-badge">Kid-friendly times</span>' : '') +
+          '<span class="tag-row">' +
+            (pool.kind === 'outdoor' ? '<span class="outdoor-badge">Outdoor</span>' : '') +
+            (pool.has_kid_friendly ? '<span class="kid-badge">Kid-friendly times</span>' : '') +
+          '</span>' +
         '</span>' +
         '<span class="chev"></span>';
       det.appendChild(summary);
