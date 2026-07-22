@@ -1,15 +1,11 @@
 {
   "source_url": "https://www.seattle.gov/parks/pools/wading-pools-and-sprayparks",
-  "scraped_at": "2026-07-20T14:53:35+00:00",
+  "scraped_at": "2026-07-22T04:48:32+00:00",
   "schedule_year": 2026,
   "today_notice": {
-    "heading": "Friday, July 17 schedule:",
-    "intro": "The following wading pools ARE operational today, Friday, July 17, despite the cool weather:",
-    "exceptions": [
-      "Delridge and Hiawatha: 12pm-5:30pm",
-      "Gilman: 12pm-6pm",
-      "Bitter Lake, Green Lake, Lincoln Park, Powell Barnett, Ravenna, Van Asselt, Volunteer Park, and Wallingford: 12pm-7pm"
-    ]
+    "heading": "Seattle Heat Advisory Alert!",
+    "intro": "From Tuesday, July 21 at 10 a.m. to Wednesday, July 22 at 11 p.m., a heat advisory is in place for the Seattle area. Temperatures will range between 88 and 95 degrees, creating a moderate risk of heat-related illness. Stay cool and hydrated. To learn how to stay safe during hot weather, visit the City\u2019s Heat Safety Page.",
+    "exceptions": []
   },
   "policy": "Wading pools are open with an attendant in season on sunny days when the temperature is forecast to be at least 70\u00b0. Please call the Wading Pool Hotline at (206) 684-7796 or check the Wading Pool Facebook page for daily updates.",
   "hotline": "(206) 684-7796",
