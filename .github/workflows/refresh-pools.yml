@@ -2,10 +2,10 @@ name: Refresh pools
 
 on:
   schedule:
-    # 7:40 AM Pacific (UTC-7 during PDT), offset from the wading-pools
+    # 5:48 AM Pacific (UTC-7 during PDT), offset from the wading-pools
     # workflow so they don't clash. Runs on GitHub's servers, not
     # dependent on any local machine being on.
-    - cron: "40 14 * * *"
+    - cron: "48 12 * * *"
   workflow_dispatch: {}
 
 permissions:
