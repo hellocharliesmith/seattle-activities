@@ -91,6 +91,25 @@
 
   /* Kid-friendly calendar card wrapper (reuses the .cal-* rules further down) */
   .search-card { background: var(--surface); border-radius: 14px; box-shadow: var(--shadow); padding: 14px; }
+  .kid-controls { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
+  .kid-day-nav {
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+  }
+  .kid-day-nav button {
+    width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--line);
+    background: var(--surface); color: var(--teal); font-size: 18px; font-weight: 700;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-family: inherit; box-shadow: var(--shadow);
+  }
+  .kid-day-nav button:hover { background: var(--teal-wash); }
+  .kid-day-nav button:disabled { opacity: 0.35; cursor: default; background: var(--surface); }
+  .kid-day-nav #kid-day-label { font-weight: 700; font-size: 15px; min-width: 108px; text-align: center; }
+  .kid-filters { display: flex; gap: 8px; }
+  .kid-filters select {
+    flex: 1 1 0; min-width: 0; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--line);
+    background: var(--paper); color: var(--ink); font-size: 13px; font-family: inherit;
+  }
+  .kid-filters select:focus { outline: 2px solid var(--teal); outline-offset: 1px; }
   .kid-badge {
     display: inline-flex; align-items: center; gap: 4px; margin-top: 4px;
     font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px;
@@ -269,8 +288,18 @@
 
   <section id="kid-section">
     <p class="eyebrow">For Toddlers &amp; Kids</p>
-    <h2 class="display" style="font-size:20px;margin:0 0 4px;">Kid-friendly swim times</h2>
-    <p class="section-sub">Family Swim, Recreation Swim, and Pool Playland sessions across every pool, for the next 3 days. Inferred from each pool's posted schedule text - always double check depth, diving boards, and exact times before heading out.</p>
+    <h2 class="display" style="font-size:20px;margin:0 0 12px;">Kid-friendly swim times</h2>
+    <div class="kid-controls">
+      <div class="kid-day-nav">
+        <button type="button" id="kid-day-prev" aria-label="Previous day">&#8249;</button>
+        <span id="kid-day-label"></span>
+        <button type="button" id="kid-day-next" aria-label="Next day">&#8250;</button>
+      </div>
+      <div class="kid-filters">
+        <select id="kid-filter-pool" aria-label="Filter by pool"></select>
+        <select id="kid-filter-category" aria-label="Filter by activity"></select>
+      </div>
+    </div>
     <div class="search-card kid-cal-scope" id="kid-calendar-slot"></div>
   </section>
 
@@ -529,23 +558,53 @@
       '<div class="cal-detail" id="cal-detail-' + pool.slug + '" hidden></div>';
   }
 
-  // Cross-pool calendar of kid-friendly sessions only (Family Swim,
-  // Recreation Swim, Pool Playland) - same layout as renderCalendar() but
-  // spans every pool at once, so each block is labeled by pool name rather
-  // than program name (there's only a handful of program types, but ten
-  // pools - the pool name is the useful "highlight" here).
+  // Single-day calendar of kid-friendly sessions only (Family Swim,
+  // Recreation Swim, Pool Playland, plus keyword-detected toddler/parent
+  // sessions), with day-arrow navigation and pool/activity dropdowns.
+  // Sessions only carry weekday-of-week (not real dates), since these are
+  // recurring weekly schedules, so "days" are computed client-side from
+  // DATA.today_iso + an offset - any offset works, not just the 3-day
+  // window the per-pool test calendar uses.
+  const DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const KID_DAY_MIN = -6, KID_DAY_MAX = 13;
+  const kidState = { dayOffset: 0, pool: '', category: '' };
+
+  function kidDayAt(offset) {
+    const d = new Date(DATA.today_iso + 'T00:00:00');
+    d.setDate(d.getDate() + offset);
+    return {
+      weekday: DOW[d.getDay()],
+      label: (offset === 0 ? 'Today, ' : '') + DOW[d.getDay()] + ' ' + d.getDate(),
+    };
+  }
+
   function renderKidCalendar() {
     const slot = document.getElementById('kid-calendar-slot');
-    const sessions = DATA.sessions.filter(s => s.kid_friendly && s.start_min != null);
-    if (!sessions.length) {
+    const allKidSessions = DATA.sessions.filter(s => s.kid_friendly && s.start_min != null);
+    if (!allKidSessions.length) {
       slot.innerHTML = '<p class="section-sub" style="margin:0;">No kid-friendly sessions with a parsed time were found in this refresh.</p>';
       return;
     }
 
-    const days = DATA.three_day_window;
+    const day = kidDayAt(kidState.dayOffset);
+    document.getElementById('kid-day-label').textContent = day.label;
+    document.getElementById('kid-day-prev').disabled = kidState.dayOffset <= KID_DAY_MIN;
+    document.getElementById('kid-day-next').disabled = kidState.dayOffset >= KID_DAY_MAX;
+
+    const sessions = allKidSessions
+      .filter(s => !s.days || s.days.indexOf(day.weekday) !== -1)
+      .filter(s => !kidState.pool || s.pool_slug === kidState.pool)
+      .filter(s => !kidState.category || s.category === kidState.category)
+      .sort((a, b) => a.start_min - b.start_min);
+
+    if (!sessions.length) {
+      slot.innerHTML = '<p class="section-sub" style="margin:0;">No kid-friendly sessions match on this day. Try a different day or clear the filters.</p>';
+      return;
+    }
+
     const minStart = Math.floor(Math.min(...sessions.map(s => s.start_min)) / 60) * 60;
     const maxEnd = Math.ceil(Math.max(...sessions.map(s => s.end_min)) / 60) * 60;
-    const pxPerMin = 0.52;
+    const pxPerMin = 0.7;
     const gridHeight = (maxEnd - minStart) * pxPerMin;
 
     let gridlines = '', timeLabels = '';
@@ -555,34 +614,21 @@
       timeLabels += '<span class="cal-time-label" style="top:' + top.toFixed(1) + 'px;">' + fmtHour(m) + '</span>';
     }
 
-    const dayCols = days.map((d, i) => {
-      const daySessions = sessions
-        .filter(s => !s.days || s.days.indexOf(d.weekday) !== -1)
-        .sort((a, b) => a.start_min - b.start_min);
-      const lanes = assignLanes(daySessions);
-
-      const blocks = daySessions.map((s, idx) => {
-        const lane = lanes.laneOf[idx];
-        const widthPct = 100 / lanes.maxLanes;
-        const top = (s.start_min - minStart) * pxPerMin;
-        const height = Math.max(15, (s.end_min - s.start_min) * pxPerMin);
-        const catVar = 'var(--cat-' + catSlug(s.category) + ')';
-        return '<div class="cal-block" tabindex="0" ' +
-          'data-program="' + escapeHtml(s.pool_name + ' - ' + s.program) + '" data-time="' + escapeHtml(s.time_label || '') + '" ' +
-          'data-details="' + escapeHtml(s.details || 'No additional details posted.') + '" ' +
-          'style="top:' + top.toFixed(1) + 'px;height:' + height.toFixed(1) + 'px;left:' + (lane * widthPct).toFixed(1) + '%;' +
-          'width:calc(' + widthPct.toFixed(1) + '% - 2px);background:color-mix(in srgb, ' + catVar + ' 16%, var(--surface));' +
-          'border-left:3px solid ' + catVar + ';color:' + catVar + ';">' +
-          '<span class="cb-time">' + escapeHtml(s.time_label || '') + '</span>' +
-          '<span class="cb-label">' + escapeHtml(s.pool_name) + '</span>' +
-        '</div>';
-      }).join('');
-
-      return '<div class="cal-day-col">' +
-        '<div class="cal-day-head"><span class="' + (i === 0 ? 'is-today-label' : '') + '">' + escapeHtml(d.date_label) + '</span></div>' +
-        '<div class="cal-grid" style="height:' + gridHeight.toFixed(1) + 'px;">' + gridlines + blocks +
-        (daySessions.length ? '' : '<div class="cal-empty-day">No sessions</div>') +
-        '</div>' +
+    const lanes = assignLanes(sessions);
+    const blocks = sessions.map((s, idx) => {
+      const lane = lanes.laneOf[idx];
+      const widthPct = 100 / lanes.maxLanes;
+      const top = (s.start_min - minStart) * pxPerMin;
+      const height = Math.max(20, (s.end_min - s.start_min) * pxPerMin);
+      const catVar = 'var(--cat-' + catSlug(s.category) + ')';
+      return '<div class="cal-block" tabindex="0" ' +
+        'data-program="' + escapeHtml(s.pool_name + ' - ' + s.program) + '" data-time="' + escapeHtml(s.time_label || '') + '" ' +
+        'data-details="' + escapeHtml(s.details || 'No additional details posted.') + '" ' +
+        'style="top:' + top.toFixed(1) + 'px;height:' + height.toFixed(1) + 'px;left:' + (lane * widthPct).toFixed(1) + '%;' +
+        'width:calc(' + widthPct.toFixed(1) + '% - 2px);background:color-mix(in srgb, ' + catVar + ' 16%, var(--surface));' +
+        'border-left:3px solid ' + catVar + ';color:' + catVar + ';">' +
+        '<span class="cb-time">' + escapeHtml(s.time_label || '') + '</span>' +
+        '<span class="cb-label">' + escapeHtml(s.pool_name) + '</span>' +
       '</div>';
     }).join('');
 
@@ -597,10 +643,42 @@
           '<div style="height:22px;"></div>' +
           '<div style="position:relative;height:' + gridHeight.toFixed(1) + 'px;">' + timeLabels + '</div>' +
         '</div>' +
-        '<div class="cal-days">' + dayCols + '</div>' +
+        '<div class="cal-days"><div class="cal-day-col cal-day-col-single">' +
+          '<div class="cal-grid" style="height:' + gridHeight.toFixed(1) + 'px;">' + gridlines + blocks + '</div>' +
+        '</div></div>' +
       '</div>' +
       '<div class="cal-detail" id="cal-detail-kid" hidden></div>';
   }
+
+  function setupKidControls() {
+    const allKidSessions = DATA.sessions.filter(s => s.kid_friendly);
+
+    const poolSelect = document.getElementById('kid-filter-pool');
+    const pools = [...new Map(allKidSessions.map(s => [s.pool_slug, s.pool_name])).entries()]
+      .sort((a, b) => a[1].localeCompare(b[1]));
+    poolSelect.innerHTML = '<option value="">All pools</option>' +
+      pools.map(([slug, name]) => '<option value="' + slug + '">' + escapeHtml(name) + '</option>').join('');
+
+    const CATEGORY_ORDER = ['Family Swim', 'Recreation Swim', 'Pool Playland', 'Multiple', 'Other'];
+    const catSelect = document.getElementById('kid-filter-category');
+    const cats = [...new Set(allKidSessions.map(s => s.category))]
+      .sort((a, b) => CATEGORY_ORDER.indexOf(a) - CATEGORY_ORDER.indexOf(b));
+    catSelect.innerHTML = '<option value="">All activities</option>' +
+      cats.map(c => '<option value="' + escapeHtml(c) + '">' + escapeHtml(c) + '</option>').join('');
+
+    poolSelect.addEventListener('change', () => { kidState.pool = poolSelect.value; renderKidCalendar(); });
+    catSelect.addEventListener('change', () => { kidState.category = catSelect.value; renderKidCalendar(); });
+
+    document.getElementById('kid-day-prev').addEventListener('click', () => {
+      kidState.dayOffset = Math.max(KID_DAY_MIN, kidState.dayOffset - 1);
+      renderKidCalendar();
+    });
+    document.getElementById('kid-day-next').addEventListener('click', () => {
+      kidState.dayOffset = Math.min(KID_DAY_MAX, kidState.dayOffset + 1);
+      renderKidCalendar();
+    });
+  }
+  setupKidControls();
   renderKidCalendar();
 
   const footer = document.getElementById('footer');

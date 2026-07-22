@@ -173,6 +173,7 @@ def render(data: dict) -> str:
     view = {
         "generated_at": now.strftime("%A, %B %-d at %-I:%M %p") + " Pacific",
         "date_label": today.strftime("%A, %B %-d"),
+        "today_iso": today.isoformat(),
         "hub_url": data["hub_url"],
         "outdoor_pools": outdoor,
         "indoor_pools": indoor,
