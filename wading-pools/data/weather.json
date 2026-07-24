@@ -1,65 +1,65 @@
 {
-  "date": "2026-07-23",
+  "date": "2026-07-24",
   "condition": "Cloudy",
   "icon": "cloudy",
-  "high_f": 78,
-  "low_f": 62,
+  "high_f": 79,
+  "low_f": 60,
   "hourly": [
     {
       "hour": 0,
-      "temp_f": 68
-    },
-    {
-      "hour": 1,
-      "temp_f": 65
-    },
-    {
-      "hour": 2,
       "temp_f": 64
     },
     {
+      "hour": 1,
+      "temp_f": 62
+    },
+    {
+      "hour": 2,
+      "temp_f": 62
+    },
+    {
       "hour": 3,
-      "temp_f": 63
+      "temp_f": 61
     },
     {
       "hour": 4,
-      "temp_f": 62
+      "temp_f": 60
     },
     {
       "hour": 5,
-      "temp_f": 62
+      "temp_f": 60
     },
     {
       "hour": 6,
-      "temp_f": 62
+      "temp_f": 60
     },
     {
       "hour": 7,
-      "temp_f": 62
+      "temp_f": 60
     },
     {
       "hour": 8,
-      "temp_f": 63
+      "temp_f": 62
     },
     {
       "hour": 9,
-      "temp_f": 65
+      "temp_f": 64
     },
     {
       "hour": 10,
-      "temp_f": 66
+      "temp_f": 64
     },
     {
       "hour": 11,
-      "temp_f": 68
+      "temp_f": 66
     },
     {
       "hour": 12,
-      "temp_f": 71
+      "temp_f": 69
     },
     {
       "hour": 13,
-      "temp_f": 73
+      "temp_f": 72
     },
     {
       "hour": 14,
@@ -67,19 +67,19 @@
     },
     {
       "hour": 15,
-      "temp_f": 76
-    },
-    {
-      "hour": 16,
       "temp_f": 77
     },
     {
-      "hour": 17,
+      "hour": 16,
       "temp_f": 78
     },
     {
+      "hour": 17,
+      "temp_f": 79
+    },
+    {
       "hour": 18,
-      "temp_f": 78
+      "temp_f": 79
     },
     {
       "hour": 19,
@@ -87,49 +87,49 @@
     },
     {
       "hour": 20,
-      "temp_f": 74
+      "temp_f": 72
     },
     {
       "hour": 21,
-      "temp_f": 70
+      "temp_f": 69
     },
     {
       "hour": 22,
-      "temp_f": 68
+      "temp_f": 65
     },
     {
       "hour": 23,
-      "temp_f": 66
+      "temp_f": 63
     }
   ],
   "checkpoints": [
     {
       "hour": 8,
       "label": "8 AM",
-      "temp_f": 63,
-      "uv_index": 0,
-      "rain_chance": 9
+      "temp_f": 62,
+      "uv_index": 1,
+      "rain_chance": 0
     },
     {
       "hour": 12,
       "label": "12 PM",
-      "temp_f": 71,
+      "temp_f": 69,
       "uv_index": 6,
-      "rain_chance": 1
+      "rain_chance": 0
     },
     {
       "hour": 16,
       "label": "4 PM",
-      "temp_f": 77,
+      "temp_f": 78,
       "uv_index": 6,
-      "rain_chance": 2
+      "rain_chance": 0
     },
     {
       "hour": 20,
       "label": "8 PM",
-      "temp_f": 74,
+      "temp_f": 72,
       "uv_index": 1,
-      "rain_chance": 2
+      "rain_chance": 0
     }
   ]
 }
