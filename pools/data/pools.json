@@ -1,6 +1,6 @@
 {
   "hub_url": "https://www.seattle.gov/parks/pools",
-  "scraped_at": "2026-07-24T14:27:52+00:00",
+  "scraped_at": "2026-07-25T14:21:18+00:00",
   "schedule_year": 2026,
   "pools": [
     {
@@ -11,120 +11,9 @@
       "address": "1471 NW 67th Street",
       "map_url": "https://www.google.com/maps/search/?api=1&query=1471%20NW%2067th%20Street",
       "blurb": "Adjacent to Ballard High School. Features a 25-yard indoor pool with water slide, low dive, rope swing and warm water spa.",
-      "season_label": "Early Summer 2026: June 22 - August 2",
-      "season_note": "Pool Closed: July 4 and September 7",
-      "schedule": {
-        "columns": [
-          "Program",
-          "Day",
-          "Time",
-          "Details"
-        ],
-        "rows": [
-          [
-            "Lap Swim*",
-            "Mon/Wed/Fri Early Morning Lap Swim (EMLS)",
-            "6am-7:30am",
-            "Six lap lanes. Payment with a Quick Card, check, or exact change only."
-          ],
-          [
-            "Lap Swim*",
-            "Mon/Wed",
-            "7:45pm-8:45pm",
-            "Six lap lanes."
-          ],
-          [
-            "Lap Swim*",
-            "Fri",
-            "5:30pm-6:45pm***",
-            "Six lap lanes.***Program cancelled 7/17"
-          ],
-          [
-            "Lap Swim*",
-            "Sat",
-            "8am-9am",
-            "Six lap lanes."
-          ],
-          [
-            "Lap Swim*",
-            "Sun",
-            "8am-9am",
-            "Six lap lanes."
-          ],
-          [
-            "Lap Swim*",
-            "Sun",
-            "11am-12:15pm",
-            "Four lap lanes with an open section for water walking."
-          ],
-          [
-            "Adult/Senior Swim*",
-            "Mon-Fri",
-            "12pm-1:15pm",
-            "Three lap lanes with an open section for water walking. Reserved for guests 18 years old and older."
-          ],
-          [
-            "Recreation Swim*",
-            "Mon-Fri",
-            "1:30pm-2:50pm",
-            "Diving board, slide, and rope swing used during program."
-          ],
-          [
-            "Recreation Swim*",
-            "Wed",
-            "6:30pm-7:30pm",
-            "Diving board, slide, and rope swing used during program."
-          ],
-          [
-            "Recreation Swim*",
-            "Fri",
-            "7:30pm-8:30pm***",
-            "Diving board, slide, and rope swing used during program. ***Program cancelled 7/17"
-          ],
-          [
-            "Recreation Swim*",
-            "Sat",
-            "10am-11am",
-            "Diving board, slide, and rope swing used during program."
-          ],
-          [
-            "Recreation Swim*",
-            "Sun",
-            "1pm-2pm",
-            "Diving board, slide, and rope swing used during program."
-          ],
-          [
-            "Family Swim*",
-            "Sun",
-            "4:15pm-5:30pm",
-            "Children under 18 must be accompanied by an adult in the water. Diving board, slide and rope swing used during this program."
-          ],
-          [
-            "Deep Water Exercise**",
-            "Tues/Thur",
-            "11:10am-11:55am",
-            "Instructor led water exercise class in the deep end of the pool, also called aqua jogging."
-          ],
-          [
-            "Deep Water Exercise**",
-            "Tues/Thur",
-            "7:40pm-8:25pm",
-            "Instructor led water exercise class in the deep end of the pool, also called aqua jogging."
-          ],
-          [
-            "Shallow Water Exercise**",
-            "Mon/Wed/Fri",
-            "11:10am-11:55am",
-            "Instructor led water exercise in the shallow end of the pool."
-          ],
-          [
-            "Shallow Water Exercise**",
-            "Sun",
-            "10:10am-10:55am",
-            "Instructor led water exercise in the shallow end of the pool."
-          ]
-        ]
-      },
+      "season_label": null,
+      "season_note": null,
+      "schedule": null,
       "schedule_pdfs": [],
       "holiday_note": null,
       "holiday_list": [],
