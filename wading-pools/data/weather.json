@@ -1,53 +1,53 @@
 {
-  "date": "2026-08-05",
-  "condition": "Clear",
-  "icon": "sun",
+  "date": "2026-08-06",
+  "condition": "Partly Cloudy",
+  "icon": "partly-cloudy",
   "high_f": 82,
-  "low_f": 56,
+  "low_f": 59,
   "hourly": [
     {
       "hour": 0,
-      "temp_f": 62
+      "temp_f": 66
     },
     {
       "hour": 1,
-      "temp_f": 61
+      "temp_f": 65
     },
     {
       "hour": 2,
-      "temp_f": 59
-    },
-    {
-      "hour": 3,
-      "temp_f": 58
-    },
-    {
-      "hour": 4,
-      "temp_f": 58
-    },
-    {
-      "hour": 5,
-      "temp_f": 56
-    },
-    {
-      "hour": 6,
-      "temp_f": 56
-    },
-    {
-      "hour": 7,
-      "temp_f": 56
-    },
-    {
-      "hour": 8,
-      "temp_f": 60
-    },
-    {
-      "hour": 9,
       "temp_f": 64
     },
     {
-      "hour": 10,
+      "hour": 3,
+      "temp_f": 61
+    },
+    {
+      "hour": 4,
+      "temp_f": 61
+    },
+    {
+      "hour": 5,
+      "temp_f": 61
+    },
+    {
+      "hour": 6,
+      "temp_f": 59
+    },
+    {
+      "hour": 7,
+      "temp_f": 60
+    },
+    {
+      "hour": 8,
+      "temp_f": 63
+    },
+    {
+      "hour": 9,
       "temp_f": 66
+    },
+    {
+      "hour": 10,
+      "temp_f": 68
     },
     {
       "hour": 11,
@@ -55,23 +55,23 @@
     },
     {
       "hour": 12,
-      "temp_f": 73
+      "temp_f": 71
     },
     {
       "hour": 13,
-      "temp_f": 76
+      "temp_f": 74
     },
     {
       "hour": 14,
-      "temp_f": 79
+      "temp_f": 77
     },
     {
       "hour": 15,
-      "temp_f": 81
+      "temp_f": 80
     },
     {
       "hour": 16,
-      "temp_f": 81
+      "temp_f": 82
     },
     {
       "hour": 17,
@@ -79,11 +79,11 @@
     },
     {
       "hour": 18,
-      "temp_f": 81
+      "temp_f": 82
     },
     {
       "hour": 19,
-      "temp_f": 78
+      "temp_f": 79
     },
     {
       "hour": 20,
@@ -95,32 +95,32 @@
     },
     {
       "hour": 22,
-      "temp_f": 68
+      "temp_f": 67
     },
     {
       "hour": 23,
-      "temp_f": 66
+      "temp_f": 65
     }
   ],
   "checkpoints": [
     {
       "hour": 8,
       "label": "8 AM",
-      "temp_f": 60,
+      "temp_f": 63,
       "uv_index": 1,
       "rain_chance": 0
     },
     {
       "hour": 12,
       "label": "12 PM",
-      "temp_f": 73,
+      "temp_f": 71,
       "uv_index": 6,
       "rain_chance": 0
     },
     {
       "hour": 16,
       "label": "4 PM",
-      "temp_f": 81,
+      "temp_f": 82,
       "uv_index": 6,
       "rain_chance": 0
     },
