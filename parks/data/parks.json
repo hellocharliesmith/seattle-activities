@@ -1,6 +1,6 @@
 {
   "source": "Seattle GeoData (data-seattlecitygis.opendata.arcgis.com), Seattle Parks & Recreation layers",
-  "scraped_at": "2026-08-10T14:23:38+00:00",
+  "scraped_at": "2026-08-11T14:23:28+00:00",
   "amenity_layer_errors": [],
   "parks": [
     {
@@ -2789,7 +2789,7 @@
       "has_restroom": false,
       "has_sport_court": false,
       "has_splashpad": false,
-      "has_offleash": false
+      "has_offleash": true
     },
     {
       "slug": "georgetown-playfield",
@@ -6750,7 +6750,7 @@
       "has_restroom": true,
       "has_sport_court": true,
       "has_splashpad": true,
-      "has_offleash": false
+      "has_offleash": true
     },
     {
       "slug": "south-park-plaza",
