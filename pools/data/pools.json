@@ -1,6 +1,6 @@
 {
   "hub_url": "https://www.seattle.gov/parks/pools",
-  "scraped_at": "2026-08-17T13:28:28+00:00",
+  "scraped_at": "2026-08-18T13:31:39+00:00",
   "schedule_year": 2026,
   "pools": [
     {
@@ -291,192 +291,9 @@
       "address": "13401 Meridian Ave N",
       "map_url": "https://www.google.com/maps/search/?api=1&query=13401%20Meridian%20Ave%20N",
       "blurb": "A 25-yard indoor pool in the Haller Lake/Bitter Lake neighborhood of NE Seattle, with a shallow section and two diving boards.",
-      "season_label": "Summer 2026: June 20 - August 16",
-      "season_note": "Scroll down for the text-only schedule. CLOSED August 17-24 for Preventative Maintenance.",
-      "schedule": {
-        "columns": [
-          "Program",
-          "Day",
-          "Time",
-          "Details"
-        ],
-        "rows": [
-          [
-            "Shallow Water Fitness",
-            "Mon/Wed",
-            "11:10- 11:55am",
-            "Pool opens at 11:00am"
-          ],
-          [
-            "Deep Water Fitness",
-            "Tue, Thurs. Fri",
-            "11:10-11:55am",
-            "Pool opens at 11:00am"
-          ],
-          [
-            "Deep Water Fitness",
-            "Tue/Thurs",
-            "7:10-7:55pm",
-            "Pool closes at 8:00pm"
-          ],
-          [
-            "Lap Swim 4 Lanes",
-            "Sunday",
-            "12:00-1:00pm",
-            "A double lane is provided for leisure swimming, exercise, and head high swimming. Lap swimmers will be asked to move to the lap lanes."
-          ],
-          [
-            "Lap Swim 4 Lanes",
-            "Sunday",
-            "3:00-4:00pm",
-            "A double lane is provided for leisure swimming, exercise, and head high swimming. Lap swimmers will be asked to move to the lap lanes."
-          ],
-          [
-            "Lap Swim 4 Lanes",
-            "Saturday",
-            "9:00-10:30am",
-            "A double lane is provided for leisure swimming, exercise, and head high swimming. Lap swimmers will be asked to move to the lap lanes."
-          ],
-          [
-            "Lap Swim 4 Lanes",
-            "Saturday",
-            "12:00-1:30pm",
-            "A double lane is provided for leisure swimming, exercise, and head high swimming. Lap swimmers will be asked to move to the lap lanes."
-          ],
-          [
-            "Lap Swim 4 Lanes",
-            "Mon, Tue, Wed, Thurs, Fri",
-            "12:00-2:00pm",
-            "A double lane is provided for leisure swimming, exercise, and head high swimming. Lap swimmers will be asked to move to the lap lanes."
-          ],
-          [
-            "Lap Swim 3 Lanes",
-            "Sunday",
-            "11:00-12:00pm",
-            "Diving class happening in other lanes"
-          ],
-          [
-            "Lap Swim 3 Lanes",
-            "Saturday",
-            "1:30-2:30pm",
-            "No Open Lane"
-          ],
-          [
-            "Lap Swim 3 Lanes",
-            "Mon, Tue, Wed, Thurs",
-            "6:30-8:00pm",
-            "Rec or Deep Water Fitness in other lanes"
-          ],
-          [
-            "Lap Swim 6 Lanes",
-            "Friday",
-            "6:00-7:00pm",
-            "No Open Lane"
-          ],
-          [
-            "Adult/Senior Swim",
-            "Mon/Wed",
-            "11:00-12:00pm",
-            "Deep Pool Only 18+ adults only"
-          ],
-          [
-            "Adult Shallow Swim",
-            "Tue, Thurs, Fri",
-            "11:00am-12:00pm",
-            "Shallow Pool Only 18+ adults only"
-          ],
-          [
-            "Adult Shallow Swim",
-            "Mon, Tue, Wed, Thurs, Fri",
-            "12:00-1:30pm",
-            "Shallow Pool Only 18+ adults only"
-          ],
-          [
-            "Adult Shallow Swim",
-            "Saturday",
-            "12:40-1:30pm",
-            "Shallow Pool Only 18+ adults only"
-          ],
-          [
-            "Adult Shallow Swim",
-            "Friday",
-            "6:00-7:00pm",
-            "Shallow Pool Only 18+ adults only"
-          ],
-          [
-            "Recreation Swim - Full Pool",
-            "Sunday",
-            "2:00-3:00pm",
-            "1m and 3m Diving boards open"
-          ],
-          [
-            "Recreation Swim - Full Pool",
-            "Saturday",
-            "2:30-4:00pm",
-            "1m and 3m Diving boards open"
-          ],
-          [
-            "Recreation Swim - Full Pool",
-            "Mon, Tue, Wed, Thurs, Fri",
-            "2:00-4:00pm",
-            "1m and 3m Diving boards open"
-          ],
-          [
-            "Recreation Swim - Full Pool",
-            "Friday",
-            "7:00-8:00pm",
-            "1m and 3m Diving boards open"
-          ],
-          [
-            "Recreation Swim w/3-lane Lap",
-            "Mon/Wed",
-            "7:00-8:00pm",
-            "1m Diving Board Open Pool closes at 8pm"
-          ],
-          [
-            "Pool Playland",
-            "Sunday",
-            "11:00-12:00pm",
-            "Shallow Pool Only"
-          ],
-          [
-            "Pool Playland",
-            "Sunday",
-            "3:00-4:00pm",
-            "Shallow Pool Only"
-          ],
-          [
-            "Pool Playland",
-            "Mon, Tue, Wed, Thurs, Fri",
-            "1:00-2:00pm",
-            "Shallow Pool Only"
-          ],
-          [
-            "Pool Playland",
-            "Saturday",
-            "9:00-10:00am",
-            "Shallow Pool Only"
-          ],
-          [
-            "Pool Playland",
-            "Saturday",
-            "1:30-2:30pm",
-            "Shallow Pool Only"
-          ],
-          [
-            "Masters (no coach)",
-            "Sunday",
-            "9:00-10:00am",
-            "6-Lane Fitness Swim"
-          ],
-          [
-            "Jr Masters",
-            "Saturday",
-            "1:30-2:30pm",
-            "3-Lane Fitness Swim"
-          ]
-        ]
-      },
+      "season_label": null,
+      "season_note": null,
+      "schedule": null,
       "schedule_pdfs": [],
       "holiday_note": null,
       "holiday_list": [],
@@ -664,131 +481,17 @@
       "address": "2535 32nd Ave West",
       "map_url": "https://www.google.com/maps/search/?api=1&query=2535%2032nd%20Ave%20West",
       "blurb": "In the Magnolia neighborhood. Two outdoor pools: one w/50-foot corkscrew slide; the other shallow & great for kids. Concessionaire too! Summer only.",
-      "season_label": "Main Season: June 22 - September 6.",
-      "season_note": "Scroll down for the schedule organized by program.",
-      "schedule": {
-        "columns": [
-          "Program",
-          "Day",
-          "Time",
-          "Details"
-        ],
-        "rows": [
-          [
-            "Water Fitness (Lap Pool Only)",
-            "Daily",
-            "10:30 \u2013 11:30 am",
-            "Class instruction: 10:40am-11:25am"
-          ],
-          [
-            "Early Morning Lap Swim",
-            "Mon-Fri",
-            "6 \u2013 7 am",
-            "Discount Pass/Exact Change Only"
-          ],
-          [
-            "Lap Swim (Lap Pool Only)",
-            "Sat-Sun",
-            "9 \u2013 10 am",
-            "5 Lap Lanes"
-          ],
-          [
-            "Lap Swim (Lap Pool Only)",
-            "Daily",
-            "11:35am \u2013 12:45pm",
-            "5 Lap Lanes"
-          ],
-          [
-            "Lap Swim (Lap Pool Only)",
-            "Mon-Thurs",
-            "7:30pm \u2013 9pm* *7:30-8:30 starting 8/3 **Last day 8/13",
-            "5 Lap Lanes"
-          ],
-          [
-            "Pool Playland (Small Pool Only)",
-            "Daily",
-            "10:30 \u2013 11:30am",
-            "Parents and children aged 5 and younger."
-          ],
-          [
-            "Pool Playland (Small Pool Only)",
-            "Mon-Thurs",
-            "11:45 am \u2013 12:45 pm",
-            "Parents and children aged 5 and younger."
-          ],
-          [
-            "Sensory Swim (Small Pool Only)",
-            "Friday",
-            "11:45 am - 12:45 pm",
-            "Dedicated time for families with children who have sensory processing disorders or other special needs. A quiet and calming environment for adaptive swimmers to enjoy the water"
-          ],
-          [
-            "Recreation Swim (Both Pools)",
-            "Daily",
-            "1pm \u2013 2:25pm",
-            "Children 5 & younger must be accompanied in the water by a parent during this swim."
-          ],
-          [
-            "Recreation Swim (Both Pools)",
-            "Daily",
-            "3pm \u2013 4:25pm",
-            "Children 5 & younger must be accompanied in the water by a parent during this swim."
-          ],
-          [
-            "Recreation Swim (Both Pools)",
-            "Daily",
-            "6:05pm \u2013 7:25pm",
-            "Children 5 & younger must be accompanied in the water by a parent during this swim."
-          ]
-        ]
-      },
+      "season_label": null,
+      "season_note": null,
+      "schedule": null,
       "schedule_pdfs": [],
-      "holiday_note": "Mounger Pool will operate this schedule on 4 holidays in 2026:",
+      "holiday_note": "Mounger Pool will operate the schedule below on 4 holidays in 2026:",
       "holiday_list": [
-        "Memorial Day... Monday, May 25",
-        "Juneteenth... Friday, June 19",
-        "Independence Day... Saturday, July 4 Mounger Pool will run a regular Friday drop-in schedule on \"Observed\" Independence Day, Friday, July 3. Swim lessons will be canceled.",
-        "Labor Day... Monday, September 7"
+        "March 24, Scholarship-eligible priority registration (12:00 noon)",
+        "March 31, General registration for summer swim lessons.",
+        "Sessions start the weeks of May 11 , June 1 , June 22 , and August 3"
       ],
-      "holiday_schedule": {
-        "columns": [
-          "Time",
-          "Lap Pool",
-          "Small Pool"
-        ],
-        "rows": [
-          [
-            "9-10am",
-            "Lap Swim, 5 lanes",
-            "Pool Playland"
-          ],
-          [
-            "10:30-11:30am",
-            "Water Fitness",
-            "Pool Playland"
-          ],
-          [
-            "11:35am-12:45pm",
-            "Lap Swim, 5 lanes",
-            "Pool Playland"
-          ],
-          [
-            "1:00-2:25pm",
-            "Recreation Swim",
-            "Recreation Swim"
-          ],
-          [
-            "3:00-4:25pm",
-            "Recreation Swim",
-            "Recreation Swim"
-          ],
-          [
-            "4:30-6:00pm",
-            "Lap Swim, 5 lanes",
-            "Pool Playland"
-          ]
-        ]
-      },
+      "holiday_schedule": null,
       "closure": null
     },
     {
