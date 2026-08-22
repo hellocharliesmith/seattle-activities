@@ -1,96 +1,12 @@
 {
   "source_url": "https://www.trumba.com/calendars/kalendaro.json?filterview=SeriesStoryTime",
   "calendar_page_url": "https://www.spl.org/programs-and-services/fun-and-games/story-time/story-time-calendar",
-  "scraped_at": "2026-08-21T14:16:29+00:00",
+  "scraped_at": "2026-08-22T13:55:27+00:00",
   "date_range": {
-    "start": "2026-08-21",
-    "end": "2026-10-06"
+    "start": "2026-08-22",
+    "end": "2026-10-07"
   },
   "events": [
-    {
-      "branch": "Magnolia Branch",
-      "neighborhood_bucket": "queen-anne-magnolia",
-      "neighborhood_label": "Queen Anne / Magnolia",
-      "age_group": "family",
-      "title": "Family Story Time",
-      "date": "2026-08-21",
-      "start_time": "10:30 AM",
-      "end_time": "11:00 AM",
-      "start_min": 630,
-      "end_min": 660,
-      "location_note": "",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D204304324"
-    },
-    {
-      "branch": "Capitol Hill Branch",
-      "neighborhood_bucket": "capitol-hill-central-district",
-      "neighborhood_label": "Capitol Hill / Central District",
-      "age_group": "family",
-      "title": "Family Story Time",
-      "date": "2026-08-21",
-      "start_time": "10:30 AM",
-      "end_time": "11:30 AM",
-      "start_min": 630,
-      "end_min": 690,
-      "location_note": "",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205225686"
-    },
-    {
-      "branch": "Beacon Hill Branch",
-      "neighborhood_bucket": "southeast-seattle",
-      "neighborhood_label": "Southeast Seattle",
-      "age_group": "family",
-      "title": "Firefighter Story Time",
-      "date": "2026-08-21",
-      "start_time": "10:30 AM",
-      "end_time": "11:30 AM",
-      "start_min": 630,
-      "end_min": 690,
-      "location_note": "Meeting Room",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D202220090"
-    },
-    {
-      "branch": "Columbia Branch",
-      "neighborhood_bucket": "southeast-seattle",
-      "neighborhood_label": "Southeast Seattle",
-      "age_group": "toddler",
-      "title": "Kaleidoscope Play & Learn / Caleidoscopio Juega y Aprende",
-      "date": "2026-08-21",
-      "start_time": "10:30 AM",
-      "end_time": "12:00 PM",
-      "start_min": 630,
-      "end_min": 720,
-      "location_note": "Meeting Room",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D202322602"
-    },
-    {
-      "branch": "NewHolly Branch",
-      "neighborhood_bucket": "southeast-seattle",
-      "neighborhood_label": "Southeast Seattle",
-      "age_group": "toddler",
-      "title": "Kaleidoscope Play and Learn / Ku ciyaarista iyo barashada qalabka Kaleidoscope-ka",
-      "date": "2026-08-21",
-      "start_time": "10:30 AM",
-      "end_time": "12:00 PM",
-      "start_min": 630,
-      "end_min": 720,
-      "location_note": "Meeting Room",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D204162328"
-    },
-    {
-      "branch": "Greenwood Branch",
-      "neighborhood_bucket": "ballard-fremont-greenwood",
-      "neighborhood_label": "Ballard / Fremont / Greenwood",
-      "age_group": "family",
-      "title": "La Hora de Cuentos Familiares",
-      "date": "2026-08-21",
-      "start_time": "11:15 AM",
-      "end_time": "12:00 PM",
-      "start_min": 675,
-      "end_min": 720,
-      "location_note": "Meeting Room",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D202322533"
-    },
     {
       "branch": "Ballard Branch",
       "neighborhood_bucket": "ballard-fremont-greenwood",
@@ -132,20 +48,6 @@
       "end_min": 720,
       "location_note": "Meeting Room / Sala de reuniones",
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D202326424"
-    },
-    {
-      "branch": "Beacon Hill Branch",
-      "neighborhood_bucket": "southeast-seattle",
-      "neighborhood_label": "Southeast Seattle",
-      "age_group": "family",
-      "title": "La Hora de Cuentos Familiares",
-      "date": "2026-08-22",
-      "start_time": "11:00 AM",
-      "end_time": "11:30 AM",
-      "start_min": 660,
-      "end_min": 690,
-      "location_note": "\u00c1rea para ni\u00f1os",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D202326399"
     },
     {
       "branch": "Green Lake Branch",
@@ -386,20 +288,6 @@
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D204578749"
     },
     {
-      "branch": "Beacon Hill Branch",
-      "neighborhood_bucket": "southeast-seattle",
-      "neighborhood_label": "Southeast Seattle",
-      "age_group": "family",
-      "title": "La Hora de Cuentos Familiares",
-      "date": "2026-08-29",
-      "start_time": "11:00 AM",
-      "end_time": "11:30 AM",
-      "start_min": 660,
-      "end_min": 690,
-      "location_note": "\u00c1rea para ni\u00f1os",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D202326400"
-    },
-    {
       "branch": "Green Lake Branch",
       "neighborhood_bucket": "wallingford-green-lake",
       "neighborhood_label": "Wallingford / Green Lake",
@@ -610,20 +498,6 @@
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205890096"
     },
     {
-      "branch": "Capitol Hill Branch",
-      "neighborhood_bucket": "capitol-hill-central-district",
-      "neighborhood_label": "Capitol Hill / Central District",
-      "age_group": "family",
-      "title": "Family Story Time",
-      "date": "2026-09-04",
-      "start_time": "10:30 AM",
-      "end_time": "11:30 AM",
-      "start_min": 630,
-      "end_min": 690,
-      "location_note": "",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205888172"
-    },
-    {
       "branch": "Magnolia Branch",
       "neighborhood_bucket": "queen-anne-magnolia",
       "neighborhood_label": "Queen Anne / Magnolia",
@@ -636,6 +510,20 @@
       "end_min": 660,
       "location_note": "",
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205889777"
+    },
+    {
+      "branch": "Capitol Hill Branch",
+      "neighborhood_bucket": "capitol-hill-central-district",
+      "neighborhood_label": "Capitol Hill / Central District",
+      "age_group": "family",
+      "title": "Family Story Time",
+      "date": "2026-09-04",
+      "start_time": "10:30 AM",
+      "end_time": "11:30 AM",
+      "start_min": 630,
+      "end_min": 690,
+      "location_note": "",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205888172"
     },
     {
       "branch": "Columbia Branch",
@@ -750,20 +638,6 @@
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205955313"
     },
     {
-      "branch": "Rainier Beach Branch",
-      "neighborhood_bucket": "southeast-seattle",
-      "neighborhood_label": "Southeast Seattle",
-      "age_group": "baby",
-      "title": "Baby Story Time",
-      "date": "2026-09-08",
-      "start_time": "12:30 PM",
-      "end_time": "1:30 PM",
-      "start_min": 750,
-      "end_min": 810,
-      "location_note": "Meeting Room",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205760196"
-    },
-    {
       "branch": "Central Library",
       "neighborhood_bucket": "downtown-slu",
       "neighborhood_label": "Downtown / South Lake Union",
@@ -776,6 +650,20 @@
       "end_min": 780,
       "location_note": "Level 1 - Story Hour Room in Children\u2019s Center",
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205760168"
+    },
+    {
+      "branch": "Rainier Beach Branch",
+      "neighborhood_bucket": "southeast-seattle",
+      "neighborhood_label": "Southeast Seattle",
+      "age_group": "baby",
+      "title": "Baby Story Time",
+      "date": "2026-09-08",
+      "start_time": "12:30 PM",
+      "end_time": "1:30 PM",
+      "start_min": 750,
+      "end_min": 810,
+      "location_note": "Meeting Room",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205760196"
     },
     {
       "branch": "Magnolia Branch",
@@ -918,20 +806,6 @@
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205890097"
     },
     {
-      "branch": "Magnolia Branch",
-      "neighborhood_bucket": "queen-anne-magnolia",
-      "neighborhood_label": "Queen Anne / Magnolia",
-      "age_group": "family",
-      "title": "Family Story Time",
-      "date": "2026-09-11",
-      "start_time": "10:30 AM",
-      "end_time": "11:00 AM",
-      "start_min": 630,
-      "end_min": 660,
-      "location_note": "",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205889778"
-    },
-    {
       "branch": "Capitol Hill Branch",
       "neighborhood_bucket": "capitol-hill-central-district",
       "neighborhood_label": "Capitol Hill / Central District",
@@ -944,6 +818,20 @@
       "end_min": 690,
       "location_note": "",
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205888173"
+    },
+    {
+      "branch": "Magnolia Branch",
+      "neighborhood_bucket": "queen-anne-magnolia",
+      "neighborhood_label": "Queen Anne / Magnolia",
+      "age_group": "family",
+      "title": "Family Story Time",
+      "date": "2026-09-11",
+      "start_time": "10:30 AM",
+      "end_time": "11:00 AM",
+      "start_min": 630,
+      "end_min": 660,
+      "location_note": "",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205889778"
     },
     {
       "branch": "Columbia Branch",
@@ -1702,20 +1590,6 @@
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205883820"
     },
     {
-      "branch": "Douglass-Truth Branch",
-      "neighborhood_bucket": "capitol-hill-central-district",
-      "neighborhood_label": "Capitol Hill / Central District",
-      "age_group": "family",
-      "title": "Family Story Time",
-      "date": "2026-09-23",
-      "start_time": "10:30 AM",
-      "end_time": "11:00 AM",
-      "start_min": 630,
-      "end_min": 660,
-      "location_note": "Meeting Room",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205889426"
-    },
-    {
       "branch": "Greenwood Branch",
       "neighborhood_bucket": "ballard-fremont-greenwood",
       "neighborhood_label": "Ballard / Fremont / Greenwood",
@@ -1728,6 +1602,20 @@
       "end_min": 690,
       "location_note": "Meeting Room",
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205888526"
+    },
+    {
+      "branch": "Douglass-Truth Branch",
+      "neighborhood_bucket": "capitol-hill-central-district",
+      "neighborhood_label": "Capitol Hill / Central District",
+      "age_group": "family",
+      "title": "Family Story Time",
+      "date": "2026-09-23",
+      "start_time": "10:30 AM",
+      "end_time": "11:00 AM",
+      "start_min": 630,
+      "end_min": 660,
+      "location_note": "Meeting Room",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205889426"
     },
     {
       "branch": "Northgate Branch",
@@ -2178,20 +2066,6 @@
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205883821"
     },
     {
-      "branch": "Douglass-Truth Branch",
-      "neighborhood_bucket": "capitol-hill-central-district",
-      "neighborhood_label": "Capitol Hill / Central District",
-      "age_group": "family",
-      "title": "Family Story Time",
-      "date": "2026-09-30",
-      "start_time": "10:30 AM",
-      "end_time": "11:00 AM",
-      "start_min": 630,
-      "end_min": 660,
-      "location_note": "Meeting Room",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205889427"
-    },
-    {
       "branch": "Greenwood Branch",
       "neighborhood_bucket": "ballard-fremont-greenwood",
       "neighborhood_label": "Ballard / Fremont / Greenwood",
@@ -2204,6 +2078,20 @@
       "end_min": 690,
       "location_note": "Meeting Room",
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205888527"
+    },
+    {
+      "branch": "Douglass-Truth Branch",
+      "neighborhood_bucket": "capitol-hill-central-district",
+      "neighborhood_label": "Capitol Hill / Central District",
+      "age_group": "family",
+      "title": "Family Story Time",
+      "date": "2026-09-30",
+      "start_time": "10:30 AM",
+      "end_time": "11:00 AM",
+      "start_min": 630,
+      "end_min": 660,
+      "location_note": "Meeting Room",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205889427"
     },
     {
       "branch": "Northgate Branch",
@@ -2262,20 +2150,6 @@
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205953867"
     },
     {
-      "branch": "Columbia Branch",
-      "neighborhood_bucket": "southeast-seattle",
-      "neighborhood_label": "Southeast Seattle",
-      "age_group": "toddler",
-      "title": "Toddler Story Time",
-      "date": "2026-10-01",
-      "start_time": "10:30 AM",
-      "end_time": "11:30 AM",
-      "start_min": 630,
-      "end_min": 690,
-      "location_note": "Meeting Room",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205959366"
-    },
-    {
       "branch": "Southwest Branch",
       "neighborhood_bucket": "west-seattle",
       "neighborhood_label": "West Seattle",
@@ -2288,6 +2162,20 @@
       "end_min": 660,
       "location_note": "",
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205963039"
+    },
+    {
+      "branch": "Columbia Branch",
+      "neighborhood_bucket": "southeast-seattle",
+      "neighborhood_label": "Southeast Seattle",
+      "age_group": "toddler",
+      "title": "Toddler Story Time",
+      "date": "2026-10-01",
+      "start_time": "10:30 AM",
+      "end_time": "11:30 AM",
+      "start_min": 630,
+      "end_min": 690,
+      "location_note": "Meeting Room",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205959366"
     },
     {
       "branch": "Queen Anne Branch",
@@ -2304,20 +2192,6 @@
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205890100"
     },
     {
-      "branch": "Magnolia Branch",
-      "neighborhood_bucket": "queen-anne-magnolia",
-      "neighborhood_label": "Queen Anne / Magnolia",
-      "age_group": "family",
-      "title": "Family Story Time",
-      "date": "2026-10-02",
-      "start_time": "10:30 AM",
-      "end_time": "11:00 AM",
-      "start_min": 630,
-      "end_min": 660,
-      "location_note": "",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205889781"
-    },
-    {
       "branch": "Capitol Hill Branch",
       "neighborhood_bucket": "capitol-hill-central-district",
       "neighborhood_label": "Capitol Hill / Central District",
@@ -2330,6 +2204,20 @@
       "end_min": 690,
       "location_note": "",
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205888176"
+    },
+    {
+      "branch": "Magnolia Branch",
+      "neighborhood_bucket": "queen-anne-magnolia",
+      "neighborhood_label": "Queen Anne / Magnolia",
+      "age_group": "family",
+      "title": "Family Story Time",
+      "date": "2026-10-02",
+      "start_time": "10:30 AM",
+      "end_time": "11:00 AM",
+      "start_min": 630,
+      "end_min": 660,
+      "location_note": "",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205889781"
     },
     {
       "branch": "Columbia Branch",
@@ -2666,6 +2554,90 @@
       "end_min": 780,
       "location_note": "Level 1 - Story Hour Room in Children\u2019s Center",
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205760172"
+    },
+    {
+      "branch": "Magnolia Branch",
+      "neighborhood_bucket": "queen-anne-magnolia",
+      "neighborhood_label": "Queen Anne / Magnolia",
+      "age_group": "toddler",
+      "title": "Toddler Play Group",
+      "date": "2026-10-06",
+      "start_time": "3:00 PM",
+      "end_time": "5:00 PM",
+      "start_min": 900,
+      "end_min": 1020,
+      "location_note": "Meeting Room",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205965722"
+    },
+    {
+      "branch": "South Park Branch",
+      "neighborhood_bucket": "georgetown-south-park",
+      "neighborhood_label": "Georgetown / South Park",
+      "age_group": "toddler",
+      "title": "Kaleidoscope Play & Learn / Caleidoscopio Juega y Aprende",
+      "date": "2026-10-07",
+      "start_time": "10:00 AM",
+      "end_time": "11:30 AM",
+      "start_min": 600,
+      "end_min": 690,
+      "location_note": "Children\u2019s Area / \u00c1rea para ni\u00f1os",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205925557"
+    },
+    {
+      "branch": "Ballard Branch",
+      "neighborhood_bucket": "ballard-fremont-greenwood",
+      "neighborhood_label": "Ballard / Fremont / Greenwood",
+      "age_group": "toddler",
+      "title": "Bilingual Toddler Story Time / Hora de cuentos biling\u00fce para ni\u00f1os peque\u00f1os",
+      "date": "2026-10-07",
+      "start_time": "10:30 AM",
+      "end_time": "11:00 AM",
+      "start_min": 630,
+      "end_min": 660,
+      "location_note": "Meeting Room / Sala de reuniones",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205883822"
+    },
+    {
+      "branch": "Greenwood Branch",
+      "neighborhood_bucket": "ballard-fremont-greenwood",
+      "neighborhood_label": "Ballard / Fremont / Greenwood",
+      "age_group": "family",
+      "title": "Family Story Time",
+      "date": "2026-10-07",
+      "start_time": "10:30 AM",
+      "end_time": "11:30 AM",
+      "start_min": 630,
+      "end_min": 690,
+      "location_note": "Meeting Room",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205888528"
+    },
+    {
+      "branch": "Douglass-Truth Branch",
+      "neighborhood_bucket": "capitol-hill-central-district",
+      "neighborhood_label": "Capitol Hill / Central District",
+      "age_group": "family",
+      "title": "Family Story Time",
+      "date": "2026-10-07",
+      "start_time": "10:30 AM",
+      "end_time": "11:00 AM",
+      "start_min": 630,
+      "end_min": 660,
+      "location_note": "Meeting Room",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205889428"
+    },
+    {
+      "branch": "Northgate Branch",
+      "neighborhood_bucket": "north-seattle",
+      "neighborhood_label": "North Seattle",
+      "age_group": "baby",
+      "title": "Baby Story Time",
+      "date": "2026-10-07",
+      "start_time": "12:30 PM",
+      "end_time": "1:00 PM",
+      "start_min": 750,
+      "end_min": 780,
+      "location_note": "Meeting Room",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205761059"
     }
   ]
 }
