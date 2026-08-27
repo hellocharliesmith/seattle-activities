@@ -1,6 +1,6 @@
 {
   "hub_url": "https://www.seattle.gov/parks/pools",
-  "scraped_at": "2026-08-26T13:41:39+00:00",
+  "scraped_at": "2026-08-27T22:38:07+00:00",
   "schedule_year": 2026,
   "pools": [
     {
@@ -193,19 +193,10 @@
       "address": "8825 Rainier Ave S",
       "map_url": "https://www.google.com/maps/search/?api=1&query=8825%20Rainier%20Ave%20S",
       "blurb": "2 indoor pools: one w/ huge slide, spray features, lazy river, vortex and gradual entry. The other is a 25-yard lap pool w/ diving board. Sauna/hot tub onsite.",
-      "season_label": "Summer 2026: June 22 - August 30",
-      "season_note": "Admission sold 15 minutes prior to swim times. Swim sessions may sell out. Pool Closed: July 4",
+      "season_label": null,
+      "season_note": null,
       "schedule": null,
-      "schedule_pdfs": [
-        {
-          "label": "RBP Lap Pool Summer 2026",
-          "url": "https://www.seattle.gov/documents/Departments/ParksAndRecreation/Swimming/RainierBeach/RBP%20Lap%20Pool%20Summer%202026_ADA.pdf"
-        },
-        {
-          "label": "RBP Leisure Pool Summer 2026",
-          "url": "https://www.seattle.gov/documents/Departments/ParksAndRecreation/Swimming/RainierBeach/RBP%20Leisure%20Pool%20Summer%202026_ADA.pdf"
-        }
-      ],
+      "schedule_pdfs": [],
       "holiday_note": null,
       "holiday_list": [],
       "holiday_schedule": null,
@@ -219,77 +210,9 @@
       "address": "2801 SW Thistle St",
       "map_url": "https://www.google.com/maps/search/?api=1&query=2801%20SW%20Thistle%20St",
       "blurb": "A 25-yard indoor pool in the Roxhill neighborhood of West Seattle. High and low diving boards, spa & sauna, and complimentary exercise machines.",
-      "season_label": "Summer 2026: June 22 - August 29",
-      "season_note": "Pool Closed: July 4th Closing Early: July 3 at 4:25pm & July 17 at 2:30pm",
-      "schedule": {
-        "columns": [
-          "Program",
-          "Day",
-          "Time"
-        ],
-        "rows": [
-          [
-            "Adult Swim (3 lap lanes)",
-            "Mon & Wed",
-            "3:00-4:25pm"
-          ],
-          [
-            "Adult Swim (3 lap lanes)",
-            "Tues & Thurs",
-            "12-1:30pm"
-          ],
-          [
-            "Adult Swim (3 lap lanes)",
-            "Fri",
-            "12:00-2:30pm"
-          ],
-          [
-            "Adult Swim (3 lap lanes)",
-            "Sat",
-            "2:30-3:30pm"
-          ],
-          [
-            "Lap Swim (4-6 lanes)",
-            "Sat",
-            "9:30-10:30am"
-          ],
-          [
-            "Recreation Swim",
-            "Mon & Wed",
-            "12:05-1:30pm"
-          ],
-          [
-            "Recreation Swim",
-            "Tues. Thurs, Fri",
-            "3:00-4:25pm"
-          ],
-          [
-            "Recreation Swim",
-            "Sat",
-            "12:15-1:15pm"
-          ],
-          [
-            "Teen Swim (free, age 13-18)",
-            "Fri",
-            "4:30-5:30pm E-13 Participant Form required"
-          ],
-          [
-            "Water Fitness- Shallow",
-            "Mon & Wed",
-            "2:00-2:45pm"
-          ],
-          [
-            "Water Fitness- Shallow",
-            "Tues & Thurs",
-            "1:30-2:15pm"
-          ],
-          [
-            "Water Fitness - Deep",
-            "Tues & Thurs",
-            "6:45-7:30pm"
-          ]
-        ]
-      },
+      "season_label": null,
+      "season_note": null,
+      "schedule": null,
       "schedule_pdfs": [],
       "holiday_note": null,
       "holiday_list": [],
