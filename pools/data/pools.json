@@ -1,6 +1,6 @@
 {
   "hub_url": "https://www.seattle.gov/parks/pools",
-  "scraped_at": "2026-08-30T16:59:11+00:00",
+  "scraped_at": "2026-08-31T19:15:26+00:00",
   "schedule_year": 2026,
   "pools": [
     {
@@ -28,37 +28,12 @@
       "address": "8603 Fauntleroy Wy S",
       "map_url": "https://www.google.com/maps/search/?api=1&query=8603%20Fauntleroy%20Wy%20S",
       "blurb": "A 50-meter, 8-lane Olympic sized heated saltwater pool in West Seattle\u2019s Lincoln Park. Summer only.",
-      "season_label": "Main Season: June 13 - Aug. 30, 2026",
-      "season_note": "Colman Pool is operating 7 days a week from June 13 to August 30 , including the July 4th holiday.",
-      "schedule": {
-        "columns": null,
-        "rows": [
-          [
-            "12:00pm - 1:30pm",
-            "Lap Swim (daily) and weekend Recreation Swim (Fri-Sun only)"
-          ],
-          [
-            "1:45pm - 3:15pm",
-            "Lap Swim and Recreation Swim"
-          ],
-          [
-            "3:45pm - 5:15pm",
-            "Lap Swim and Recreation Swim"
-          ],
-          [
-            "5:30pm - 7:00pm",
-            "Lap Swim and Recreation Swim"
-          ]
-        ]
-      },
+      "season_label": null,
+      "season_note": null,
+      "schedule": null,
       "schedule_pdfs": [],
-      "holiday_note": "Each day will have 4 swims:",
-      "holiday_list": [
-        "12:00 pm - 1:30 pm",
-        "1:45 pm - 3:15 pm",
-        "3:45 pm - 5:15 pm",
-        "5:30 pm - 7:00 pm"
-      ],
+      "holiday_note": null,
+      "holiday_list": [],
       "holiday_schedule": null,
       "closure": null
     },
@@ -126,17 +101,17 @@
       "address": "500 23rd Ave",
       "map_url": "https://www.google.com/maps/search/?api=1&query=500%2023rd%20Ave",
       "blurb": "Next to Garfield Community Center, this 25-yard indoor pool features a rope swing, low diving board, separate shallow section and sauna.",
-      "season_label": "Summer 2026: June 22 - Aug. 29 & Aug. 31 - Sept. 5",
-      "season_note": "(Aug. 31 - Sept. 5 schedule below this one)",
+      "season_label": "Late Summer 2026: Aug. 31 - Sept. 5",
+      "season_note": "(Fall 2026 schedule below this one)",
       "schedule": null,
       "schedule_pdfs": [
         {
-          "label": "Medgar Evers Summer 2026 Schedule",
-          "url": "https://www.seattle.gov/documents/Departments/ParksAndRecreation/Swimming/MedgarEvers/Medgar%20Evers%20Summer%202026%20Schedule.pdf"
-        },
-        {
           "label": "Fall Transition 2026 MEP 8-31 to 9-5",
           "url": "https://www.seattle.gov/documents/Departments/ParksAndRecreation/Swimming/MedgarEvers/Fall%20Transition%202026%20MEP%208-31%20to%209-5.pdf"
+        },
+        {
+          "label": "Fall 2026 MEP At-A-Glance",
+          "url": "https://www.seattle.gov/documents/Departments/ParksAndRecreation/Swimming/MedgarEvers/Fall%202026%20MEP%20At-A-Glance_ADA.pdf"
         }
       ],
       "holiday_note": null,
