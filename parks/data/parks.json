@@ -1,6 +1,6 @@
 {
   "source": "Seattle GeoData (data-seattlecitygis.opendata.arcgis.com), Seattle Parks & Recreation layers",
-  "scraped_at": "2026-09-01T17:18:20+00:00",
+  "scraped_at": "2026-09-02T17:07:21+00:00",
   "amenity_layer_errors": [],
   "parks": [
     {
@@ -3855,6 +3855,23 @@
       "lon": -122.2807331489643,
       "neighborhood_bucket": "other",
       "neighborhood_label": "Other Seattle",
+      "has_playground": false,
+      "has_picnic": false,
+      "has_restroom": false,
+      "has_sport_court": false,
+      "has_splashpad": false,
+      "has_offleash": false
+    },
+    {
+      "slug": "lake-city-community-center-garage-and-plaza",
+      "name": "Lake City Community Center Garage And Plaza",
+      "address": "12509 28th Ave NE",
+      "map_url": "https://www.google.com/maps/search/?api=1&query=12509%2028th%20Ave%20NE",
+      "seattle_url": null,
+      "lat": 47.72011430240898,
+      "lon": -122.29809894800441,
+      "neighborhood_bucket": "north-seattle",
+      "neighborhood_label": "North Seattle",
       "has_playground": false,
       "has_picnic": false,
       "has_restroom": false,
