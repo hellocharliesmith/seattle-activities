@@ -1,6 +1,6 @@
 {
   "hub_url": "https://www.seattle.gov/parks/pools",
-  "scraped_at": "2026-09-02T16:53:04+00:00",
+  "scraped_at": "2026-09-03T16:42:26+00:00",
   "schedule_year": 2026,
   "pools": [
     {
@@ -46,7 +46,7 @@
       "map_url": "https://www.google.com/maps/search/?api=1&query=7201%20E%20GreenLk%20Dr%20N",
       "blurb": "A 25-yard indoor lap pool on the east shore of Green Lake, with sauna. Same building as the community center.",
       "season_label": "Fall 2026: September 8 - December 20",
-      "season_note": "Closure: Sept 7 (Labor Day)",
+      "season_note": "Closures: Sept 7 (Labor Day); Sep 24 (Staff in-service day); Oct 12 (Indigenous People\u2019s Day); Nov 11 (Veteran\u2019s Day); Nov 26 & 27 (Thanksgiving); Dec 10 (Staff in-service day)",
       "schedule": null,
       "schedule_pdfs": [
         {
