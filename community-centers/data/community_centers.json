@@ -1,7 +1,7 @@
 {
   "hub_url": "https://www.seattle.gov/parks/community-centers",
   "teen_programs_url": "https://www.seattle.gov/parks/childcare/teen-programs",
-  "scraped_at": "2026-09-04T16:54:36+00:00",
+  "scraped_at": "2026-09-05T16:09:00+00:00",
   "centers": [
     {
       "slug": "alki-community-center",
@@ -24,37 +24,8 @@
       "phone": "(206) 684-4093",
       "neighborhood_bucket": "ballard-fremont-greenwood",
       "neighborhood_label": "Ballard / Fremont / Greenwood",
-      "hours_text": "Mon-Fri: 8:30am-8pm; Sat: 8:30am-3:30pm; Sun: 8:30am-12:30pm",
-      "hours_parsed": {
-        "Mon": {
-          "open": "08:30",
-          "close": "20:00"
-        },
-        "Tue": {
-          "open": "08:30",
-          "close": "20:00"
-        },
-        "Wed": {
-          "open": "08:30",
-          "close": "20:00"
-        },
-        "Thu": {
-          "open": "08:30",
-          "close": "20:00"
-        },
-        "Fri": {
-          "open": "08:30",
-          "close": "20:00"
-        },
-        "Sat": {
-          "open": "08:30",
-          "close": "15:30"
-        },
-        "Sun": {
-          "open": "08:30",
-          "close": "12:30"
-        }
-      },
+      "hours_text": "Fall 2026 (begins Sept 8). Mon-Fri: 8:30am-8pm; Sat: 8:30am-3:30pm; Sun: 8:30am-12:30pm; Mon-Fri: 10am-9pm; Sat: 10am-6pm; Sun: 10am-3pm",
+      "hours_parsed": null,
       "amenities": [
         "Meeting Rooms",
         "After School Programs",
@@ -143,28 +114,13 @@
       "phone": "(206) 684-7423",
       "neighborhood_bucket": "west-seattle",
       "neighborhood_label": "West Seattle",
-      "hours_text": "Summer 2026. Mon-Fri 7:30am-7:00pm; Sat 9:30am-6:00pm; Sun Closed",
+      "hours_text": "Summer 2026. Mon-Fri 7:30am-7:00pm; Sat 9:30am-6:00pm; Sun Closed; Mon-Fri 8:30am-8:00pm Sat 9:30am-6:00pm Sun Closed",
       "hours_parsed": {
-        "Mon": {
-          "open": "07:30",
-          "close": "19:00"
-        },
-        "Tue": {
-          "open": "07:30",
-          "close": "19:00"
-        },
-        "Wed": {
-          "open": "07:30",
-          "close": "19:00"
-        },
-        "Thu": {
-          "open": "07:30",
-          "close": "19:00"
-        },
-        "Fri": {
-          "open": "07:30",
-          "close": "19:00"
-        },
+        "Mon": null,
+        "Tue": null,
+        "Wed": null,
+        "Thu": null,
+        "Fri": null,
         "Sat": {
           "open": "09:30",
           "close": "18:00"
@@ -251,34 +207,8 @@
       "phone": "(206) 684-0780",
       "neighborhood_bucket": "wallingford-green-lake",
       "neighborhood_label": "Wallingford / Green Lake",
-      "hours_text": "Summer 2026 Hours. Mon, Tues, Wed, Thurs: 8:30am-7pm; Friday: 8:30am-9pm; Saturday: 8:30am-5p; Sunday: closed",
-      "hours_parsed": {
-        "Mon": {
-          "open": "08:30",
-          "close": "19:00"
-        },
-        "Tue": {
-          "open": "08:30",
-          "close": "19:00"
-        },
-        "Wed": {
-          "open": "08:30",
-          "close": "19:00"
-        },
-        "Thu": {
-          "open": "08:30",
-          "close": "19:00"
-        },
-        "Fri": {
-          "open": "08:30",
-          "close": "21:00"
-        },
-        "Sat": {
-          "open": "08:30",
-          "close": "17:00"
-        },
-        "Sun": null
-      },
+      "hours_text": "Summer 2026 Hours. Mon-Fri: 10am-9pm; Sat: 8:30am-5pm; Sun: Closed; Showers : Tues & Thurs, 10am-1pm",
+      "hours_parsed": null,
       "amenities": [
         "Gym",
         "Meeting Rooms",
@@ -300,27 +230,27 @@
       "phone": "(206) 684-7441",
       "neighborhood_bucket": "southeast-seattle",
       "neighborhood_label": "Southeast Seattle",
-      "hours_text": "Mon-Fri: 9am-6pm; Closed Sat, Sun",
+      "hours_text": "Summer 2026. Mon-Fri: 9am-6pm; Closed Sat, Sun; Mon-Thurs: 10:00am-7:00pm; Friday: 11:00am-8:00pm",
       "hours_parsed": {
         "Mon": {
-          "open": "09:00",
-          "close": "18:00"
+          "open": "10:00",
+          "close": "19:00"
         },
         "Tue": {
-          "open": "09:00",
-          "close": "18:00"
+          "open": "10:00",
+          "close": "19:00"
         },
         "Wed": {
-          "open": "09:00",
-          "close": "18:00"
+          "open": "10:00",
+          "close": "19:00"
         },
         "Thu": {
-          "open": "09:00",
-          "close": "18:00"
+          "open": "10:00",
+          "close": "19:00"
         },
         "Fri": {
-          "open": "09:00",
-          "close": "18:00"
+          "open": "11:00",
+          "close": "20:00"
         },
         "Sat": null,
         "Sun": null
@@ -458,29 +388,32 @@
       "phone": "(206) 684-7481",
       "neighborhood_bucket": "downtown-slu",
       "neighborhood_label": "Downtown / South Lake Union",
-      "hours_text": "Summer 2026 (June 22 - Sept. 6). Mon-Wed: 7am-9pm; Thurs-Fri: 7am-8pm; Closed Sat-Sun",
+      "hours_text": "Summer 2026. Mon-Wed: 7am-9pm; Thurs-Fri: 7am-8pm; Closed Sat-Sun; Mon-Fri: 9:00am-9:00pm; Sat: 9:00am-5:00pm; Sun: Closed",
       "hours_parsed": {
         "Mon": {
-          "open": "07:00",
+          "open": "09:00",
           "close": "21:00"
         },
         "Tue": {
-          "open": "07:00",
+          "open": "09:00",
           "close": "21:00"
         },
         "Wed": {
-          "open": "07:00",
+          "open": "09:00",
           "close": "21:00"
         },
         "Thu": {
-          "open": "07:00",
-          "close": "20:00"
+          "open": "09:00",
+          "close": "21:00"
         },
         "Fri": {
-          "open": "07:00",
-          "close": "20:00"
+          "open": "09:00",
+          "close": "21:00"
         },
-        "Sat": null,
+        "Sat": {
+          "open": "09:00",
+          "close": "17:00"
+        },
         "Sun": null
       },
       "amenities": [
@@ -523,31 +456,8 @@
       "phone": "(206) 684-7529",
       "neighborhood_bucket": "northeast-seattle",
       "neighborhood_label": "Northeast Seattle",
-      "hours_text": "Summer 2026: June 21 - Sept. 7. Mon-Fri: 9am-2pm; Sat & Sun: Closed, but available for rentals",
-      "hours_parsed": {
-        "Mon": {
-          "open": "09:00",
-          "close": "14:00"
-        },
-        "Tue": {
-          "open": "09:00",
-          "close": "14:00"
-        },
-        "Wed": {
-          "open": "09:00",
-          "close": "14:00"
-        },
-        "Thu": {
-          "open": "09:00",
-          "close": "14:00"
-        },
-        "Fri": {
-          "open": "09:00",
-          "close": "14:00"
-        },
-        "Sat": null,
-        "Sun": null
-      },
+      "hours_text": "Summer 2026: June 21 - Sept. 7. Mon/Wed/Fri: 2:00-7:00pm; Tues/Thurs: 9:00am-2:00pm; Sat/Sun: Closed",
+      "hours_parsed": null,
       "amenities": [],
       "has_teen_program": false,
       "has_drop_in_gym": false,
@@ -612,7 +522,7 @@
       "phone": "(206) 386-4235",
       "neighborhood_bucket": "queen-anne-magnolia",
       "neighborhood_label": "Queen Anne / Magnolia",
-      "hours_text": "Summer 2026: June 21 - Sept. 7. Mon-Fri: 9am-8pm; Sat: 9am-5pm; Closed Sunday",
+      "hours_text": "Year Round. Mon-Fri: 9am-8pm; Sat: 9am-5pm; Sun: Closed",
       "hours_parsed": {
         "Mon": {
           "open": "09:00",
@@ -666,31 +576,8 @@
       "phone": "(206) 684-7026",
       "neighborhood_bucket": "northeast-seattle",
       "neighborhood_label": "Northeast Seattle",
-      "hours_text": "Summer 2026: June 21 - Sept. 7. Mon-Fri: 8:30am-6:30pm; Closed Saturdays & Sundays",
-      "hours_parsed": {
-        "Mon": {
-          "open": "08:30",
-          "close": "18:30"
-        },
-        "Tue": {
-          "open": "08:30",
-          "close": "18:30"
-        },
-        "Wed": {
-          "open": "08:30",
-          "close": "18:30"
-        },
-        "Thu": {
-          "open": "08:30",
-          "close": "18:30"
-        },
-        "Fri": {
-          "open": "08:30",
-          "close": "18:30"
-        },
-        "Sat": null,
-        "Sun": null
-      },
+      "hours_text": "Summer 2026: June 21 - Sept. 7. Mon-Fri: 8:30am-6:30pm; Closed Saturdays & Sundays; Mon/Tues/Fri: 2-9pm; Wed/Thurs: 9am-8pm; Sat: 10am-5p; Sun: Closed",
+      "hours_parsed": null,
       "amenities": [
         "Basketball Court",
         "Indoor Toddler Playtime",
@@ -716,34 +603,8 @@
       "phone": "(206) 684-7522",
       "neighborhood_bucket": "north-seattle",
       "neighborhood_label": "North Seattle",
-      "hours_text": "Year-Round. Mon-Fri 8:30am-8:30pm; Sat 9am-5pm; Closed Sundays",
-      "hours_parsed": {
-        "Mon": {
-          "open": "08:30",
-          "close": "20:30"
-        },
-        "Tue": {
-          "open": "08:30",
-          "close": "20:30"
-        },
-        "Wed": {
-          "open": "08:30",
-          "close": "20:30"
-        },
-        "Thu": {
-          "open": "08:30",
-          "close": "20:30"
-        },
-        "Fri": {
-          "open": "08:30",
-          "close": "20:30"
-        },
-        "Sat": {
-          "open": "09:00",
-          "close": "17:00"
-        },
-        "Sun": null
-      },
+      "hours_text": "Year-Round. Mon-Fri 8:30am-8:30pm; Sat 9am-5pm; Sun: closed; Showers M-F 10:30am-4:30pm",
+      "hours_parsed": null,
       "amenities": [
         "Kitchen",
         "Gym",
@@ -822,29 +683,32 @@
       "phone": "(206) 684-4736",
       "neighborhood_bucket": "capitol-hill-central-district",
       "neighborhood_label": "Capitol Hill / Central District",
-      "hours_text": "Summer 2026 hours:. Mon: 8am-5pm; Tues-Fri: 845am-5pm; Sat/Sun: Closed",
+      "hours_text": "Summer 2026 hours:. Mon: 8am-5pm; Tues-Fri: 845am-5pm; Sat/Sun: Closed; Mon: 10am-6pm; Tues/Wed/Thurs: 130pm-8pm; Friday: 10am-6pm; Saturday: 9am-330pm; Sun: Closed",
       "hours_parsed": {
         "Mon": {
-          "open": "08:00",
-          "close": "17:00"
+          "open": "10:00",
+          "close": "18:00"
         },
         "Tue": {
-          "open": "08:45",
-          "close": "17:00"
+          "open": "13:30",
+          "close": "20:00"
         },
         "Wed": {
-          "open": "08:45",
-          "close": "17:00"
+          "open": "13:30",
+          "close": "20:00"
         },
         "Thu": {
-          "open": "08:45",
-          "close": "17:00"
+          "open": "13:30",
+          "close": "20:00"
         },
         "Fri": {
-          "open": "08:45",
-          "close": "17:00"
+          "open": "10:00",
+          "close": "18:00"
         },
-        "Sat": null,
+        "Sat": {
+          "open": "09:00",
+          "close": "15:30"
+        },
         "Sun": null
       },
       "amenities": [
@@ -929,30 +793,30 @@
       "phone": "(206) 386-4240",
       "neighborhood_bucket": "queen-anne-magnolia",
       "neighborhood_label": "Queen Anne / Magnolia",
-      "hours_text": "Mon-Thur: 8am-7pm; Fri: 8am-6pm; Sat: 8am-5pm; Closed Sundays",
+      "hours_text": "Fall 2026 (begins Sept 8). Mon-Thur: 8am-7pm; Fri: 8am-6pm; Sat: 8am-5pm; Closed Sundays; Mon-Fri: 9:00am-8:00pm; Sat: 9:00am-5:00pm; Sun: closed",
       "hours_parsed": {
         "Mon": {
-          "open": "08:00",
-          "close": "19:00"
+          "open": "09:00",
+          "close": "20:00"
         },
         "Tue": {
-          "open": "08:00",
-          "close": "19:00"
+          "open": "09:00",
+          "close": "20:00"
         },
         "Wed": {
-          "open": "08:00",
-          "close": "19:00"
+          "open": "09:00",
+          "close": "20:00"
         },
         "Thu": {
-          "open": "08:00",
-          "close": "19:00"
+          "open": "09:00",
+          "close": "20:00"
         },
         "Fri": {
-          "open": "08:00",
-          "close": "18:00"
+          "open": "09:00",
+          "close": "20:00"
         },
         "Sat": {
-          "open": "08:00",
+          "open": "09:00",
           "close": "17:00"
         },
         "Sun": null
@@ -985,26 +849,26 @@
       "phone": "(206) 386-1925",
       "neighborhood_bucket": "southeast-seattle",
       "neighborhood_label": "Southeast Seattle",
-      "hours_text": "Summer 2026: June 21 - Sept. 6. Mon, Wed: 7:30am-8:30pm; Tue, Thur: 7:30am-7:30pm; Fri: 7:30am-7pm, Teen Late Night (age 13-19) 7pm-12am; Sat: 8:30am-7:00pm, Teen Late Night (age 13-19) 7pm-12am; Sun: 9am-6pm",
+      "hours_text": "Summer 2026. Mon, Wed: 7:30am-8:30pm; Tue, Thur: 7:30am-7:30pm; Fri: 7:30am-7pm, Teen Late Night (age 13-19) 7pm-12am; Sat: 8:30am-7:00pm, Teen Late Night (age 13-19) 7pm-12am; Sun: 9am-6pm; Mon - Thur 8:30am - 9:00pm; Fri 8:30am - 7:00pm (Teen Late Nite 7:00 pm - Midnight); Sat 8:30 am - 7:00 pm (Teen Late Nite 7:00 pm - Midnight); Sun 9:00 am - 7:00 pm",
       "hours_parsed": {
         "Mon": {
-          "open": "07:30",
-          "close": "20:30"
+          "open": "08:30",
+          "close": "21:00"
         },
         "Wed": {
-          "open": "07:30",
-          "close": "20:30"
+          "open": "08:30",
+          "close": "21:00"
         },
         "Tue": {
-          "open": "07:30",
-          "close": "19:30"
+          "open": "08:30",
+          "close": "21:00"
         },
         "Thu": {
-          "open": "07:30",
-          "close": "19:30"
+          "open": "08:30",
+          "close": "21:00"
         },
         "Fri": {
-          "open": "07:30",
+          "open": "08:30",
           "close": "19:00"
         },
         "Sat": {
@@ -1013,7 +877,7 @@
         },
         "Sun": {
           "open": "09:00",
-          "close": "18:00"
+          "close": "19:00"
         }
       },
       "amenities": [
@@ -1045,7 +909,7 @@
       "phone": "(206) 386-1919",
       "neighborhood_bucket": "southeast-seattle",
       "neighborhood_label": "Southeast Seattle",
-      "hours_text": "Summer 2026: June 21-Sept. 6. Mon-Thurs: 9am-8pm; Fri: 9am-6:30pm, Teen Late Night 7pm-12am; Sat: 9am-6:30pm, Teen Late Night 7pm-12am; Closed Sundays",
+      "hours_text": "Summer 2026. Mon-Thurs: 9am-8pm; Fri: 9am-6:30pm, Teen Late Night 7pm-12am; Sat: 9am-6:30pm, Teen Late Night 7pm-12am; Closed Sundays; Mon-Thur 9:00am - 8:00pm; Fri 9:00am - 6:30pm (Teen Late Nite 7:00 pm - Midnight); Sat 9:00am - 6:30pm (Teen Late Nite 7:00 pm - Midnight); Sun Closed",
       "hours_parsed": {
         "Mon": {
           "open": "09:00",
@@ -1101,31 +965,8 @@
       "phone": "(206) 684-7534",
       "neighborhood_bucket": "northeast-seattle",
       "neighborhood_label": "Northeast Seattle",
-      "hours_text": "Summer 2026: June 21 - Sept. 7. Mon-Fri: 9am-5pm; Closed Saturdays & Sundays",
-      "hours_parsed": {
-        "Mon": {
-          "open": "09:00",
-          "close": "17:00"
-        },
-        "Tue": {
-          "open": "09:00",
-          "close": "17:00"
-        },
-        "Wed": {
-          "open": "09:00",
-          "close": "17:00"
-        },
-        "Thu": {
-          "open": "09:00",
-          "close": "17:00"
-        },
-        "Fri": {
-          "open": "09:00",
-          "close": "17:00"
-        },
-        "Sat": null,
-        "Sun": null
-      },
+      "hours_text": "Summer 2026: June 21 - Sept. 7. Mon-Fri: 9am-5pm; Closed Saturdays & Sundays; Mon-Thurs: 12:30-8pm; Fri: 12:30-7:30pm; Sat: 9am-5pm; Sun: Closed",
+      "hours_parsed": null,
       "amenities": [
         "Kitchen",
         "Gym",
@@ -1151,31 +992,31 @@
       "phone": "(206) 684-7451",
       "neighborhood_bucket": "georgetown-south-park",
       "neighborhood_label": "Georgetown / South Park",
-      "hours_text": "Summer 2026: June 22 - Sept. 6. Mon-Thurs: 7:30am-7:30pm; Fri: 7:30am-7pm, Teen Late Night 7pm-12am; Sat: 10:30am-7pm, Teen Late Night 7pm-12am; Closed Sundays",
+      "hours_text": "Summer 2026. Mon-Thurs: 7:30am-7:30pm; Fri: 7:30am-7pm, Teen Late Night 7pm-12am; Sat: 10:30am-7pm, Teen Late Night 7pm-12am; Closed Sundays; Mon-Thurs: 8:30am-8:30pm; Fri: 8:30am-6:30pm (Late Nite 7:00pm - Midnight); Sat: 8:30am-6:30pm (Late Nite 7:00pm - Midnight); Sun: Closed",
       "hours_parsed": {
         "Mon": {
-          "open": "07:30",
-          "close": "19:30"
+          "open": "08:30",
+          "close": "20:30"
         },
         "Tue": {
-          "open": "07:30",
-          "close": "19:30"
+          "open": "08:30",
+          "close": "20:30"
         },
         "Wed": {
-          "open": "07:30",
-          "close": "19:30"
+          "open": "08:30",
+          "close": "20:30"
         },
         "Thu": {
-          "open": "07:30",
-          "close": "19:30"
+          "open": "08:30",
+          "close": "20:30"
         },
         "Fri": {
-          "open": "07:30",
-          "close": "19:00"
+          "open": "08:30",
+          "close": "18:30"
         },
         "Sat": {
-          "open": "10:30",
-          "close": "19:00"
+          "open": "08:30",
+          "close": "18:30"
         },
         "Sun": null
       },
@@ -1205,7 +1046,7 @@
       "phone": "(206) 386-1921",
       "neighborhood_bucket": "other",
       "neighborhood_label": "Other Seattle",
-      "hours_text": "Year-Round. Mon-Thurs: 9am-7pm; Fri: 10am-7pm, Teen Late Night (age 13-19): 7pm-12am; Sat: Closed, Teen Late Night (age 13-19): 7pm-12am; Sun: Closed.",
+      "hours_text": "Fall 2026 (begins Sept 8). Mon-Thurs: 9am-7pm; Fri: 9:30am-6:30pm ( Teen Late Night: 7pm-12am); Sat: Closed ( Teen Late Night: 7pm-12am); Sun: Closed",
       "hours_parsed": {
         "Mon": {
           "open": "09:00",
@@ -1224,8 +1065,8 @@
           "close": "19:00"
         },
         "Fri": {
-          "open": "10:00",
-          "close": "19:00"
+          "open": "09:30",
+          "close": "18:30"
         },
         "Sat": null,
         "Sun": null
@@ -1256,31 +1097,31 @@
       "phone": "(206) 386-1245",
       "neighborhood_bucket": "downtown-slu",
       "neighborhood_label": "Downtown / South Lake Union",
-      "hours_text": "Summer 2026: June 21 - Sept. 7. Mon-Fri: 7:15 am - 6:45 pm; Sat: 8:30 am- 5:00 pm; Closed Sundays.",
+      "hours_text": "Summer 2026: June 21 - Sept. 7. Mon-Fri: 7:15 am - 6:45 pm; Sat: 8:30 am- 5:00 pm; Closed Sundays; Mon-Fri: 7:30am-7:00pm; Sat: 8:00am-4:30pm; Sun: closed",
       "hours_parsed": {
         "Mon": {
-          "open": "07:15",
-          "close": "18:45"
+          "open": "07:30",
+          "close": "19:00"
         },
         "Tue": {
-          "open": "07:15",
-          "close": "18:45"
+          "open": "07:30",
+          "close": "19:00"
         },
         "Wed": {
-          "open": "07:15",
-          "close": "18:45"
+          "open": "07:30",
+          "close": "19:00"
         },
         "Thu": {
-          "open": "07:15",
-          "close": "18:45"
+          "open": "07:30",
+          "close": "19:00"
         },
         "Fri": {
-          "open": "07:15",
-          "close": "18:45"
+          "open": "07:30",
+          "close": "19:00"
         },
         "Sat": {
-          "open": "08:30",
-          "close": "17:00"
+          "open": "08:00",
+          "close": "16:30"
         },
         "Sun": null
       },
