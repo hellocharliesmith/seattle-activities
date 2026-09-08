@@ -1,7 +1,7 @@
 {
   "source_url": "https://www.trumba.com/calendars/kalendaro.json?filterview=SeriesStoryTime",
   "calendar_page_url": "https://www.spl.org/programs-and-services/fun-and-games/story-time/story-time-calendar",
-  "scraped_at": "2026-09-07T18:22:30+00:00",
+  "scraped_at": "2026-09-08T17:26:56+00:00",
   "date_range": {
     "start": "2026-09-08",
     "end": "2026-10-17"
@@ -300,20 +300,6 @@
       "end_min": 720,
       "location_note": "Meeting Room",
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205955339"
-    },
-    {
-      "branch": "Ballard Branch",
-      "neighborhood_bucket": "ballard-fremont-greenwood",
-      "neighborhood_label": "Ballard / Fremont / Greenwood",
-      "age_group": "toddler",
-      "title": "Toddler Play Group",
-      "date": "2026-09-12",
-      "start_time": "10:00 AM",
-      "end_time": "1:00 PM",
-      "start_min": 600,
-      "end_min": 780,
-      "location_note": "Meeting Room",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205959251"
     },
     {
       "branch": "Central Library",
