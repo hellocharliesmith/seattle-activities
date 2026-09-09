@@ -1,6 +1,6 @@
 {
   "hub_url": "https://www.seattle.gov/parks/pools",
-  "scraped_at": "2026-09-08T16:52:14+00:00",
+  "scraped_at": "2026-09-09T16:54:59+00:00",
   "schedule_year": 2026,
   "pools": [
     {
@@ -101,19 +101,10 @@
       "address": "500 23rd Ave",
       "map_url": "https://www.google.com/maps/search/?api=1&query=500%2023rd%20Ave",
       "blurb": "Next to Garfield Community Center, this 25-yard indoor pool features a rope swing, low diving board, separate shallow section and sauna.",
-      "season_label": "Late Summer 2026: Aug. 31 - Sept. 5",
-      "season_note": "(Fall 2026 schedule below this one)",
+      "season_label": null,
+      "season_note": null,
       "schedule": null,
-      "schedule_pdfs": [
-        {
-          "label": "Fall Transition 2026 MEP 8-31 to 9-5",
-          "url": "https://www.seattle.gov/documents/Departments/ParksAndRecreation/Swimming/MedgarEvers/Fall%20Transition%202026%20MEP%208-31%20to%209-5.pdf"
-        },
-        {
-          "label": "Fall 2026 MEP At-A-Glance",
-          "url": "https://www.seattle.gov/documents/Departments/ParksAndRecreation/Swimming/MedgarEvers/Fall%202026%20MEP%20At-A-Glance_ADA.pdf"
-        }
-      ],
+      "schedule_pdfs": [],
       "holiday_note": null,
       "holiday_list": [],
       "holiday_schedule": null,
