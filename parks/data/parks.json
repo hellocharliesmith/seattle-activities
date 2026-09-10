@@ -1,6 +1,6 @@
 {
   "source": "Seattle GeoData (data-seattlecitygis.opendata.arcgis.com), Seattle Parks & Recreation layers",
-  "scraped_at": "2026-09-09T17:08:08+00:00",
+  "scraped_at": "2026-09-10T16:58:39+00:00",
   "amenity_layer_errors": [],
   "parks": [
     {
@@ -1207,23 +1207,6 @@
       "has_picnic": true,
       "has_restroom": false,
       "has_sport_court": true,
-      "has_splashpad": false,
-      "has_offleash": false
-    },
-    {
-      "slug": "cesar-chavez-park",
-      "name": "Cesar Chavez Park",
-      "address": "700 S Cloverdale St",
-      "map_url": "https://www.google.com/maps/search/?api=1&query=700%20S%20Cloverdale%20St",
-      "seattle_url": null,
-      "lat": 47.5266834631913,
-      "lon": -122.3253157793849,
-      "neighborhood_bucket": "georgetown-south-park",
-      "neighborhood_label": "Georgetown / South Park",
-      "has_playground": false,
-      "has_picnic": false,
-      "has_restroom": false,
-      "has_sport_court": false,
       "has_splashpad": false,
       "has_offleash": false
     },
@@ -5623,6 +5606,23 @@
       "lon": -122.4097173543305,
       "neighborhood_bucket": "queen-anne-magnolia",
       "neighborhood_label": "Queen Anne / Magnolia",
+      "has_playground": false,
+      "has_picnic": false,
+      "has_restroom": false,
+      "has_sport_court": false,
+      "has_splashpad": false,
+      "has_offleash": false
+    },
+    {
+      "slug": "parque-libertad",
+      "name": "Parque Libertad",
+      "address": "700 S Cloverdale St",
+      "map_url": "https://www.google.com/maps/search/?api=1&query=700%20S%20Cloverdale%20St",
+      "seattle_url": null,
+      "lat": 47.5266834631913,
+      "lon": -122.3253157793849,
+      "neighborhood_bucket": "georgetown-south-park",
+      "neighborhood_label": "Georgetown / South Park",
       "has_playground": false,
       "has_picnic": false,
       "has_restroom": false,
