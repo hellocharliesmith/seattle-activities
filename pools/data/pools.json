@@ -1,16 +1,16 @@
 {
   "hub_url": "https://www.seattle.gov/parks/pools",
-  "scraped_at": "2026-10-20T17:34:08+00:00",
+  "scraped_at": "2026-10-21T17:42:45+00:00",
   "schedule_year": 2026,
   "pools": [
     {
       "slug": "ballard-pool",
-      "name": "Ballard Pool Adjacent to Ballard High School. Features a 25-yard indoor pool with water slide, low dive, rope swing and warm water spa.",
+      "name": "Ballard Pool",
       "kind": "indoor",
       "url": "https://www.seattle.gov/parks/pools/ballard-pool",
-      "address": "1471 NW 67th Street",
-      "map_url": "https://www.google.com/maps/search/?api=1&query=1471%20NW%2067th%20Street",
-      "blurb": "Adjacent to Ballard High School. Features a 25-yard indoor pool with water slide, low dive, rope swing and warm water spa.",
+      "address": null,
+      "map_url": null,
+      "blurb": null,
       "season_label": null,
       "season_note": null,
       "schedule": null,
@@ -18,11 +18,12 @@
       "holiday_note": null,
       "holiday_list": [],
       "holiday_schedule": null,
-      "closure": null
+      "closure": null,
+      "error": "The read operation timed out"
     },
     {
       "slug": "colman-pool",
-      "name": "Colman Pool A 50-meter, 8-lane Olympic sized heated saltwater pool in West Seattle\u2019s Lincoln Park. Summer only.",
+      "name": "Colman Pool",
       "kind": "outdoor",
       "url": "https://www.seattle.gov/parks/pools/colman-pool",
       "address": "8603 Fauntleroy Wy S",
@@ -39,7 +40,7 @@
     },
     {
       "slug": "evans-pool",
-      "name": "Evans Pool A 25-yard indoor lap pool on the east shore of Green Lake, with sauna. Same building as the community center.",
+      "name": "Evans Pool",
       "kind": "indoor",
       "url": "https://www.seattle.gov/parks/pools/evans-pool",
       "address": "7201 E GreenLk Dr N",
@@ -56,7 +57,7 @@
     },
     {
       "slug": "helene-madison-pool",
-      "name": "Helene Madison Pool A 25-yard indoor pool in the Haller Lake/Bitter Lake neighborhood of NE Seattle, with a shallow section and two diving boards.",
+      "name": "Helene Madison Pool",
       "kind": "indoor",
       "url": "https://www.seattle.gov/parks/pools/helene-madison-pool",
       "address": "13401 Meridian Ave N",
@@ -73,7 +74,7 @@
     },
     {
       "slug": "meadowbrook-pool",
-      "name": "Meadowbrook Pool Just east of Lake City Way in NE Seattle, this 25-yard indoor pool features a rope swing, high dive, water fitness equipment and sauna.",
+      "name": "Meadowbrook Pool",
       "kind": "indoor",
       "url": "https://www.seattle.gov/parks/pools/meadowbrook-pool",
       "address": "10515 35th Ave NE",
@@ -90,7 +91,7 @@
     },
     {
       "slug": "medgar-evers-pool",
-      "name": "Medgar Evers Pool Next to Garfield Community Center, this 25-yard indoor pool features a rope swing, low diving board, separate shallow section and sauna.",
+      "name": "Medgar Evers Pool",
       "kind": "indoor",
       "url": "https://www.seattle.gov/parks/pools/medgar-evers-pool",
       "address": "500 23rd Ave",
@@ -107,7 +108,7 @@
     },
     {
       "slug": "mounger-pool",
-      "name": "Mounger Pool In the Magnolia neighborhood. Two outdoor pools: one w/50-foot corkscrew slide; the other shallow & great for kids. Concessionaire too! Summer only.",
+      "name": "Mounger Pool",
       "kind": "outdoor",
       "url": "https://www.seattle.gov/parks/pools/mounger-pool",
       "address": "2535 32nd Ave West",
@@ -124,7 +125,7 @@
     },
     {
       "slug": "queen-anne-pool",
-      "name": "Queen Anne Pool CLOSED UNTIL FURTHER NOTICE. Queen Anne's 6-lane, 25-yard indoor pool has built-in steps for easy entry, 1m and 3m diving boards, rope swing and a sauna.",
+      "name": "Queen Anne Pool",
       "kind": "indoor",
       "url": "https://www.seattle.gov/parks/pools/queen-anne-pool",
       "address": "1920 1st Ave West",
@@ -144,7 +145,7 @@
     },
     {
       "slug": "rainier-beach-pool",
-      "name": "Rainier Beach Pool 2 indoor pools: one w/ huge slide, spray features, lazy river, vortex and gradual entry. The other is a 25-yard lap pool w/ diving board. Sauna/hot tub onsite.",
+      "name": "Rainier Beach Pool",
       "kind": "indoor",
       "url": "https://www.seattle.gov/parks/pools/rainier-beach-pool",
       "address": "8825 Rainier Ave S",
@@ -161,7 +162,7 @@
     },
     {
       "slug": "southwest-pool",
-      "name": "Southwest Pool A 25-yard indoor pool in the Roxhill neighborhood of West Seattle. High and low diving boards, spa & sauna, and complimentary exercise machines.",
+      "name": "Southwest Pool",
       "kind": "indoor",
       "url": "https://www.seattle.gov/parks/pools/southwest-pool",
       "address": "2801 SW Thistle St",
