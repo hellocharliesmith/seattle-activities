@@ -1,6 +1,6 @@
 {
   "hub_url": "https://www.seattle.gov/parks/pools",
-  "scraped_at": "2026-10-26T18:55:16+00:00",
+  "scraped_at": "2026-10-27T18:21:46+00:00",
   "schedule_year": 2026,
   "pools": [
     {
@@ -42,9 +42,9 @@
       "name": "Evans Pool A 25-yard indoor lap pool on the east shore of Green Lake, with sauna. Same building as the community center.",
       "kind": "indoor",
       "url": "https://www.seattle.gov/parks/pools/evans-pool",
-      "address": null,
-      "map_url": null,
-      "blurb": null,
+      "address": "7201 E GreenLk Dr N",
+      "map_url": "https://www.google.com/maps/search/?api=1&query=7201%20E%20GreenLk%20Dr%20N",
+      "blurb": "A 25-yard indoor lap pool on the east shore of Green Lake, with sauna. Same building as the community center.",
       "season_label": null,
       "season_note": null,
       "schedule": null,
@@ -52,17 +52,16 @@
       "holiday_note": null,
       "holiday_list": [],
       "holiday_schedule": null,
-      "closure": null,
-      "error": "The read operation timed out"
+      "closure": null
     },
     {
       "slug": "helene-madison-pool",
       "name": "Helene Madison Pool A 25-yard indoor pool in the Haller Lake/Bitter Lake neighborhood of NE Seattle, with a shallow section and two diving boards.",
       "kind": "indoor",
       "url": "https://www.seattle.gov/parks/pools/helene-madison-pool",
-      "address": null,
-      "map_url": null,
-      "blurb": null,
+      "address": "13401 Meridian Ave N",
+      "map_url": "https://www.google.com/maps/search/?api=1&query=13401%20Meridian%20Ave%20N",
+      "blurb": "A 25-yard indoor pool in the Haller Lake/Bitter Lake neighborhood of NE Seattle, with a shallow section and two diving boards.",
       "season_label": null,
       "season_note": null,
       "schedule": null,
@@ -70,17 +69,16 @@
       "holiday_note": null,
       "holiday_list": [],
       "holiday_schedule": null,
-      "closure": null,
-      "error": "The read operation timed out"
+      "closure": null
     },
     {
       "slug": "meadowbrook-pool",
       "name": "Meadowbrook Pool Just east of Lake City Way in NE Seattle, this 25-yard indoor pool features a rope swing, high dive, water fitness equipment and sauna.",
       "kind": "indoor",
       "url": "https://www.seattle.gov/parks/pools/meadowbrook-pool",
-      "address": null,
-      "map_url": null,
-      "blurb": null,
+      "address": "10515 35th Ave NE",
+      "map_url": "https://www.google.com/maps/search/?api=1&query=10515%2035th%20Ave%20NE",
+      "blurb": "Just east of Lake City Way in NE Seattle, this 25-yard indoor pool features a rope swing, high dive, water fitness equipment and sauna.",
       "season_label": null,
       "season_note": null,
       "schedule": null,
@@ -88,8 +86,7 @@
       "holiday_note": null,
       "holiday_list": [],
       "holiday_schedule": null,
-      "closure": null,
-      "error": "The read operation timed out"
+      "closure": null
     },
     {
       "slug": "medgar-evers-pool",
