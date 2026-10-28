@@ -1,124 +1,12 @@
 {
   "source_url": "https://www.trumba.com/calendars/kalendaro.json?filterview=SeriesStoryTime",
   "calendar_page_url": "https://www.spl.org/programs-and-services/fun-and-games/story-time/story-time-calendar",
-  "scraped_at": "2026-10-27T18:55:41+00:00",
+  "scraped_at": "2026-10-28T19:04:21+00:00",
   "date_range": {
-    "start": "2026-10-27",
+    "start": "2026-10-28",
     "end": "2026-12-09"
   },
   "events": [
-    {
-      "branch": "Queen Anne Branch",
-      "neighborhood_bucket": "queen-anne-magnolia",
-      "neighborhood_label": "Queen Anne / Magnolia",
-      "age_group": "family",
-      "title": "Family Story Time",
-      "date": "2026-10-27",
-      "start_time": "10:15 AM",
-      "end_time": "10:45 AM",
-      "start_min": 615,
-      "end_min": 645,
-      "location_note": "Meeting Room",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205890083"
-    },
-    {
-      "branch": "Northeast Branch",
-      "neighborhood_bucket": "northeast-seattle",
-      "neighborhood_label": "Northeast Seattle",
-      "age_group": "family",
-      "title": "Family Story Time",
-      "date": "2026-10-27",
-      "start_time": "10:30 AM",
-      "end_time": "11:30 AM",
-      "start_min": 630,
-      "end_min": 690,
-      "location_note": "Children's Area",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205891459"
-    },
-    {
-      "branch": "Lake City Branch",
-      "neighborhood_bucket": "north-seattle",
-      "neighborhood_label": "North Seattle",
-      "age_group": "toddler",
-      "title": "Kaleidoscope Play & Learn / Caleidoscopio Juega y Aprende",
-      "date": "2026-10-27",
-      "start_time": "10:30 AM",
-      "end_time": "12:00 PM",
-      "start_min": 630,
-      "end_min": 720,
-      "location_note": "",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205925913"
-    },
-    {
-      "branch": "Beacon Hill Branch",
-      "neighborhood_bucket": "southeast-seattle",
-      "neighborhood_label": "Southeast Seattle",
-      "age_group": "toddler",
-      "title": "Kaleidoscope Play & Learn / \u4e07\u82b1\u7b52\u6e38\u620f\u548c\u5b66\u4e60 / \u842c\u82b1\u7b52\u904a\u6232\u548c\u5b78\u7fd2",
-      "date": "2026-10-27",
-      "start_time": "10:30 AM",
-      "end_time": "12:00 PM",
-      "start_min": 630,
-      "end_min": 720,
-      "location_note": "Meeting Room",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205955320"
-    },
-    {
-      "branch": "South Park Branch",
-      "neighborhood_bucket": "georgetown-south-park",
-      "neighborhood_label": "Georgetown / South Park",
-      "age_group": "preschool",
-      "title": "Preschool Story Time",
-      "date": "2026-10-27",
-      "start_time": "10:30 AM",
-      "end_time": "11:00 AM",
-      "start_min": 630,
-      "end_min": 660,
-      "location_note": "",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205957558"
-    },
-    {
-      "branch": "Central Library",
-      "neighborhood_bucket": "downtown-slu",
-      "neighborhood_label": "Downtown / South Lake Union",
-      "age_group": "baby",
-      "title": "Baby Story Time",
-      "date": "2026-10-27",
-      "start_time": "12:30 PM",
-      "end_time": "1:00 PM",
-      "start_min": 750,
-      "end_min": 780,
-      "location_note": "Level 1 - Story Hour Room in Children\u2019s Center",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205760175"
-    },
-    {
-      "branch": "Rainier Beach Branch",
-      "neighborhood_bucket": "southeast-seattle",
-      "neighborhood_label": "Southeast Seattle",
-      "age_group": "baby",
-      "title": "Baby Story Time",
-      "date": "2026-10-27",
-      "start_time": "12:30 PM",
-      "end_time": "1:30 PM",
-      "start_min": 750,
-      "end_min": 810,
-      "location_note": "Meeting Room",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205760203"
-    },
-    {
-      "branch": "Magnolia Branch",
-      "neighborhood_bucket": "queen-anne-magnolia",
-      "neighborhood_label": "Queen Anne / Magnolia",
-      "age_group": "toddler",
-      "title": "Toddler Play Group",
-      "date": "2026-10-27",
-      "start_time": "3:00 PM",
-      "end_time": "5:00 PM",
-      "start_min": 900,
-      "end_min": 1020,
-      "location_note": "Meeting Room",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205965725"
-    },
     {
       "branch": "South Park Branch",
       "neighborhood_bucket": "georgetown-south-park",
@@ -1590,20 +1478,6 @@
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205891439"
     },
     {
-      "branch": "NewHolly Branch",
-      "neighborhood_bucket": "southeast-seattle",
-      "neighborhood_label": "Southeast Seattle",
-      "age_group": "baby",
-      "title": "Baby Story Time",
-      "date": "2026-11-17",
-      "start_time": "12:30 PM",
-      "end_time": "1:30 PM",
-      "start_min": 750,
-      "end_min": 810,
-      "location_note": "Meeting Room",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205761141"
-    },
-    {
       "branch": "Central Library",
       "neighborhood_bucket": "downtown-slu",
       "neighborhood_label": "Downtown / South Lake Union",
@@ -1616,6 +1490,20 @@
       "end_min": 780,
       "location_note": "Level 1 - Story Hour Room in Children\u2019s Center",
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D209120953"
+    },
+    {
+      "branch": "NewHolly Branch",
+      "neighborhood_bucket": "southeast-seattle",
+      "neighborhood_label": "Southeast Seattle",
+      "age_group": "baby",
+      "title": "Baby Story Time",
+      "date": "2026-11-17",
+      "start_time": "12:30 PM",
+      "end_time": "1:30 PM",
+      "start_min": 750,
+      "end_min": 810,
+      "location_note": "Meeting Room",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205761141"
     },
     {
       "branch": "Magnolia Branch",
@@ -1660,20 +1548,6 @@
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205883828"
     },
     {
-      "branch": "Greenwood Branch",
-      "neighborhood_bucket": "ballard-fremont-greenwood",
-      "neighborhood_label": "Ballard / Fremont / Greenwood",
-      "age_group": "family",
-      "title": "Family Story Time",
-      "date": "2026-11-18",
-      "start_time": "10:30 AM",
-      "end_time": "11:30 AM",
-      "start_min": 630,
-      "end_min": 690,
-      "location_note": "Meeting Room",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205888534"
-    },
-    {
       "branch": "Douglass-Truth Branch",
       "neighborhood_bucket": "capitol-hill-central-district",
       "neighborhood_label": "Capitol Hill / Central District",
@@ -1686,6 +1560,20 @@
       "end_min": 660,
       "location_note": "Meeting Room",
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205889434"
+    },
+    {
+      "branch": "Greenwood Branch",
+      "neighborhood_bucket": "ballard-fremont-greenwood",
+      "neighborhood_label": "Ballard / Fremont / Greenwood",
+      "age_group": "family",
+      "title": "Family Story Time",
+      "date": "2026-11-18",
+      "start_time": "10:30 AM",
+      "end_time": "11:30 AM",
+      "start_min": 630,
+      "end_min": 690,
+      "location_note": "Meeting Room",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205888534"
     },
     {
       "branch": "Northgate Branch",
@@ -2066,20 +1954,6 @@
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205891440"
     },
     {
-      "branch": "NewHolly Branch",
-      "neighborhood_bucket": "southeast-seattle",
-      "neighborhood_label": "Southeast Seattle",
-      "age_group": "baby",
-      "title": "Baby Story Time",
-      "date": "2026-11-24",
-      "start_time": "12:30 PM",
-      "end_time": "1:30 PM",
-      "start_min": 750,
-      "end_min": 810,
-      "location_note": "Meeting Room",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205761142"
-    },
-    {
       "branch": "Central Library",
       "neighborhood_bucket": "downtown-slu",
       "neighborhood_label": "Downtown / South Lake Union",
@@ -2092,6 +1966,20 @@
       "end_min": 780,
       "location_note": "Level 1 - Story Hour Room in Children\u2019s Center",
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D209120954"
+    },
+    {
+      "branch": "NewHolly Branch",
+      "neighborhood_bucket": "southeast-seattle",
+      "neighborhood_label": "Southeast Seattle",
+      "age_group": "baby",
+      "title": "Baby Story Time",
+      "date": "2026-11-24",
+      "start_time": "12:30 PM",
+      "end_time": "1:30 PM",
+      "start_min": 750,
+      "end_min": 810,
+      "location_note": "Meeting Room",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205761142"
     },
     {
       "branch": "Magnolia Branch",
@@ -2318,6 +2206,20 @@
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D212259138"
     },
     {
+      "branch": "Beacon Hill Branch",
+      "neighborhood_bucket": "southeast-seattle",
+      "neighborhood_label": "Southeast Seattle",
+      "age_group": "toddler",
+      "title": "Kaleidoscope Play & Learn / \u4e07\u82b1\u7b52\u6e38\u620f\u548c\u5b66\u4e60 / \u842c\u82b1\u7b52\u904a\u6232\u548c\u5b78\u7fd2",
+      "date": "2026-12-01",
+      "start_time": "10:30 AM",
+      "end_time": "12:00 PM",
+      "start_min": 630,
+      "end_min": 720,
+      "location_note": "Meeting Room",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D212265791"
+    },
+    {
       "branch": "Rainier Beach Branch",
       "neighborhood_bucket": "southeast-seattle",
       "neighborhood_label": "Southeast Seattle",
@@ -2332,20 +2234,6 @@
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205891441"
     },
     {
-      "branch": "Central Library",
-      "neighborhood_bucket": "downtown-slu",
-      "neighborhood_label": "Downtown / South Lake Union",
-      "age_group": "baby",
-      "title": "Baby Story Time",
-      "date": "2026-12-01",
-      "start_time": "12:30 PM",
-      "end_time": "1:00 PM",
-      "start_min": 750,
-      "end_min": 780,
-      "location_note": "Level 1 - Story Hour Room in Children\u2019s Center",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D211889762"
-    },
-    {
       "branch": "NewHolly Branch",
       "neighborhood_bucket": "southeast-seattle",
       "neighborhood_label": "Southeast Seattle",
@@ -2358,6 +2246,20 @@
       "end_min": 810,
       "location_note": "Meeting Room",
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205761143"
+    },
+    {
+      "branch": "Central Library",
+      "neighborhood_bucket": "downtown-slu",
+      "neighborhood_label": "Downtown / South Lake Union",
+      "age_group": "baby",
+      "title": "Baby Story Time",
+      "date": "2026-12-01",
+      "start_time": "12:30 PM",
+      "end_time": "1:00 PM",
+      "start_min": 750,
+      "end_min": 780,
+      "location_note": "Level 1 - Story Hour Room in Children\u2019s Center",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D211889762"
     },
     {
       "branch": "South Park Branch",
@@ -2388,20 +2290,6 @@
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D211897283"
     },
     {
-      "branch": "Douglass-Truth Branch",
-      "neighborhood_bucket": "capitol-hill-central-district",
-      "neighborhood_label": "Capitol Hill / Central District",
-      "age_group": "family",
-      "title": "Family Story Time",
-      "date": "2026-12-02",
-      "start_time": "10:30 AM",
-      "end_time": "11:00 AM",
-      "start_min": 630,
-      "end_min": 660,
-      "location_note": "Meeting Room",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D212186967"
-    },
-    {
       "branch": "Magnolia Branch",
       "neighborhood_bucket": "queen-anne-magnolia",
       "neighborhood_label": "Queen Anne / Magnolia",
@@ -2428,6 +2316,20 @@
       "end_min": 690,
       "location_note": "Meeting Room",
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D212179579"
+    },
+    {
+      "branch": "Douglass-Truth Branch",
+      "neighborhood_bucket": "capitol-hill-central-district",
+      "neighborhood_label": "Capitol Hill / Central District",
+      "age_group": "family",
+      "title": "Family Story Time",
+      "date": "2026-12-02",
+      "start_time": "10:30 AM",
+      "end_time": "11:00 AM",
+      "start_min": 630,
+      "end_min": 660,
+      "location_note": "Meeting Room",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D212186967"
     },
     {
       "branch": "Northgate Branch",
@@ -2556,6 +2458,34 @@
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D212259220"
     },
     {
+      "branch": "NewHolly Branch",
+      "neighborhood_bucket": "southeast-seattle",
+      "neighborhood_label": "Southeast Seattle",
+      "age_group": "toddler",
+      "title": "Kaleidoscope Play and Learn / Ku ciyaarista iyo barashada qalabka Kaleidoscope-ka",
+      "date": "2026-12-04",
+      "start_time": "10:30 AM",
+      "end_time": "12:00 PM",
+      "start_min": 630,
+      "end_min": 720,
+      "location_note": "Meeting Room",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D212325929"
+    },
+    {
+      "branch": "Greenwood Branch",
+      "neighborhood_bucket": "ballard-fremont-greenwood",
+      "neighborhood_label": "Ballard / Fremont / Greenwood",
+      "age_group": "family",
+      "title": "La Hora de Cuentos Familiares",
+      "date": "2026-12-04",
+      "start_time": "11:15 AM",
+      "end_time": "12:00 PM",
+      "start_min": 675,
+      "end_min": 720,
+      "location_note": "Meeting Room",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D212325944"
+    },
+    {
       "branch": "Broadview Branch",
       "neighborhood_bucket": "north-seattle",
       "neighborhood_label": "North Seattle",
@@ -2568,6 +2498,20 @@
       "end_min": 780,
       "location_note": "Meeting Room",
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D211893339"
+    },
+    {
+      "branch": "South Park Branch",
+      "neighborhood_bucket": "georgetown-south-park",
+      "neighborhood_label": "Georgetown / South Park",
+      "age_group": "family",
+      "title": "La Hora de Cuentos Familiares",
+      "date": "2026-12-05",
+      "start_time": "10:00 AM",
+      "end_time": "10:30 AM",
+      "start_min": 600,
+      "end_min": 630,
+      "location_note": "\u00c1rea para ni\u00f1os",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D212326060"
     },
     {
       "branch": "Lake City Branch",
@@ -2596,6 +2540,34 @@
       "end_min": 660,
       "location_note": "Meeting Room",
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D212183915"
+    },
+    {
+      "branch": "Central Library",
+      "neighborhood_bucket": "downtown-slu",
+      "neighborhood_label": "Downtown / South Lake Union",
+      "age_group": "family",
+      "title": "La Hora de Cuentos Familiares",
+      "date": "2026-12-05",
+      "start_time": "10:30 AM",
+      "end_time": "11:00 AM",
+      "start_min": 630,
+      "end_min": 660,
+      "location_note": "\u00c1rea para ni\u00f1os",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D212326532"
+    },
+    {
+      "branch": "Beacon Hill Branch",
+      "neighborhood_bucket": "southeast-seattle",
+      "neighborhood_label": "Southeast Seattle",
+      "age_group": "family",
+      "title": "La Hora de Cuentos Familiares",
+      "date": "2026-12-05",
+      "start_time": "11:30 AM",
+      "end_time": "12:00 PM",
+      "start_min": 690,
+      "end_min": 720,
+      "location_note": "\u00c1rea para ni\u00f1os",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D212326010"
     },
     {
       "branch": "Delridge Branch",
@@ -2668,6 +2640,20 @@
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D212259139"
     },
     {
+      "branch": "Beacon Hill Branch",
+      "neighborhood_bucket": "southeast-seattle",
+      "neighborhood_label": "Southeast Seattle",
+      "age_group": "toddler",
+      "title": "Kaleidoscope Play & Learn / \u4e07\u82b1\u7b52\u6e38\u620f\u548c\u5b66\u4e60 / \u842c\u82b1\u7b52\u904a\u6232\u548c\u5b78\u7fd2",
+      "date": "2026-12-08",
+      "start_time": "10:30 AM",
+      "end_time": "12:00 PM",
+      "start_min": 630,
+      "end_min": 720,
+      "location_note": "Meeting Room",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D212265792"
+    },
+    {
       "branch": "Rainier Beach Branch",
       "neighborhood_bucket": "southeast-seattle",
       "neighborhood_label": "Southeast Seattle",
@@ -2682,20 +2668,6 @@
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205891442"
     },
     {
-      "branch": "NewHolly Branch",
-      "neighborhood_bucket": "southeast-seattle",
-      "neighborhood_label": "Southeast Seattle",
-      "age_group": "baby",
-      "title": "Baby Story Time",
-      "date": "2026-12-08",
-      "start_time": "12:30 PM",
-      "end_time": "1:30 PM",
-      "start_min": 750,
-      "end_min": 810,
-      "location_note": "Meeting Room",
-      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205761144"
-    },
-    {
       "branch": "Central Library",
       "neighborhood_bucket": "downtown-slu",
       "neighborhood_label": "Downtown / South Lake Union",
@@ -2708,6 +2680,20 @@
       "end_min": 780,
       "location_note": "Level 1 - Story Hour Room in Children\u2019s Center",
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D211889763"
+    },
+    {
+      "branch": "NewHolly Branch",
+      "neighborhood_bucket": "southeast-seattle",
+      "neighborhood_label": "Southeast Seattle",
+      "age_group": "baby",
+      "title": "Baby Story Time",
+      "date": "2026-12-08",
+      "start_time": "12:30 PM",
+      "end_time": "1:30 PM",
+      "start_min": 750,
+      "end_min": 810,
+      "location_note": "Meeting Room",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D205761144"
     },
     {
       "branch": "South Park Branch",
@@ -2736,6 +2722,20 @@
       "end_min": 660,
       "location_note": "Meeting Room / Sala de reuniones",
       "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D211897284"
+    },
+    {
+      "branch": "Greenwood Branch",
+      "neighborhood_bucket": "ballard-fremont-greenwood",
+      "neighborhood_label": "Ballard / Fremont / Greenwood",
+      "age_group": "family",
+      "title": "Family Story Time",
+      "date": "2026-12-09",
+      "start_time": "10:30 AM",
+      "end_time": "11:30 AM",
+      "start_min": 630,
+      "end_min": 690,
+      "location_note": "Meeting Room",
+      "url": "https://www.spl.org/event-calendar?trumbaEmbed=view%3Devent%26eventid%3D212179580"
     }
   ]
 }
