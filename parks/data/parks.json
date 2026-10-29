@@ -1,7 +1,10 @@
 {
   "source": "Seattle GeoData (data-seattlecitygis.opendata.arcgis.com), Seattle Parks & Recreation layers",
-  "scraped_at": "2026-10-28T18:48:32+00:00",
-  "amenity_layer_errors": [],
+  "scraped_at": "2026-10-29T18:57:27+00:00",
+  "amenity_layer_errors": [
+    "https://www.seattle.gov/parks/parks/parks-a-d: The read operation timed out",
+    "https://www.seattle.gov/parks/parks/parks-i-l: The read operation timed out"
+  ],
   "parks": [
     {
       "slug": "1125-harvard-ave-e",
