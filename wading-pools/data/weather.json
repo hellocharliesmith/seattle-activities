@@ -1,77 +1,77 @@
 {
-  "date": "2026-11-04",
-  "condition": "Light Rain",
-  "icon": "rain",
-  "high_f": 54,
-  "low_f": 38,
+  "date": "2026-11-05",
+  "condition": "Cloudy",
+  "icon": "cloudy",
+  "high_f": 56,
+  "low_f": 47,
   "hourly": [
     {
       "hour": 0,
-      "temp_f": 42
-    },
-    {
-      "hour": 1,
-      "temp_f": 41
-    },
-    {
-      "hour": 2,
-      "temp_f": 40
-    },
-    {
-      "hour": 3,
-      "temp_f": 40
-    },
-    {
-      "hour": 4,
-      "temp_f": 39
-    },
-    {
-      "hour": 5,
-      "temp_f": 40
-    },
-    {
-      "hour": 6,
-      "temp_f": 40
-    },
-    {
-      "hour": 7,
-      "temp_f": 38
-    },
-    {
-      "hour": 8,
-      "temp_f": 41
-    },
-    {
-      "hour": 9,
-      "temp_f": 45
-    },
-    {
-      "hour": 10,
-      "temp_f": 47
-    },
-    {
-      "hour": 11,
       "temp_f": 50
     },
     {
+      "hour": 1,
+      "temp_f": 50
+    },
+    {
+      "hour": 2,
+      "temp_f": 49
+    },
+    {
+      "hour": 3,
+      "temp_f": 48
+    },
+    {
+      "hour": 4,
+      "temp_f": 48
+    },
+    {
+      "hour": 5,
+      "temp_f": 48
+    },
+    {
+      "hour": 6,
+      "temp_f": 48
+    },
+    {
+      "hour": 7,
+      "temp_f": 48
+    },
+    {
+      "hour": 8,
+      "temp_f": 49
+    },
+    {
+      "hour": 9,
+      "temp_f": 51
+    },
+    {
+      "hour": 10,
+      "temp_f": 51
+    },
+    {
+      "hour": 11,
+      "temp_f": 54
+    },
+    {
       "hour": 12,
-      "temp_f": 52
+      "temp_f": 55
     },
     {
       "hour": 13,
-      "temp_f": 54
+      "temp_f": 55
     },
     {
       "hour": 14,
-      "temp_f": 54
+      "temp_f": 56
     },
     {
       "hour": 15,
-      "temp_f": 54
+      "temp_f": 55
     },
     {
       "hour": 16,
-      "temp_f": 52
+      "temp_f": 53
     },
     {
       "hour": 17,
@@ -79,57 +79,57 @@
     },
     {
       "hour": 18,
-      "temp_f": 50
+      "temp_f": 49
     },
     {
       "hour": 19,
-      "temp_f": 50
+      "temp_f": 49
     },
     {
       "hour": 20,
-      "temp_f": 50
+      "temp_f": 48
     },
     {
       "hour": 21,
-      "temp_f": 49
+      "temp_f": 47
     },
     {
       "hour": 22,
-      "temp_f": 49
+      "temp_f": 47
     },
     {
       "hour": 23,
-      "temp_f": 49
+      "temp_f": 47
     }
   ],
   "checkpoints": [
     {
       "hour": 8,
       "label": "8 AM",
-      "temp_f": 41,
+      "temp_f": 49,
       "uv_index": 0,
-      "rain_chance": 1
+      "rain_chance": 3
     },
     {
       "hour": 12,
       "label": "12 PM",
-      "temp_f": 52,
+      "temp_f": 55,
       "uv_index": 2,
       "rain_chance": 1
     },
     {
       "hour": 16,
       "label": "4 PM",
-      "temp_f": 52,
-      "uv_index": 0,
-      "rain_chance": 3
+      "temp_f": 53,
+      "uv_index": 1,
+      "rain_chance": 2
     },
     {
       "hour": 20,
       "label": "8 PM",
-      "temp_f": 50,
+      "temp_f": 48,
       "uv_index": 0,
-      "rain_chance": 47
+      "rain_chance": 3
     }
   ]
 }
