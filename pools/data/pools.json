@@ -1,6 +1,6 @@
 {
   "hub_url": "https://www.seattle.gov/parks/pools",
-  "scraped_at": "2026-11-06T19:44:35+00:00",
+  "scraped_at": "2026-11-07T17:52:25+00:00",
   "schedule_year": 2026,
   "pools": [
     {
@@ -8,9 +8,9 @@
       "name": "Ballard Pool Adjacent to Ballard High School. Features a 25-yard indoor pool with water slide, low dive, rope swing and warm water spa.",
       "kind": "indoor",
       "url": "https://www.seattle.gov/parks/pools/ballard-pool",
-      "address": null,
-      "map_url": null,
-      "blurb": null,
+      "address": "1471 NW 67th Street",
+      "map_url": "https://www.google.com/maps/search/?api=1&query=1471%20NW%2067th%20Street",
+      "blurb": "Adjacent to Ballard High School. Features a 25-yard indoor pool with water slide, low dive, rope swing and warm water spa.",
       "season_label": null,
       "season_note": null,
       "schedule": null,
@@ -18,17 +18,16 @@
       "holiday_note": null,
       "holiday_list": [],
       "holiday_schedule": null,
-      "closure": null,
-      "error": "The read operation timed out"
+      "closure": null
     },
     {
       "slug": "colman-pool",
       "name": "Colman Pool A 50-meter, 8-lane Olympic sized heated saltwater pool in West Seattle\u2019s Lincoln Park. Summer only.",
       "kind": "outdoor",
       "url": "https://www.seattle.gov/parks/pools/colman-pool",
-      "address": null,
-      "map_url": null,
-      "blurb": null,
+      "address": "8603 Fauntleroy Wy S",
+      "map_url": "https://www.google.com/maps/search/?api=1&query=8603%20Fauntleroy%20Wy%20S",
+      "blurb": "A 50-meter, 8-lane Olympic sized heated saltwater pool in West Seattle\u2019s Lincoln Park. Summer only.",
       "season_label": null,
       "season_note": null,
       "schedule": null,
@@ -36,8 +35,7 @@
       "holiday_note": null,
       "holiday_list": [],
       "holiday_schedule": null,
-      "closure": null,
-      "error": "The read operation timed out"
+      "closure": null
     },
     {
       "slug": "evans-pool",
