@@ -1,57 +1,57 @@
 {
-  "date": "2026-11-21",
+  "date": "2026-11-22",
   "condition": "Light Drizzle",
   "icon": "rain",
-  "high_f": 46,
-  "low_f": 35,
+  "high_f": 45,
+  "low_f": 39,
   "hourly": [
     {
       "hour": 0,
-      "temp_f": 37
+      "temp_f": 43
     },
     {
       "hour": 1,
-      "temp_f": 37
+      "temp_f": 42
     },
     {
       "hour": 2,
-      "temp_f": 37
+      "temp_f": 42
     },
     {
       "hour": 3,
-      "temp_f": 37
+      "temp_f": 41
     },
     {
       "hour": 4,
-      "temp_f": 37
+      "temp_f": 41
     },
     {
       "hour": 5,
-      "temp_f": 35
+      "temp_f": 41
     },
     {
       "hour": 6,
-      "temp_f": 35
+      "temp_f": 41
     },
     {
       "hour": 7,
-      "temp_f": 36
+      "temp_f": 40
     },
     {
       "hour": 8,
-      "temp_f": 36
+      "temp_f": 40
     },
     {
       "hour": 9,
-      "temp_f": 37
+      "temp_f": 41
     },
     {
       "hour": 10,
-      "temp_f": 39
+      "temp_f": 44
     },
     {
       "hour": 11,
-      "temp_f": 42
+      "temp_f": 44
     },
     {
       "hour": 12,
@@ -59,77 +59,77 @@
     },
     {
       "hour": 13,
-      "temp_f": 46
-    },
-    {
-      "hour": 14,
-      "temp_f": 46
-    },
-    {
-      "hour": 15,
-      "temp_f": 46
-    },
-    {
-      "hour": 16,
       "temp_f": 45
     },
     {
-      "hour": 17,
+      "hour": 14,
       "temp_f": 44
+    },
+    {
+      "hour": 15,
+      "temp_f": 43
+    },
+    {
+      "hour": 16,
+      "temp_f": 43
+    },
+    {
+      "hour": 17,
+      "temp_f": 41
     },
     {
       "hour": 18,
-      "temp_f": 44
+      "temp_f": 40
     },
     {
       "hour": 19,
-      "temp_f": 43
+      "temp_f": 40
     },
     {
       "hour": 20,
-      "temp_f": 43
+      "temp_f": 40
     },
     {
       "hour": 21,
-      "temp_f": 43
+      "temp_f": 40
     },
     {
       "hour": 22,
-      "temp_f": 42
+      "temp_f": 40
     },
     {
       "hour": 23,
-      "temp_f": 42
+      "temp_f": 40
     }
   ],
   "checkpoints": [
     {
       "hour": 8,
       "label": "8 AM",
-      "temp_f": 36,
+      "temp_f": 40,
       "uv_index": 0,
-      "rain_chance": 0
+      "rain_chance": 10
     },
     {
       "hour": 12,
       "label": "12 PM",
       "temp_f": 45,
-      "uv_index": 2,
-      "rain_chance": 1
+      "uv_index": 1,
+      "rain_chance": 10
     },
     {
       "hour": 16,
       "label": "4 PM",
-      "temp_f": 45,
+      "temp_f": 43,
       "uv_index": 0,
-      "rain_chance": 19
+      "rain_chance": 5
     },
     {
       "hour": 20,
       "label": "8 PM",
-      "temp_f": 43,
+      "temp_f": 40,
       "uv_index": 0,
-      "rain_chance": 18
+      "rain_chance": 2
     }
   ]
 }
