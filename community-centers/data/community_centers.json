@@ -1,7 +1,7 @@
 {
   "hub_url": "https://www.seattle.gov/parks/community-centers",
   "teen_programs_url": "https://www.seattle.gov/parks/childcare/teen-programs",
-  "scraped_at": "2026-11-24T01:02:56+00:00",
+  "scraped_at": "2026-11-24T23:08:15+00:00",
   "centers": [
     {
       "slug": "alki-community-center",
@@ -267,7 +267,7 @@
     },
     {
       "slug": "lake-city-community-center",
-      "name": "Lake City Community Center Closed due to fire damage, and redevelopment plans are underway. Lake City Community Center forms a hub with the Lake City Library branch and Albert Davis Park.",
+      "name": "Lake City Community Center Construction for the Lake City Community Center and Affordable Housing Co-Development begins in December 2026.",
       "address": null,
       "phone": null,
       "neighborhood_bucket": "north-seattle",
